@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEGULAP – Seguridad Contra Incendios e Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CC1010;
+    --red-dark: #A00C0C;
+    --red-light: #E01515;
+    --black: #111111;
+    --dark: #1a1a1a;
+    --gray: #555;
+    --light-gray: #f4f4f4;
+    --white: #ffffff;
+    --border: #e0e0e0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    color: var(--black);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 86px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-shield {
+    width: 44px;
+    height: 44px;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--red);
+    letter-spacing: 1px;
+  }
+
+  .logo-name span { color: var(--black); }
+
+  .logo-sub {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--black);
+    transition: color .2s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links a.active::after,
+  .nav-links a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    border-radius: 2px;
+  }
+
+  .nav-links a.active { color: var(--red); }
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    background: var(--red);
+    color: var(--white) !important;
+    padding: 11px 22px;
+    border-radius: 4px;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .2s, transform .15s;
+    white-space: nowrap;
+  }
+
+  .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(100deg, #111 0%, #1e1e1e 40%, #2a0505 100%);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(180,20,20,0.18) 0%, transparent 60%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 30px,
+        rgba(255,255,255,0.012) 30px,
+        rgba(255,255,255,0.012) 31px
+      );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px 80px;
+    max-width: 600px;
+    animation: fadeUp .8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(28px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .hero-accent { color: var(--red-light); }
+
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .badge svg { flex-shrink: 0; }
+
+  .hero-products {
+    position: absolute;
+    right: 0; bottom: 0; top: 0;
+    width: 55%;
+    background: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Extinguisher illustration group */
+  .ext-group {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding-bottom: 0;
+    animation: fadeUp .9s .2s ease both;
+    opacity: 0;
+  }
+
+  .ext {
+    border-radius: 8px 8px 4px 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--light-gray);
+    padding: 64px 48px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform .25s, box-shadow .25s;
+    cursor: pointer;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 32px rgba(180,20,20,0.15);
+  }
+
+  .service-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    background: #ddd;
+  }
+
+  .service-img-placeholder {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  .service-body {
+    padding: 20px;
+  }
+
+  .service-icon-wrap {
+    width: 42px;
+    height: 42px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .service-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .service-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* ── WHY US ── */
+  .why {
+    padding: 64px 48px;
+    background: var(--white);
+  }
+
+  .why-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .why-header::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--red);
+    margin-top: 8px;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+    margin-top: 40px;
+    max-width: 1280px;
+  }
+
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .why-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .why-item h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .why-item p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--red);
+    padding: 36px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+  }
+
+  .cta-banner-text h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    text-transform: uppercase;
+  }
+
+  .cta-banner-text p {
+    font-size: 15px;
+    opacity: .85;
+  }
+
+  .cta-white {
+    background: var(--white);
+    color: var(--red);
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: transform .15s, box-shadow .15s;
+    flex-shrink: 0;
+  }
+
+  .cta-white:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.85);
+    padding: 56px 48px 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .footer-logo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--red);
+    letter-spacing: 1px;
+  }
+  .footer-logo-name span { color: var(--white); }
+
+  .footer-logo-sub {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+  }
+
+  .footer-col .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .footer-col .contact-row .icon-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .social-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .2s, border-color .2s;
+    text-decoration: none;
+  }
+
+  .social-btn:hover { background: var(--red); border-color: var(--red); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    max-width: 1280px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom a {
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color .2s;
+  }
+
+  .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+
+  /* ── UTILS ── */
+  .container { max-width: 1280px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">
+    <img src="assets/Segulap-Logo.png" alt="SEGULAP" style="height:70px;width:auto">
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="productos.html">Productos</a></li>
+    <li><a href="redincendios.html">Red contra incendios</a></li>
+    <li><a href="izajes.html">Izajes</a></li>
+  </ul>
+
+  <a href="contact.html" class="nav-cta">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Solicitar Asesoramiento
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Soluciones <span class="hero-accent">integrales</span><br>en seguridad</h1>
+    <p>Venta, capacitación, inspección y protección para su empresa.</p>
+    <div class="hero-badges">
+      <div class="badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CC1010" stroke-width="2.5"><path d="M12 2L3 7v7c0 5.25 3.75 10.15 9 11.25C17.25 24.15 21 19.25 21 14V7L12 2z"/></svg>
+        Protegemos lo que importa
+      </div>
+      <div class="badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CC1010" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Cumplimos con la normativa
+      </div>
+      <div class="badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CC1010" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Profesionales especializados
+      </div>
+      <div class="badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CC1010" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Soluciones para cada industria
+      </div>
+    </div>
+  </div>
+
+  <!-- Illustrated extinguisher wall -->
+  <div class="hero-products">
+    <svg viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" width="620" height="420" style="position:absolute;right:0;bottom:0;opacity:.92">
+      <!-- Back extinguishers (large) -->
+      <g transform="translate(70,20)">
+        <rect x="0" y="80" width="72" height="260" rx="12" fill="#b80c0c"/>
+        <rect x="0" y="80" width="72" height="260" rx="12" fill="url(#extGrad)"/>
+        <rect x="10" y="130" width="52" height="140" rx="4" fill="#fff" opacity=".12"/>
+        <rect x="8" y="70" width="56" height="20" rx="6" fill="#8a0808"/>
+        <circle cx="36" cy="50" r="18" fill="#8a0808"/>
+        <rect x="30" y="18" width="12" height="22" rx="6" fill="#6a0606"/>
+        <text x="36" y="210" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white" opacity=".5">SEGULAP</text>
+        <text x="36" y="228" text-anchor="middle" font-family="Arial" font-size="8" fill="white" opacity=".35">MATAFUEGO</text>
+      </g>
+      <g transform="translate(155,50)">
+        <rect x="0" y="60" width="60" height="220" rx="10" fill="#c00e0e"/>
+        <rect x="0" y="60" width="60" height="220" rx="10" fill="url(#extGrad)"/>
+        <rect x="8" y="52" width="44" height="16" rx="5" fill="#8a0808"/>
+        <circle cx="30" cy="36" r="15" fill="#8a0808"/>
+        <rect x="24" y="12" width="10" height="18" rx="5" fill="#6a0606"/>
+        <rect x="8" y="100" width="44" height="110" rx="3" fill="#fff" opacity=".1"/>
+        <text x="30" y="170" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="9" fill="white" opacity=".5">SEGULAP</text>
+      </g>
+      <!-- Hose reel -->
+      <g transform="translate(250,80)">
+        <circle cx="80" cy="100" r="88" fill="#222" stroke="#444" stroke-width="3"/>
+        <circle cx="80" cy="100" r="60" fill="#1a1a1a"/>
+        <circle cx="80" cy="100" r="40" fill="#888" opacity=".15"/>
+        <!-- hose coils -->
+        <circle cx="80" cy="100" r="74" fill="none" stroke="#c8c8c8" stroke-width="9" stroke-dasharray="20 8" opacity=".7"/>
+        <circle cx="80" cy="100" r="55" fill="none" stroke="#b0b0b0" stroke-width="7" stroke-dasharray="18 8" opacity=".6"/>
+      </g>
+      <!-- hydrant fittings cluster bottom -->
+      <g transform="translate(20,280)">
+        <ellipse cx="40" cy="20" rx="40" ry="14" fill="#8a6600" opacity=".8"/>
+        <rect x="15" y="4" width="50" height="40" rx="6" fill="#b88a00"/>
+        <circle cx="40" cy="24" r="14" fill="#d4a200" stroke="#8a6600" stroke-width="2"/>
+        <circle cx="40" cy="24" r="8" fill="#8a6600"/>
+        <rect x="28" y="44" width="24" height="16" rx="3" fill="#9a7800"/>
+      </g>
+      <g transform="translate(90,290)">
+        <ellipse cx="30" cy="15" rx="30" ry="11" fill="#6a4400" opacity=".7"/>
+        <rect x="8" y="3" width="44" height="36" rx="5" fill="#8a5e00"/>
+        <circle cx="30" cy="21" r="13" fill="#c08800" stroke="#6a4400" stroke-width="2"/>
+        <circle cx="30" cy="21" r="7" fill="#6a4400"/>
+      </g>
+      <!-- Small extinguisher right -->
+      <g transform="translate(430,100)">
+        <rect x="0" y="50" width="52" height="200" rx="9" fill="#c80e0e"/>
+        <rect x="0" y="50" width="52" height="200" rx="9" fill="url(#extGrad)"/>
+        <rect x="6" y="42" width="40" height="14" rx="5" fill="#880808"/>
+        <circle cx="26" cy="28" r="13" fill="#880808"/>
+        <rect x="20" y="8" width="9" height="16" rx="4" fill="#660606"/>
+        <text x="26" y="150" text-anchor="middle" font-family="Arial" font-size="8" font-weight="bold" fill="white" opacity=".45">SEGULAP</text>
+      </g>
+      <!-- big red gate valve right -->
+      <g transform="translate(500,60)">
+        <rect x="10" y="100" width="80" height="200" rx="8" fill="#CC1010"/>
+        <ellipse cx="50" cy="100" rx="44" ry="16" fill="#aa0d0d"/>
+        <ellipse cx="50" cy="70" rx="36" ry="14" fill="#880a0a"/>
+        <rect x="20" y="50" width="60" height="30" rx="6" fill="#aa0d0d"/>
+        <!-- handwheel -->
+        <circle cx="50" cy="40" r="28" fill="none" stroke="#880a0a" stroke-width="7"/>
+        <circle cx="50" cy="40" r="8" fill="#880a0a"/>
+        <line x1="50" y1="12" x2="50" y2="68" stroke="#880a0a" stroke-width="5"/>
+        <line x1="22" y1="40" x2="78" y2="40" stroke="#880a0a" stroke-width="5"/>
+      </g>
+      <!-- Sign top right -->
+      <g transform="translate(540,10)">
+        <rect width="60" height="80" rx="4" fill="#e8f5e9"/>
+        <rect width="60" height="30" rx="4" fill="#c62828"/>
+        <text x="30" y="22" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="11" fill="white">EXTINTOR</text>
+        <path d="M20 55 l20 0 M30 45 l0 20 M24 51 l12 8 M36 51 l-12 8" stroke="#c62828" stroke-width="3" fill="none"/>
+        <polygon points="30,38 26,55 34,55" fill="#c62828"/>
+      </g>
+
+      <defs>
+        <linearGradient id="extGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#000;stop-opacity:.35"/>
+          <stop offset="40%" style="stop-color:#000;stop-opacity:0"/>
+          <stop offset="100%" style="stop-color:#000;stop-opacity:.25"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="container">
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-img-placeholder" style="background:linear-gradient(135deg,#ffeaea,#ffd0d0)">🧯</div>
+        <div class="service-body">
+          <div class="service-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2c0 0-4 5-4 10a4 4 0 0 0 8 0C16 7 12 2 12 2z"/></svg>
+          </div>
+          <div class="service-title">Venta de extintores / matafuegos</div>
+          <div class="service-desc">Extintores de todo tipo y capacidad. Recargas y accesorios.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img-placeholder" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">🔧</div>
+        <div class="service-body">
+          <div class="service-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div class="service-title">Accesorios para instalaciones contra incendio</div>
+          <div class="service-desc">Mangueras, válvulas, hidrantes, conexiones y más.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img-placeholder" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">⛑️</div>
+        <div class="service-body">
+          <div class="service-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z"/><rect x="2" y="12" width="20" height="4" rx="2"/><path d="M12 16v6"/></svg>
+          </div>
+          <div class="service-title">Elementos de protección personal (EPP)</div>
+          <div class="service-desc">Protección para cada riesgo y actividad laboral.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img-placeholder" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">📋</div>
+        <div class="service-body">
+          <div class="service-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="service-title">Capacitaciones</div>
+          <div class="service-desc">Formación teórica y práctica en seguridad, uso de extintores, primeros auxilios y más.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img-placeholder" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)">🔍</div>
+        <div class="service-body">
+          <div class="service-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <div class="service-title">Inspección de equipos de izaje y accesorios</div>
+          <div class="service-desc">Inspección y certificación de eslingas, grilletes, ganchos y accesorios de izaje.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img-placeholder" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)">⚙️</div>
+        <div class="service-body">
+          <div class="service-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <div class="service-title">Mantenimiento y control de equipos</div>
+          <div class="service-desc">Servicio técnico, recarga, mantenimiento y control periódico.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="container">
+    <h2 class="why-header">¿Por qué elegirnos?</h2>
+    <div class="why-grid">
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <h3>Atención profesional</h3>
+          <p>Equipo capacitado para brindar soluciones a medida.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <h3>Asesoramiento técnico</h3>
+          <p>Acompañamiento y asesoramiento en cada etapa del proceso.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <h3>Productos certificados</h3>
+          <p>Trabajamos con marcas líderes y productos de calidad.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
+        </div>
+        <div>
+          <h3>Servicio integral</h3>
+          <p>Soluciones completas en seguridad contra incendios e industrial.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-banner-text">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+    <div>
+      <h2>Proteja su empresa, a su personal y sus instalaciones.</h2>
+      <p>Estamos para ayudarlo.</p>
+    </div>
+  </div>
+  <a href="#" class="cta-white">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Solicitar Asesoramiento
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+
+    <div class="footer-brand">
+      <img src="assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
+      <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Teléfono</h4>
+      <div class="contact-row">
+        <div class="icon-circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+        </div>
+        <div>+54 11 1234 5678<br>+54 11 8765 4321</div>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Email</h4>
+      <div class="contact-row">
+        <div class="icon-circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>info@segulap.com.ar<br>ventas@segulap.com.ar</div>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Ubicación</h4>
+      <div class="contact-row">
+        <div class="icon-circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>Av. Siempre Viva 1234<br>B1768AAA – San Justo<br>Buenos Aires, Argentina</div>
+      </div>
+      <div class="social-row">
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2024 SEGULAP. Todos los derechos reservados.</span>
+    <div style="display:flex;gap:24px">
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
