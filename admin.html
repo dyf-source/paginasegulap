@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin – SEGULAP Productos</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="assets/css/segulap.css" rel="stylesheet" type="text/css">
+</head>
+<body class="admin-body">
+
+<div id="loginScreen" class="admin-login">
+  <div class="admin-login-box">
+    <h1>Acceso Administrador</h1>
+    <input type="password" id="loginPass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')adminLogin()">
+    <button onclick="adminLogin()">Ingresar</button>
+    <p id="loginError" class="admin-login-error"></p>
+  </div>
+</div>
+
+<div id="adminPanel" class="admin-panel" style="display:none">
+  <div class="admin-topbar">
+    <h2>Productos – Administración</h2>
+    <button class="admin-btn admin-btn-outline" onclick="adminLogout()">Cerrar sesión</button>
+  </div>
+
+  <div class="admin-toolbar">
+    <button class="admin-btn admin-btn-primary" onclick="showAddForm()">+ Agregar producto</button>
+    <button class="admin-btn admin-btn-outline" onclick="exportJSON()">Exportar JSON</button>
+    <button class="admin-btn admin-btn-outline" onclick="document.getElementById('importInput').click()">Importar JSON</button>
+    <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
+  </div>
+
+  <div id="addForm" class="admin-form" style="display:none">
+    <h3>Nuevo producto</h3>
+    <input type="text" id="addName" placeholder="Nombre del producto">
+    <select id="addCat"></select>
+    <div class="admin-form-field">
+      <label>Imagen</label>
+      <input type="file" id="addImg" accept="image/*" onchange="previewAddImg(event)">
+      <img id="addImgPreview" class="admin-img-preview" style="display:none">
+    </div>
+    <div class="admin-form-actions">
+      <button class="admin-btn admin-btn-primary" onclick="addProduct()">Guardar</button>
+      <button class="admin-btn admin-btn-outline" onclick="hideAddForm()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table" id="adminTable">
+      <thead>
+        <tr>
+          <th style="width:60px">Imagen</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th style="width:140px">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="assets/js/productos.js"></script>
+<script>
+var ADMIN_PASSWORD = 'segulap2024';
+var db = [];
+
+function initDB() {
+  var stored = localStorage.getItem('segulap_productos');
+  if (stored) {
+    try { db = JSON.parse(stored); } catch(e) { db = JSON.parse(JSON.stringify(productosData)); }
+  } else {
+    db = JSON.parse(JSON.stringify(productosData));
+    saveDB();
+  }
+}
+
+function saveDB() {
+  localStorage.setItem('segulap_productos', JSON.stringify(db));
+}
+
+function adminLogin() {
+  var pass = document.getElementById('loginPass').value;
+  if (pass === ADMIN_PASSWORD) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    document.getElementById('loginError').textContent = '';
+    renderAdminTable();
+  } else {
+    document.getElementById('loginError').textContent = 'Contraseña incorrecta';
+  }
+}
+
+function adminLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('loginPass').value = '';
+}
+
+function imgCell(p) {
+  if (p.img) {
+    return '<img src="' + p.img + '" class="admin-table-img">';
+  }
+  return '<div class="admin-table-img-placeholder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
+}
+
+function renderAdminTable() {
+  var tbody = document.getElementById('adminTableBody');
+  var html = '';
+  db.forEach(function(p, i) {
+    html += '<tr>' +
+      '<td>' + imgCell(p) + '</td>' +
+      '<td class="admin-name-cell" data-idx="' + i + '">' + p.name + '</td>' +
+      '<td class="admin-cat-cell" data-idx="' + i + '">' + p.cat + '</td>' +
+      '<td>' +
+        '<button class="admin-btn-sm admin-btn-edit" onclick="editProduct(' + i + ')">Editar</button> ' +
+        '<button class="admin-btn-sm admin-btn-del" onclick="deleteProduct(' + i + ')">Eliminar</button>' +
+      '</td>' +
+    '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function populateCatSelect(selId, selected) {
+  var sel = document.getElementById(selId);
+  sel.innerHTML = '';
+  categories.forEach(function(c) {
+    var opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = c;
+    if (c === selected) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function previewAddImg(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var prev = document.getElementById('addImgPreview');
+    prev.src = ev.target.result;
+    prev.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function showAddForm() {
+  document.getElementById('addForm').style.display = 'block';
+  document.getElementById('addName').value = '';
+  document.getElementById('addImg').value = '';
+  document.getElementById('addImgPreview').style.display = 'none';
+  populateCatSelect('addCat', categories[0]);
+  document.getElementById('addName').focus();
+}
+
+function hideAddForm() {
+  document.getElementById('addForm').style.display = 'none';
+}
+
+function addProduct() {
+  var name = document.getElementById('addName').value.trim();
+  if (!name) return;
+  var cat = document.getElementById('addCat').value;
+  var img = document.getElementById('addImgPreview').src;
+  if (img && img.startsWith('data:')) {
+    db.push({ name: name, cat: cat, img: img });
+  } else {
+    db.push({ name: name, cat: cat });
+  }
+  saveDB();
+  hideAddForm();
+  renderAdminTable();
+}
+
+function editProduct(idx) {
+  var nameCell = document.querySelector('.admin-name-cell[data-idx="' + idx + '"]');
+  var catCell = document.querySelector('.admin-cat-cell[data-idx="' + idx + '"]');
+  var imgTd = nameCell.parentElement.querySelector('td:first-child');
+  var current = db[idx];
+
+  nameCell.innerHTML = '<input type="text" class="admin-inline-input" value="' + current.name.replace(/"/g, '&quot;') + '">';
+  var catSelect = '<select class="admin-inline-select">';
+  categories.forEach(function(c) {
+    catSelect += '<option value="' + c + '"' + (c === current.cat ? ' selected' : '') + '>' + c + '</option>';
+  });
+  catSelect += '</select>';
+  catCell.innerHTML = catSelect;
+
+  var imgHtml = '<div class="admin-edit-img">';
+  if (current.img) {
+    imgHtml += '<img src="' + current.img + '" class="admin-table-img" id="editImgPreview' + idx + '">';
+  } else {
+    imgHtml += '<div class="admin-table-img-placeholder" id="editImgPreview' + idx + '"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
+  }
+  imgHtml += '<input type="file" accept="image/*" onchange="editImgChange(' + idx + ',event)" style="font-size:11px;margin-top:4px"></div>';
+  imgTd.innerHTML = imgHtml;
+
+  var actionsCell = nameCell.parentElement.querySelector('td:last-child');
+  actionsCell.innerHTML =
+    '<button class="admin-btn-sm admin-btn-edit" onclick="saveEdit(' + idx + ')">Guardar</button> ' +
+    '<button class="admin-btn-sm admin-btn-outline" onclick="cancelEdit(' + idx + ')">Cancelar</button>';
+}
+
+function editImgChange(idx, e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var prev = document.getElementById('editImgPreview' + idx);
+    prev.src = ev.target.result;
+    prev.className = 'admin-table-img';
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveEdit(idx) {
+  var nameCell = document.querySelector('.admin-name-cell[data-idx="' + idx + '"]');
+  var catCell = document.querySelector('.admin-cat-cell[data-idx="' + idx + '"]');
+  var newName = nameCell.querySelector('input').value.trim();
+  var newCat = catCell.querySelector('select').value;
+  if (!newName) return;
+  db[idx].name = newName;
+  db[idx].cat = newCat;
+  var prev = document.getElementById('editImgPreview' + idx);
+  if (prev && prev.tagName === 'IMG') {
+    db[idx].img = prev.src;
+  }
+  saveDB();
+  renderAdminTable();
+}
+
+function cancelEdit(idx) {
+  renderAdminTable();
+}
+
+function deleteProduct(idx) {
+  if (!confirm('¿Eliminar "' + db[idx].name + '"?')) return;
+  db.splice(idx, 1);
+  saveDB();
+  renderAdminTable();
+}
+
+function exportJSON() {
+  var blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'productos.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importJSON(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      if (!Array.isArray(data)) throw new Error('Formato inválido');
+      db = data;
+      saveDB();
+      renderAdminTable();
+      alert('Importados ' + db.length + ' productos.');
+    } catch(err) {
+      alert('Error al importar: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+populateCatSelect('addCat', categories[0]);
+initDB();
+</script>
+</body>
+</html>
