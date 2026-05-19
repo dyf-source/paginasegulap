@@ -1,112 +1,376 @@
 <!DOCTYPE html>
-<!-- Last Published: Fri May 15 2026 14:15:01 GMT+0000 (Coordinated Universal Time) -->
-<html data-wf-domain="segulap-1.webflow.io" data-wf-page="6a03389cc50dc31c59694b9c" data-wf-site="6a03389ac50dc31c59694b2f" data-wf-status="1" lang="es-AR">
+<html lang="es-AR">
   <head>
-   <meta charset="utf-8"/>
-   <title>
-    Segulap
-   </title>
-    <meta content="Segulap - Servicios profesionales de seguridad contra incendios. Extintores, redes de incendio, capacitaciones y más." name="description"/>
-   <meta content="Cleaners - Webflow HTML website template" property="og:title"/>
-    <meta content="Segulap - Servicios profesionales de seguridad contra incendios. Extintores, redes de incendio, capacitaciones y más." property="og:description"/>
-   <meta content="https://cdn.prod.website-files.com/66e6783cc86fe3f35ea19bd5/66f2948c9dc7988462c749ff_SEO.jpg" property="og:image"/>
-   <meta content="Cleaners - Webflow HTML website template" property="twitter:title"/>
-    <meta content="Segulap - Servicios profesionales de seguridad contra incendios. Extintores, redes de incendio, capacitaciones y más." property="twitter:description"/>
-   <meta content="https://cdn.prod.website-files.com/66e6783cc86fe3f35ea19bd5/66f2948c9dc7988462c749ff_SEO.jpg" property="twitter:image"/>
-   <meta content="website" property="og:type"/>
-   <meta content="summary_large_image" name="twitter:card"/>
-   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-
-   <link href="assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+    <meta charset="utf-8"/>
+    <title>Productos | Segulap</title>
+    <meta content="Productos de seguridad contra incendios - Extintores, señalización, luces de emergencia y más." name="description"/>
+    <meta content="Productos | Segulap" property="og:title"/>
+    <meta content="Productos de seguridad contra incendios - Extintores, señalización, luces de emergencia y más." property="og:description"/>
+    <meta content="Productos | Segulap" property="twitter:title"/>
+    <meta content="Productos de seguridad contra incendios - Extintores, señalización, luces de emergencia y más." property="twitter:description"/>
+    <meta content="website" property="og:type"/>
+    <meta content="summary_large_image" name="twitter:card"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
     <link href="assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="assets/css/segulap.css" rel="stylesheet" type="text/css">
+    <style>
+      .product-card {
+        display:flex;
+        background:white;
+        border-radius:0.5rem;
+        overflow:hidden;
+        box-shadow:0 2px 8px rgba(0,0,0,0.08);
+        transition:box-shadow 0.2s;
+      }
+      .product-card:hover {
+        box-shadow:0 4px 16px rgba(0,0,0,0.12);
+      }
+      .product-icon-col {
+        flex:0 0 90px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:var(--primary, #c62828);
+      }
+      .product-icon-col img {
+        width:48px;
+        height:48px;
+        object-fit:contain;
+        filter:brightness(0) invert(1);
+      }
+      .product-info {
+        flex:1;
+        padding:1rem 1.25rem;
+      }
+      .product-info h3 {
+        margin:0 0 0.35rem;
+        font-size:1.1rem;
+        color:var(--primary, #c62828);
+      }
+      .product-info p {
+        margin:0 0 0.5rem;
+        font-size:0.9rem;
+        color:#555;
+        line-height:1.4;
+      }
+      .product-meta {
+        font-size:0.82rem;
+        color:#777;
+        display:flex;
+        gap:0.75rem;
+        flex-wrap:wrap;
+      }
+      .product-meta span {
+        display:inline-flex;
+        align-items:center;
+        gap:4px;
+      }
+      .cat-checkbox {
+        display:flex;
+        align-items:center;
+        gap:0.5rem;
+        padding:0.4rem 0;
+        cursor:pointer;
+        font-size:0.9rem;
+        color:#333;
+        transition:color 0.15s;
+      }
+      .cat-checkbox:hover {
+        color:var(--primary, #c62828);
+      }
+      .cat-checkbox input {
+        accent-color:var(--primary, #c62828);
+        width:16px;
+        height:16px;
+        cursor:pointer;
+      }
+      .product-list {
+        flex:1;
+        max-width:700px;
+        display:flex;
+        flex-direction:column;
+        gap:1rem;
+      }
+      #no-results {
+        text-align:center;
+        padding:3rem 1rem;
+        color:#888;
+        display:none;
+      }
+      .count-badge {
+        margin-left:auto;
+        background:#eee;
+        border-radius:999px;
+        padding:0.1rem 0.6rem;
+        font-size:0.78rem;
+        color:#666;
+      }
+    </style>
   </head>
- <body class="body">
-  <!-- NAV -->
-  <nav>
-    <a class="logo" href="index.html">
-      <img src="assets/Segulap-Logo.png" alt="SEGULAP" style="height:70px;width:auto">
-    </a>
+  <body class="body" style="display:flex;flex-direction:column;min-height:100vh">
 
-    <ul class="nav-links">
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="servicios.html">Servicios</a></li>
-      <li><a href="productos.html" class="active">Productos</a></li>
-      <li><a href="redincendios.html">Red contra incendios</a></li>
-      <li><a href="izajes.html">Izajes</a></li>
-    </ul>
-
-    <a href="contact.html" class="nav-cta">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Solicitar Asesoramiento
-    </a>
-  </nav>
-  <section class="section">
-   <div class="space-7rem">
-   </div>
-   <div class="space-2rem">
-   </div>
-   <div class="w-layout-blockcontainer container padding-4-5rem w-container">
-    <div class="hero-wrapper">
-     <div class="hero-block">
-      <h1 class="hero-title">
-       Productos
-      </h1>
-      <p>
-       Esta p&aacute;gina est&aacute; en construcci&oacute;n. Pronto estar&aacute; disponible.
-      </p>
-     </div>
-    </div>
-   </div>
-   <div class="space-7rem">
-   </div>
-  </section>
-  <section class="section background-primary">
-   <div class="w-layout-blockcontainer container padding-4-5rem w-container">
-    <div class="footer-top" data-w-id="fa36639f-bc34-8f1a-4024-d088998077f8">
-     <div class="footer-block">
-      <a class="footer-logo-link-wrapper w-nav-brand" href="/">
-       <img alt="" class="footer-logo" height="Auto" loading="eager" sizes="120px" src="https://cdn.prod.website-files.com/6a03389ac50dc31c59694b2f/6a034f60f7df4833142a43d3_Segulap_extintores_sin_fondo.png" srcset="https://cdn.prod.website-files.com/6a03389ac50dc31c59694b2f/6a034f60f7df4833142a43d3_Segulap_extintores_sin_fondo-p-500.png 500w, https://cdn.prod.website-files.com/6a03389ac50dc31c59694b2f/6a034f60f7df4833142a43d3_Segulap_extintores_sin_fondo.png 765w" width="120"/>
+    <!-- NAV -->
+    <nav>
+      <a class="logo" href="index.html">
+        <img src="assets/Segulap-Logo.png" alt="SEGULAP" style="height:70px;width:auto">
       </a>
-     </div>
-      <div class="footer-right-flex" style="display:flex; flex-direction:column; gap:0.4rem; padding:0.5rem 0; align-items:flex-end">
-       <div style="display:flex; align-items:center; gap:0.3rem; flex-direction:row-reverse; justify-content:flex-end">
-        <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
-         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z">
-         </path>
-         <circle cx="12" cy="10" r="3">
-         </circle>
-        </svg>
-        <span style="font-size:0.85rem">
-          191, Entre 45 y 46, B1901 La Plata, Provincia de Buenos Aires
-        </span>
-       </div>
-       <div style="display:flex; align-items:center; gap:0.3rem; flex-direction:row-reverse; justify-content:flex-end">
-        <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
-         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-         </path>
-        </svg>
-        <span style="font-size:0.85rem">
-          0221 651-5377
-        </span>
-       </div>
-       <div style="display:flex; align-items:center; gap:0.3rem; flex-direction:row-reverse; justify-content:flex-end">
-        <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
-         <rect height="16" rx="2" width="20" x="2" y="4">
-         </rect>
-         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
-         </path>
-        </svg>
-        <span style="font-size:0.85rem">
-         [Email]
-        </span>
-       </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="productos.html" class="active">Productos</a></li>
+        <li><a href="redincendios.html">Red contra incendios</a></li>
+        <li><a href="izajes.html">Izajes</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Solicitar Asesoramiento
+      </a>
+    </nav>
+
+    <section class="section" style="flex:1">
+      <div class="space-7rem"></div>
+      <div class="space-2rem"></div>
+      <div class="w-layout-blockcontainer container padding-4-5rem w-container">
+        <h1 class="hero-title" style="text-align:left; margin:0 0 2rem; font-size:clamp(2.85rem, 5.7vw, 4.75rem)">Productos</h1>
+
+        <div class="product-layout" style="display:flex; gap:2.5rem; align-items:flex-start">
+
+          <aside class="product-sidebar" style="flex:0 0 220px; background:#f8f9fa; padding:1.25rem; border-radius:0.5rem; position:sticky; top:1rem">
+            <h3 style="margin:0 0 0.25rem; font-size:1rem; text-transform:uppercase; letter-spacing:0.5px; color:#333">Categorías</h3>
+            <hr style="border:none; border-top:1px solid #ddd; margin:0.5rem 0 0.75rem">
+            <div id="category-filters"></div>
+          </aside>
+
+          <div class="product-list" id="product-list">
+            <div id="product-container"></div>
+            <div id="no-results">
+              <p>No se encontraron productos con los filtros seleccionados.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-    <div class="footer-line" data-w-id="fa36639f-bc34-8f1a-4024-d0889980784b">
-    </div>
-   </div>
-  </section>
+      <div class="space-7rem"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="margin-top:auto">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
+          <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Teléfono</h4>
+          <div class="contact-row">
+            <div class="icon-circle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+            </div>
+            <div>+54 11 1234 5678<br>+54 11 8765 4321</div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Email</h4>
+          <div class="contact-row">
+            <div class="icon-circle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>info@segulap.com.ar<br>ventas@segulap.com.ar</div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Ubicación</h4>
+          <div class="contact-row">
+            <div class="icon-circle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div><a href="https://share.google/q5LJZtAUMqAPQVmmJ" target="_blank" rel="noopener" class="address-link">191, Entre 45 y 46, B1901 La Plata, Provincia de Buenos Aires</a></div>
+          </div>
+          <div class="social-row">
+            <a class="social-btn" href="#">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a class="social-btn" href="https://www.instagram.com/matafuegossegulap/" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a class="social-btn" href="#">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024 SEGULAP. Todos los derechos reservados.</span>
+        <div style="display:flex;gap:24px">
+          <a href="#">Política de privacidad</a>
+          <a href="#">Términos y condiciones</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      var products = [
+        { name: 'Extintor ABC 1kg',       cat: 'Extintores',      desc: 'Polvo químico seco ABC, ideal para fuegos clase A, B y C.',                                specs: '1kg | ABC | Incluye soporte' },
+        { name: 'Extintor ABC 2.5kg',     cat: 'Extintores',      desc: 'Polvo químico seco ABC, versátil para hogar, comercio y oficina.',                          specs: '2.5kg | ABC | Incluye soporte' },
+        { name: 'Extintor ABC 5kg',       cat: 'Extintores',      desc: 'Equipo multipropósito de alta capacidad. Recomendado para industrias y depósitos.',           specs: '5kg | ABC | Incluye soporte' },
+        { name: 'Extintor ABC 10kg',      cat: 'Extintores',      desc: 'Alta capacidad para cubrir grandes superficies de riesgo mixto.',                             specs: '10kg | ABC | Incluye soporte' },
+        { name: 'Extintor CO2 2.5kg',     cat: 'Extintores',      desc: 'Dióxido de carbono, no deja residuos. Ideal para equipos eléctricos y laboratorios.',         specs: '2.5kg | CO2' },
+        { name: 'Extintor CO2 5kg',       cat: 'Extintores',      desc: 'Dióxido de carbono de alta capacidad para salas de servidores y archivos.',                   specs: '5kg | CO2' },
+        { name: 'Extintor CO2 10kg',      cat: 'Extintores',      desc: 'Protección máxima con CO2 para entornos críticos y equipos sensibles.',                       specs: '10kg | CO2' },
+        { name: 'Extintor Halotron 1kg',  cat: 'Extintores',      desc: 'Agente limpio, apto para electrónica. Sin residuos corrosivos ni conductividad eléctrica.',   specs: '1kg | Halotron' },
+        { name: 'Extintor Halotron 5kg',  cat: 'Extintores',      desc: 'Agente limpio de alto rendimiento para salas de servidores y archivo documental.',             specs: '5kg | Halotron' },
+        { name: 'Extintor K 2.5l',        cat: 'Extintores',      desc: 'Especial para aceites y grasas de cocina. Clase K.',                                          specs: '2.5l | Clase K' },
+        { name: 'Extintor K 5l',          cat: 'Extintores',      desc: 'Alta capacidad para cocinas industriales y restaurantes.',                                    specs: '5l | Clase K' },
+        { name: 'Extintor Espuma AFFF 6l',cat: 'Extintores',      desc: 'Espuma formadora de película acuosa para fuegos clase A y B.',                                specs: '6l | AFFF' },
+        { name: 'Extintor Espuma AFFF 9l',cat: 'Extintores',      desc: 'Espuma AFFF con mayor capacidad para hidrocarburos y líquidos inflamables.',                  specs: '9l | AFFF' },
+        { name: 'Extintor Espuma AFFF 50l',cat:'Extintores',      desc: 'Carro espumífero de gran capacidad para industrias y plantas petroquímicas.',                  specs: '50l | AFFF | Carro' },
+
+        { name: 'Cartel Salida',          cat: 'Señalización',    desc: 'Señal foto-luminiscente con leyenda SALIDA, conforme a normativa.',                           specs: '30x15cm | Foto-luminiscente' },
+        { name: 'Cartel Extintor',        cat: 'Señalización',    desc: 'Señal foto-luminiscente indicando ubicación de extintor.',                                    specs: '30x15cm | Foto-luminiscente' },
+        { name: 'Cartel Matafuego',       cat: 'Señalización',    desc: 'Señal con pictograma de matafuego, fotoluminiscente.',                                        specs: '30x15cm | Foto-luminiscente' },
+        { name: 'Cartel Riesgo Eléctrico',cat: 'Señalización',    desc: 'Advertencia de riesgo eléctrico, visible en condiciones de poca luz.',                        specs: '30x15cm | Foto-luminiscente' },
+        { name: 'Cartel No Fumar',        cat: 'Señalización',    desc: 'Prohibición de fumar, fotoluminiscente, estándar.',                                           specs: '30x15cm | Foto-luminiscente' },
+        { name: 'Cartel Ruta de Evacuación',cat:'Señalización',   desc: 'Indicación de dirección de evacuación, fotoluminiscente.',                                    specs: '30x15cm | Foto-luminiscente' },
+        { name: 'Cartel Botiquín',        cat: 'Señalización',    desc: 'Señal de ubicación de botiquín de primeros auxilios.',                                        specs: '30x15cm | Foto-luminiscente' },
+
+        { name: 'Baliza Led Emergencia',  cat: 'Iluminación',     desc: 'Baliza autónoma de emergencia con tecnología LED de alta eficiencia.',                         specs: 'LED | 70 lúmenes | Autonomía 3h' },
+        { name: 'Luz de Emergencia 200lm',cat: 'Iluminación',     desc: 'Luminaria de emergencia LED para pasillos y salidas.',                                        specs: '200lm | Autonomía 2h' },
+        { name: 'Luz de Emergencia 400lm',cat: 'Iluminación',     desc: 'Luminaria de emergencia de alto brillo para naves y depósitos.',                              specs: '400lm | Autonomía 3h' },
+
+        { name: 'Detector de Humo',       cat: 'Detección',       desc: 'Detector fotoeléctrico de humo para sistemas de alarma contra incendios.',                    specs: 'Fotoeléctrico | 12-24V' },
+        { name: 'Detector de Temperatura',cat: 'Detección',       desc: 'Detector termovelocimétrico que activa alarma por aumento brusco de temperatura.',           specs: 'Térmico | 12-24V' },
+        { name: 'Detector de Gas',        cat: 'Detección',       desc: 'Detector de gas natural / GLP con sensor de alto rendimiento.',                               specs: 'Gas Natural / GLP | 220V' },
+        { name: 'Sirena de Alarma',       cat: 'Detección',       desc: 'Sirena electrónica de alta potencia para sistemas contra incendios.',                         specs: '110dB | 12V' },
+        { name: 'Central de Alarma 2 Zonas',cat:'Detección',      desc: 'Panel de control básico para detección de incendios de 2 zonas.',                             specs: '2 Zonas | 12V' },
+        { name: 'Central de Alarma 4 Zonas',cat:'Detección',      desc: 'Panel de control expandido a 4 zonas con salida para sirena y avisador.',                    specs: '4 Zonas | 12V' },
+        { name: 'Pulsador de Alarma',     cat: 'Detección',       desc: 'Pulsador manual de alarma contra incendios con reset por llave.',                             specs: 'Manual | Re-set con llave' },
+
+        { name: 'Matafuego Recargado',    cat: 'Matafuegos',      desc: 'Servicio de recarga de matafuegos con garantía.',                                             specs: 'Consultar capacidad' },
+        { name: 'Matafuego ABC 5kg',      cat: 'Matafuegos',      desc: 'Matafuego de polvo químico seco ABC 5 kilogramos.',                                          specs: '5kg | ABC' },
+        { name: 'Matafuego CO2 2.5kg',    cat: 'Matafuegos',      desc: 'Matafuego de dióxido de carbono 2.5 kilogramos.',                                            specs: '2.5kg | CO2' },
+
+        { name: 'Manguera Plana 1 1/2"',  cat: 'Mangueras',       desc: 'Manguera plana para boca de incendio, certificada.',                                         specs: '1 1/2" x 15m' },
+        { name: 'Manguera Plana 2"',      cat: 'Mangueras',       desc: 'Manguera plana de 2 pulgadas para hidrantes.',                                               specs: '2" x 15m' },
+        { name: 'Lanza para Manguera',    cat: 'Mangueras',       desc: 'Lanza regulable para manguera de incendio, chorro y niebla.',                                specs: 'Regulable' },
+        { name: 'Adaptador Manguera',     cat: 'Mangueras',       desc: 'Adaptador cónico para conexión de manguera a boca de incendio.',                             specs: '60mm a 45mm' },
+
+        { name: 'Gabinete Metálico 1 Cuerpo',cat:'Gabinetes',     desc: 'Gabinete metálico para extintor de 1 cuerpo, con puerta de vidrio.',                         specs: 'Metálico | 1 Cuerpo' },
+        { name: 'Gabinete Metálico 2 Cuerpos',cat:'Gabinetes',    desc: 'Gabinete metálico para 2 extintores, con puerta de vidrio.',                                 specs: 'Metálico | 2 Cuerpos' },
+        { name: 'Gabinete Plástico 1 Cuerpo',cat:'Gabinetes',     desc: 'Gabinete plástico liviano para extintor, resistente a la intemperie.',                       specs: 'Plástico | 1 Cuerpo' },
+
+        { name: 'Botonera Pánico',        cat: 'Accesorios',      desc: 'Botonera de pánico con llave de reset para activación de sirena.',                           specs: '12V | Reset con llave' },
+        { name: 'Timbre de Alarma',       cat: 'Accesorios',      desc: 'Timbre electrónico para señalización audible de alarma.',                                    specs: '12V | 90dB' },
+        { name: 'Tapa para Boca de Incendio',cat:'Accesorios',    desc: 'Tapa metálica para boca de incendio equipada (BIE).',                                        specs: 'Metálica' },
+        { name: 'Soporte de Pared',       cat: 'Accesorios',      desc: 'Soporte metálico para fijación de extintor a pared.',                                        specs: 'Metálico' }
+      ];
+
+      var excludeCategories = [
+        'Mantenimiento', 'Marbetes', 'Polvos Químicos', 'Repuestos y Accesorios',
+        'Pintura', 'Extintores Usados', 'Certificado profesional'
+      ];
+
+      products = products.filter(function(p) {
+        var cat = p.cat.trim().toLowerCase();
+        for (var i = 0; i < excludeCategories.length; i++) {
+          if (cat.indexOf(excludeCategories[i].toLowerCase()) !== -1) {
+            return false;
+          }
+        }
+        var prefixes = ['carga', 'cambio de disco', 'recambio', 'prueba hidraulica', 'mano de obra', 'certificado profesional'];
+        var name = p.name.trim().toLowerCase();
+        for (var j = 0; j < prefixes.length; j++) {
+          if (name.indexOf(prefixes[j]) === 0) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      function getCategories() {
+        var cats = [];
+        for (var i = 0; i < products.length; i++) {
+          if (cats.indexOf(products[i].cat) === -1) {
+            cats.push(products[i].cat);
+          }
+        }
+        return cats.sort();
+      }
+
+      var selectedCats = [];
+
+      function renderSidebar() {
+        var cats = getCategories();
+        var html = '';
+        var catCounts = {};
+        for (var i = 0; i < products.length; i++) {
+          var c = products[i].cat;
+          catCounts[c] = (catCounts[c] || 0) + 1;
+        }
+        for (var i = 0; i < cats.length; i++) {
+          var c = cats[i];
+          var checked = selectedCats.length === 0 || selectedCats.indexOf(c) !== -1;
+          html += '<label class="cat-checkbox">';
+          html += '<input type="checkbox" value="' + c.replace(/"/g, '&quot;') + '" ' + (checked ? 'checked' : '') + ' onchange="toggleCategory(this)">';
+          html += '<span>' + c + '</span>';
+          html += '<span class="count-badge">' + (catCounts[c] || 0) + '</span>';
+          html += '</label>';
+        }
+        document.getElementById('category-filters').innerHTML = html;
+      }
+
+      function toggleCategory(el) {
+        var cat = el.value;
+        if (el.checked) {
+          if (selectedCats.indexOf(cat) === -1) selectedCats.push(cat);
+        } else {
+          var idx = selectedCats.indexOf(cat);
+          if (idx !== -1) selectedCats.splice(idx, 1);
+        }
+        renderProducts();
+        renderSidebar();
+      }
+
+      function renderProducts() {
+        var filtered = [];
+        for (var i = 0; i < products.length; i++) {
+          if (selectedCats.length === 0 || selectedCats.indexOf(products[i].cat) !== -1) {
+            filtered.push(products[i]);
+          }
+        }
+        var container = document.getElementById('product-container');
+        var noResults = document.getElementById('no-results');
+        if (filtered.length === 0) {
+          container.innerHTML = '';
+          noResults.style.display = 'block';
+          return;
+        }
+        noResults.style.display = 'none';
+        var html = '';
+        for (var i = 0; i < filtered.length; i++) {
+          var p = filtered[i];
+          html += '<div class="product-card">';
+          html += '<div class="product-icon-col">';
+          html += '<img src="assets/extintor-icon.svg" alt="" width="48" height="48">';
+          html += '</div>';
+          html += '<div class="product-info">';
+          html += '<h3>' + p.name + '</h3>';
+          html += '<p>' + p.desc + '</p>';
+          html += '<div class="product-meta">';
+          html += '<span>' + p.cat + '</span>';
+          html += '<span>|</span>';
+          html += '<span>' + p.specs + '</span>';
+          html += '</div>';
+          html += '</div>';
+          html += '</div>';
+        }
+        container.innerHTML = html;
+      }
+
+      renderSidebar();
+      renderProducts();
+    </script>
+
   </body>
 </html>
