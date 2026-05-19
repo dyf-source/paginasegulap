@@ -11,7 +11,7 @@
 
 # Workflow
 
-- Before making any major or structural change, first commit all unsaved and unsynced changes with `git add -A && git commit -m "checkpoint: ..."` to create a backup point, then proceed with the new changes.
+- Before making any major or structural change, first commit all unsaved and unsynced changes with `git add -A; git checkout -b checkpoint/<description>; git commit -m "checkpoint: ..."` to create a backup point on a dedicated branch, then switch back to main and proceed with the new changes.
 
 ## Guidelines
 - Write clean, production-ready code.
