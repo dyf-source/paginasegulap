@@ -52,7 +52,7 @@
 
       <a href="redincendios.html" class="service-card-link">
         <div class="service-card">
-          <div class="service-img-placeholder" style="background:linear-gradient(135deg,#ffeaea,#ffd0d0)">🧯</div>
+          <img class="service-img" src="assets/extintores-trabajo.jpg" alt="Venta de extintores">
           <div class="service-body">
             <div class="service-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2c0 0-4 5-4 10a4 4 0 0 0 8 0C16 7 12 2 12 2z"/></svg>
@@ -65,7 +65,7 @@
 
       <a href="redincendios.html" class="service-card-link">
         <div class="service-card">
-          <div class="service-img-placeholder" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">🔧</div>
+          <img class="service-img" src="assets/accesorios-red-incendios.png" alt="Accesorios para instalaciones contra incendio">
           <div class="service-body">
             <div class="service-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
@@ -78,7 +78,7 @@
 
       <a href="productos.html" class="service-card-link">
         <div class="service-card">
-          <div class="service-img-placeholder" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">⛑️</div>
+          <img class="service-img" src="assets/PPE.jpg" alt="Elementos de protección personal">
           <div class="service-body">
             <div class="service-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z"/><rect x="2" y="12" width="20" height="4" rx="2"/><path d="M12 16v6"/></svg>
@@ -104,7 +104,7 @@
 
       <a href="izajes.html" class="service-card-link">
         <div class="service-card">
-          <div class="service-img-placeholder" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)">🔍</div>
+          <img class="service-img" src="assets/izajes.jpg" alt="Inspección de equipos de izaje">
           <div class="service-body">
             <div class="service-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -291,13 +291,13 @@
       var scrollAmount = card ? card.offsetWidth + 24 : 344;
 
       function updateArrows() {
-        if (leftArrow) leftArrow.style.display = grid.scrollLeft <= 4 ? 'none' : 'flex';
-        if (rightArrow) rightArrow.style.display = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 4 ? 'none' : 'flex';
+        if (leftArrow) leftArrow.style.display = wrap.scrollLeft <= 4 ? 'none' : 'flex';
+        if (rightArrow) rightArrow.style.display = wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4 ? 'none' : 'flex';
       }
 
       function updateCardMasks() {
-        var gr = grid.getBoundingClientRect();
-        var vl = gr.left, vr = gr.left + grid.clientWidth;
+        var gr = wrap.getBoundingClientRect();
+        var vl = gr.left, vr = gr.left + wrap.clientWidth;
         grid.querySelectorAll('.service-card').forEach(function(c) {
           var cr = c.getBoundingClientRect();
           var cw = cr.width;
@@ -328,10 +328,10 @@
         });
       }
 
-      if (leftArrow) leftArrow.addEventListener('click', function() { grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
-      if (rightArrow) rightArrow.addEventListener('click', function() { grid.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
+      if (leftArrow) leftArrow.addEventListener('click', function() { wrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
+      if (rightArrow) rightArrow.addEventListener('click', function() { wrap.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
 
-      grid.addEventListener('scroll', function() { updateArrows(); updateCardMasks(); });
+      wrap.addEventListener('scroll', function() { updateArrows(); updateCardMasks(); });
       updateArrows();
       updateCardMasks();
     }
