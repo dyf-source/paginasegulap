@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin – SEGULAP Productos</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 </head>
 <body class="admin-body">
 
@@ -29,6 +29,7 @@
     <button class="admin-btn admin-btn-outline" onclick="exportJSON()">Exportar JSON</button>
     <button class="admin-btn admin-btn-outline" onclick="document.getElementById('importInput').click()">Importar JSON</button>
     <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
+    <input type="text" id="adminSearch" class="admin-search-input" placeholder="Buscar producto..." oninput="renderAdminTable()">
   </div>
 
   <div id="addForm" class="admin-form" style="display:none">
@@ -40,11 +41,42 @@
       <input type="file" id="addImg" accept="image/*" onchange="previewAddImg(event)">
       <img id="addImgPreview" class="admin-img-preview" style="display:none">
     </div>
+    <div class="admin-form-field">
+      <label>Descripción</label>
+      <textarea id="addDesc" class="admin-textarea" placeholder="Descripción del producto..." rows="3"></textarea>
+    </div>
     <div class="admin-form-actions">
       <button class="admin-btn admin-btn-primary" onclick="addProduct()">Guardar</button>
       <button class="admin-btn admin-btn-outline" onclick="hideAddForm()">Cancelar</button>
     </div>
   </div>
+
+<div id="detailOverlay" class="admin-overlay" style="display:none" onclick="if(event.target===this)hideDetailModal()">
+  <div class="admin-modal">
+    <h3>Detalle del producto</h3>
+    <div class="admin-form-field">
+      <label>Nombre</label>
+      <input type="text" id="detailName" placeholder="Nombre del producto">
+    </div>
+    <div class="admin-form-field">
+      <label>Categoría</label>
+      <select id="detailCat"></select>
+    </div>
+    <div class="admin-form-field">
+      <label>Imagen</label>
+      <input type="file" id="detailImg" accept="image/*" onchange="previewDetailImg(event)">
+      <img id="detailImgPreview" class="admin-img-preview" style="display:none">
+    </div>
+    <div class="admin-form-field">
+      <label>Descripción</label>
+      <textarea id="detailDesc" class="admin-textarea" placeholder="Descripción del producto..." rows="4"></textarea>
+    </div>
+    <div class="admin-form-actions">
+      <button class="admin-btn admin-btn-primary" id="detailSaveBtn">Guardar</button>
+      <button class="admin-btn admin-btn-outline" onclick="hideDetailModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
 
   <div class="admin-table-wrap">
     <table class="admin-table" id="adminTable">
@@ -61,7 +93,7 @@
   </div>
 </div>
 
-<script src="assets/js/productos.js"></script>
+<script src="../assets/js/productos.js"></script>
 <script>
 var ADMIN_PASSWORD = 'segulap2024';
 var db = [];
@@ -80,19 +112,47 @@ function saveDB() {
   localStorage.setItem('segulap_productos', JSON.stringify(db));
 }
 
+function setSession() {
+  var expiry = new Date();
+  expiry.setHours(23, 59, 59, 999);
+  localStorage.setItem('segulap_admin_session', expiry.getTime());
+}
+
+function clearSession() {
+  localStorage.removeItem('segulap_admin_session');
+}
+
+function sessionValid() {
+  var stored = localStorage.getItem('segulap_admin_session');
+  if (!stored) return false;
+  return Date.now() < parseInt(stored, 10);
+}
+
+function showAdminPanel() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  renderAdminTable();
+}
+
+function initSession() {
+  if (sessionValid()) {
+    showAdminPanel();
+  }
+}
+
 function adminLogin() {
   var pass = document.getElementById('loginPass').value;
   if (pass === ADMIN_PASSWORD) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminPanel').style.display = 'block';
+    setSession();
+    showAdminPanel();
     document.getElementById('loginError').textContent = '';
-    renderAdminTable();
   } else {
     document.getElementById('loginError').textContent = 'Contraseña incorrecta';
   }
 }
 
 function adminLogout() {
+  clearSession();
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('adminPanel').style.display = 'none';
   document.getElementById('loginPass').value = '';
@@ -105,16 +165,22 @@ function imgCell(p) {
   return '<div class="admin-table-img-placeholder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
 }
 
+var adminSearchQuery = '';
+var detailIdx = -1;
+
 function renderAdminTable() {
   var tbody = document.getElementById('adminTableBody');
+  var q = document.getElementById('adminSearch').value.toLowerCase().trim();
+  adminSearchQuery = q;
   var html = '';
   db.forEach(function(p, i) {
+    if (q && p.name.toLowerCase().indexOf(q) === -1 && p.cat.toLowerCase().indexOf(q) === -1) return;
     html += '<tr>' +
       '<td>' + imgCell(p) + '</td>' +
-      '<td class="admin-name-cell" data-idx="' + i + '">' + p.name + '</td>' +
+      '<td class="admin-name-cell" data-idx="' + i + '" onclick="showDetailModal(' + i + ')">' + p.name + '</td>' +
       '<td class="admin-cat-cell" data-idx="' + i + '">' + p.cat + '</td>' +
       '<td>' +
-        '<button class="admin-btn-sm admin-btn-edit" onclick="editProduct(' + i + ')">Editar</button> ' +
+        '<button class="admin-btn-sm admin-btn-edit" onclick="showDetailModal(' + i + ')">Detalle</button> ' +
         '<button class="admin-btn-sm admin-btn-del" onclick="deleteProduct(' + i + ')">Eliminar</button>' +
       '</td>' +
     '</tr>';
@@ -149,6 +215,7 @@ function previewAddImg(e) {
 function showAddForm() {
   document.getElementById('addForm').style.display = 'block';
   document.getElementById('addName').value = '';
+  document.getElementById('addDesc').value = '';
   document.getElementById('addImg').value = '';
   document.getElementById('addImgPreview').style.display = 'none';
   populateCatSelect('addCat', categories[0]);
@@ -163,75 +230,67 @@ function addProduct() {
   var name = document.getElementById('addName').value.trim();
   if (!name) return;
   var cat = document.getElementById('addCat').value;
+  var desc = document.getElementById('addDesc').value.trim();
   var img = document.getElementById('addImgPreview').src;
+  var product = { name: name, cat: cat, desc: desc };
   if (img && img.startsWith('data:')) {
-    db.push({ name: name, cat: cat, img: img });
-  } else {
-    db.push({ name: name, cat: cat });
+    product.img = img;
   }
+  db.push(product);
   saveDB();
   hideAddForm();
   renderAdminTable();
 }
 
-function editProduct(idx) {
-  var nameCell = document.querySelector('.admin-name-cell[data-idx="' + idx + '"]');
-  var catCell = document.querySelector('.admin-cat-cell[data-idx="' + idx + '"]');
-  var imgTd = nameCell.parentElement.querySelector('td:first-child');
-  var current = db[idx];
-
-  nameCell.innerHTML = '<input type="text" class="admin-inline-input" value="' + current.name.replace(/"/g, '&quot;') + '">';
-  var catSelect = '<select class="admin-inline-select">';
-  categories.forEach(function(c) {
-    catSelect += '<option value="' + c + '"' + (c === current.cat ? ' selected' : '') + '>' + c + '</option>';
-  });
-  catSelect += '</select>';
-  catCell.innerHTML = catSelect;
-
-  var imgHtml = '<div class="admin-edit-img">';
-  if (current.img) {
-    imgHtml += '<img src="' + current.img + '" class="admin-table-img" id="editImgPreview' + idx + '">';
+function showDetailModal(idx) {
+  detailIdx = idx;
+  var p = db[idx];
+  document.getElementById('detailName').value = p.name || '';
+  document.getElementById('detailDesc').value = p.desc || '';
+  populateCatSelect('detailCat', p.cat || categories[0]);
+  var prev = document.getElementById('detailImgPreview');
+  if (p.img) {
+    prev.src = p.img;
+    prev.style.display = 'block';
   } else {
-    imgHtml += '<div class="admin-table-img-placeholder" id="editImgPreview' + idx + '"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
+    prev.style.display = 'none';
   }
-  imgHtml += '<input type="file" accept="image/*" onchange="editImgChange(' + idx + ',event)" style="font-size:11px;margin-top:4px"></div>';
-  imgTd.innerHTML = imgHtml;
-
-  var actionsCell = nameCell.parentElement.querySelector('td:last-child');
-  actionsCell.innerHTML =
-    '<button class="admin-btn-sm admin-btn-edit" onclick="saveEdit(' + idx + ')">Guardar</button> ' +
-    '<button class="admin-btn-sm admin-btn-outline" onclick="cancelEdit(' + idx + ')">Cancelar</button>';
+  document.getElementById('detailImg').value = '';
+  var saveBtn = document.getElementById('detailSaveBtn');
+  saveBtn.onclick = function() { saveDetailModal(); };
+  document.getElementById('detailOverlay').style.display = 'flex';
 }
 
-function editImgChange(idx, e) {
+function hideDetailModal() {
+  document.getElementById('detailOverlay').style.display = 'none';
+}
+
+function previewDetailImg(e) {
   var file = e.target.files[0];
   if (!file) return;
   var reader = new FileReader();
   reader.onload = function(ev) {
-    var prev = document.getElementById('editImgPreview' + idx);
+    var prev = document.getElementById('detailImgPreview');
     prev.src = ev.target.result;
-    prev.className = 'admin-table-img';
+    prev.style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
 
-function saveEdit(idx) {
-  var nameCell = document.querySelector('.admin-name-cell[data-idx="' + idx + '"]');
-  var catCell = document.querySelector('.admin-cat-cell[data-idx="' + idx + '"]');
-  var newName = nameCell.querySelector('input').value.trim();
-  var newCat = catCell.querySelector('select').value;
-  if (!newName) return;
-  db[idx].name = newName;
-  db[idx].cat = newCat;
-  var prev = document.getElementById('editImgPreview' + idx);
-  if (prev && prev.tagName === 'IMG') {
-    db[idx].img = prev.src;
+function saveDetailModal() {
+  var name = document.getElementById('detailName').value.trim();
+  if (!name) return;
+  var cat = document.getElementById('detailCat').value;
+  var desc = document.getElementById('detailDesc').value.trim();
+  var prev = document.getElementById('detailImgPreview');
+  db[detailIdx].name = name;
+  db[detailIdx].cat = cat;
+  db[detailIdx].desc = desc;
+  if (prev.style.display !== 'none' && prev.src) {
+    db[detailIdx].img = prev.src;
   }
   saveDB();
-  renderAdminTable();
-}
-
-function cancelEdit(idx) {
+  hideDetailModal();
   renderAdminTable();
 }
 
@@ -273,6 +332,7 @@ function importJSON(event) {
 
 populateCatSelect('addCat', categories[0]);
 initDB();
+initSession();
 </script>
 </body>
 </html>

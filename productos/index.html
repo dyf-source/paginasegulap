@@ -6,27 +6,27 @@
 <title>SEGULAP – Productos</title>
 <meta name="description" content="Segulap - Productos de seguridad contra incendios e industrial. Extintores, mangueras, carteles, luces de emergencia y más.">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="assets/css/segulap.css" rel="stylesheet" type="text/css">
-<link href="assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
-<link href="assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh">
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">
-    <img src="assets/Segulap-Logo.png" alt="SEGULAP" style="height:70px;width:auto">
+  <a class="logo" href="../">
+    <img src="../assets/Segulap-Logo.png" alt="SEGULAP" style="height:70px;width:auto">
   </a>
 
   <ul class="nav-links">
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="servicios.html">Servicios</a></li>
-    <li><a href="productos.html" class="active">Productos</a></li>
-    <li><a href="redincendios.html">Red contra incendios</a></li>
-    <li><a href="izajes.html">Izajes</a></li>
+    <li><a href="../">Inicio</a></li>
+    <li><a href="../servicios/">Servicios</a></li>
+    <li><a href="./" class="active">Productos</a></li>
+    <li><a href="../red-incendios/">Red contra incendios</a></li>
+    <li><a href="../izajes/">Izajes</a></li>
   </ul>
 
-  <a href="contact.html" class="nav-cta">
+  <a href="../contacto/" class="nav-cta">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     Solicitar Asesoramiento
   </a>
@@ -63,6 +63,21 @@
       <div class="products-list" id="productsList"></div>
     </main>
 
+    <div id="productDetail" class="product-detail" onclick="if(event.target===this)hideProductDetail()">
+      <div class="product-detail-inner">
+        <img id="detailImg" class="product-detail-img" src="" alt="">
+        <div class="product-detail-body">
+          <h2 id="detailName" class="product-detail-name"></h2>
+          <span id="detailCat" class="product-cat-tag"></span>
+          <p id="detailDesc" class="product-detail-desc"></p>
+          <button class="product-detail-wa" onclick="consultarWhatsApp()">
+            <img src="../assets/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
+            Consultar por WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -71,7 +86,7 @@
   <div class="footer-grid">
 
     <div class="footer-brand">
-      <img src="assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
+      <img src="../assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
     </div>
 
@@ -127,7 +142,7 @@
   </div>
 </footer>
 
-<script src="assets/js/productos.js"></script>
+<script src="../assets/js/productos.js"></script>
 <script>
 var db;
 var stored = localStorage.getItem('segulap_productos');
@@ -203,27 +218,68 @@ function toDisplayName(s) {
   return s.toLowerCase().replace(/\b\w/g, function(c) { return c.toUpperCase(); });
 }
 
+var currentProduct = null;
+var filteredItems = [];
+
 function renderProducts(items) {
   var container = document.getElementById('productsList');
+  filteredItems = items;
   if (items.length === 0) {
     container.innerHTML = '<div class="products-empty">No se encontraron productos con los filtros seleccionados.</div>';
     return;
   }
   var html = '';
-  items.forEach(function(p) {
+  items.forEach(function(p, idx) {
     var imgHtml;
     if (p.img) {
       imgHtml = '<img src="' + p.img + '" class="product-img" alt="">';
     } else {
       imgHtml = '<div class="product-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
     }
-    html += '<div class="product-item">' +
+    html += '<div class="product-item" onclick="showProductDetail(' + idx + ')">' +
       imgHtml +
       '<div class="product-body"><span class="product-name">' + toDisplayName(p.name) + '</span><span class="product-cat-tag">' + p.cat + '</span></div>' +
       '</div>';
   });
   container.innerHTML = html;
 }
+
+function showProductDetail(idx) {
+  var p = filteredItems[idx];
+  if (!p) return;
+  currentProduct = p;
+
+  var img = document.getElementById('detailImg');
+  if (p.img) {
+    img.src = p.img;
+    img.style.display = 'block';
+  } else {
+    img.style.display = 'none';
+  }
+
+  document.getElementById('detailCat').textContent = p.cat;
+  document.getElementById('detailName').textContent = toDisplayName(p.name);
+  document.getElementById('detailDesc').textContent = p.desc || 'Sin descripción disponible.';
+
+  document.getElementById('productDetail').classList.add('is-visible');
+}
+
+function hideProductDetail() {
+  document.getElementById('productDetail').classList.remove('is-visible');
+  currentProduct = null;
+}
+
+function consultarWhatsApp() {
+  if (!currentProduct) return;
+  var nombre = prompt('Por favor, ingresá tu nombre para recibir más información:');
+  if (!nombre || !nombre.trim()) return;
+  var texto = 'Hola, soy ' + nombre.trim() + '. Quiero más información sobre el producto "' + currentProduct.name + '".';
+  window.open('https://wa.me/5492216746874?text=' + encodeURIComponent(texto), '_blank');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') hideProductDetail();
+});
 
 buildCategoryList();
 filterProducts();

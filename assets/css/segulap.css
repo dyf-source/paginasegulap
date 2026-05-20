@@ -886,6 +886,127 @@ footer {
   font-size: 15px;
 }
 
+/* ── PRODUCT DETAIL PANEL ── */
+
+.product-detail {
+  display: none;
+}
+
+.product-detail.is-visible {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-detail-inner {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  width: 460px;
+  max-width: 92vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.product-detail-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  background: var(--light-gray);
+}
+
+.product-detail-body {
+  padding: 20px 24px 24px;
+}
+
+.product-detail-body .product-cat-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.product-detail-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 6px 0 12px;
+  text-transform: uppercase;
+}
+
+.product-detail-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+.product-detail-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #25D366;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.product-detail-wa:hover {
+  background: #1da851;
+}
+
+.product-item {
+  cursor: pointer;
+}
+
+/* Desktop: sticky inline flex child */
+@media (min-width: 1024px) {
+  .product-detail {
+    display: block;
+    width: 0;
+    max-height: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    visibility: hidden;
+  }
+
+  .product-detail.is-visible {
+    visibility: visible;
+    width: 360px;
+    max-height: calc(100vh - 132px);
+    overflow-y: auto;
+    position: sticky;
+    top: 106px;
+    align-self: flex-start;
+    z-index: 150;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .product-detail.is-visible .product-detail-inner {
+    box-shadow: none;
+    max-height: none;
+    max-width: 100%;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .product-detail.is-visible .product-detail-img {
+    height: 190px;
+  }
+}
+
 /* ── ADMIN PANEL ── */
 .admin-body {
   background: #f0f2f5;
@@ -988,6 +1109,23 @@ footer {
   gap: 12px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+}
+
+.admin-search-input {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  min-width: 220px;
+  background: #fff;
+  color: var(--black);
+  outline: none;
+  transition: border-color .15s;
+}
+
+.admin-search-input:focus {
+  border-color: var(--red);
 }
 
 .admin-btn {
@@ -1173,6 +1311,59 @@ footer {
   margin-top: 8px;
   object-fit: cover;
   border: 1px solid var(--border);
+}
+
+.admin-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.admin-textarea:focus {
+  border-color: var(--red);
+}
+
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-modal {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px;
+  width: 480px;
+  max-width: 94vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.admin-modal h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.admin-name-cell {
+  cursor: pointer;
+}
+
+.admin-name-cell:hover {
+  color: var(--red);
 }
 
 .admin-table-img {
