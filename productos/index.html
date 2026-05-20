@@ -65,11 +65,17 @@
 
     <div id="productDetail" class="product-detail" onclick="if(event.target===this)hideProductDetail()">
       <div class="product-detail-inner">
-        <img id="detailImg" class="product-detail-img" src="" alt="">
+        <div class="detail-top">
+          <div class="detail-text">
+            <span id="detailCat" class="product-cat-tag"></span>
+            <h2 id="detailName" class="product-detail-name"></h2>
+            <p id="detailDesc" class="product-detail-desc"></p>
+          </div>
+          <div class="detail-img-wrap">
+            <img id="detailImg" class="product-detail-img" src="" alt="">
+          </div>
+        </div>
         <div class="product-detail-body">
-          <h2 id="detailName" class="product-detail-name"></h2>
-          <span id="detailCat" class="product-cat-tag"></span>
-          <p id="detailDesc" class="product-detail-desc"></p>
           <button class="product-detail-wa" onclick="consultarWhatsApp()">
             <img src="../assets/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
             Consultar por WhatsApp
@@ -214,10 +220,6 @@ function filterProducts() {
   renderProducts(filtered);
 }
 
-function toDisplayName(s) {
-  return s.toLowerCase().replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-}
-
 var currentProduct = null;
 var filteredItems = [];
 
@@ -238,7 +240,7 @@ function renderProducts(items) {
     }
     html += '<div class="product-item" onclick="showProductDetail(' + idx + ')">' +
       imgHtml +
-      '<div class="product-body"><span class="product-name">' + toDisplayName(p.name) + '</span><span class="product-cat-tag">' + p.cat + '</span></div>' +
+      '<div class="product-body"><span class="product-name">' + p.name + '</span><span class="product-cat-tag">' + p.cat + '</span></div>' +
       '</div>';
   });
   container.innerHTML = html;
@@ -250,15 +252,18 @@ function showProductDetail(idx) {
   currentProduct = p;
 
   var img = document.getElementById('detailImg');
+  var wrap = document.querySelector('.detail-img-wrap');
   if (p.img) {
     img.src = p.img;
     img.style.display = 'block';
+    wrap.classList.remove('no-image');
   } else {
     img.style.display = 'none';
+    wrap.classList.add('no-image');
   }
 
   document.getElementById('detailCat').textContent = p.cat;
-  document.getElementById('detailName').textContent = toDisplayName(p.name);
+  document.getElementById('detailName').textContent = p.name;
   document.getElementById('detailDesc').textContent = p.desc || 'Sin descripción disponible.';
 
   document.getElementById('productDetail').classList.add('is-visible');
@@ -271,9 +276,7 @@ function hideProductDetail() {
 
 function consultarWhatsApp() {
   if (!currentProduct) return;
-  var nombre = prompt('Por favor, ingresá tu nombre para recibir más información:');
-  if (!nombre || !nombre.trim()) return;
-  var texto = 'Hola, soy ' + nombre.trim() + '. Quiero más información sobre el producto "' + currentProduct.name + '".';
+  var texto = 'Hola, quisiera consultar por "' + currentProduct.name + '".';
   window.open('https://wa.me/5492216746874?text=' + encodeURIComponent(texto), '_blank');
 }
 

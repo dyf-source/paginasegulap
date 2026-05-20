@@ -913,36 +913,65 @@ footer {
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 
-.product-detail-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
+.detail-top {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px 0;
+  align-items: flex-start;
+}
+
+.detail-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.detail-text .product-cat-tag {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.detail-text .product-detail-name {
+  margin: 0 0 6px;
+}
+
+.detail-text .product-detail-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin: 0;
+}
+
+.detail-img-wrap {
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.detail-img-wrap.no-image {
   background: var(--light-gray);
 }
 
-.product-detail-body {
-  padding: 20px 24px 24px;
+.product-detail-img {
+  height: 100%;
+  width: auto;
+  display: block;
+  margin: 0 auto;
 }
 
-.product-detail-body .product-cat-tag {
-  display: inline-block;
-  margin-bottom: 10px;
+.product-detail-body {
+  padding: 16px 24px 24px;
 }
 
 .product-detail-name {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 24px;
-  margin: 6px 0 12px;
   text-transform: uppercase;
-}
-
-.product-detail-desc {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--gray);
-  margin-bottom: 20px;
 }
 
 .product-detail-wa {
@@ -1002,10 +1031,7 @@ footer {
     overflow: visible;
   }
 
-  .product-detail.is-visible .product-detail-img {
-    height: 190px;
   }
-}
 
 /* ── ADMIN PANEL ── */
 .admin-body {
