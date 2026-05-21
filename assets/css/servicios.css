@@ -1,0 +1,245 @@
+/* ── SERVICIOS SPLIT LAYOUT ── */
+
+.servicios-split {
+  display: flex;
+  min-height: calc(100vh - 86px);
+  overflow: hidden;
+  flex: 1;
+}
+
+/* ── LEFT PANEL (Image + Blur Fade) ── */
+
+.servicios-left {
+  width: 45%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.servicios-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.6s ease;
+  will-change: opacity;
+}
+
+.servicios-bg--front {
+  z-index: 1;
+}
+
+.servicios-bg--back {
+  z-index: 0;
+}
+
+/* Gradient overlay: blurred edge softens the split boundary */
+.servicios-left::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  bottom: -80px;
+  right: -75px;
+  width: 150px;
+  background: linear-gradient(to right, transparent 0%, #000 40%);
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── RIGHT PANEL (Black + Cards) ── */
+
+.servicios-right {
+  width: 55%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.servicios-title {
+  padding-top: 36px;
+  padding-bottom: 4px;
+  flex-shrink: 0;
+  align-self: center;
+  width: 100%;
+  max-width: 680px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 34px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1.5px;
+  line-height: 1;
+}
+
+.servicios-title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+.servicios-cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 680px;
+  align-self: center;
+  padding-bottom: 20px;
+  transform: translateX(-20px);
+}
+
+/* ── CARD BUTTONS ── */
+
+.servicio-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  position: relative;
+  background: transparent;
+}
+
+.servicio-card .card-icon-wrap {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.servicio-card .card-icon-wrap img {
+  width: 22px;
+  height: 22px;
+  display: block;
+  opacity: 0.55;
+  transition: opacity 0.25s ease;
+  filter: brightness(0) invert(1);
+}
+
+.servicio-card .card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.servicio-card .card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2px;
+  transition: color 0.25s ease;
+  letter-spacing: 0.5px;
+}
+
+.servicio-card .card-desc {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.25s ease;
+  line-height: 1.4;
+}
+
+.servicio-card .card-arrow {
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.25s ease;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── HOVER STATE ── */
+
+.servicio-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.servicio-card:hover .card-title {
+  color: #fff;
+}
+
+.servicio-card:hover .card-desc {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.servicio-card:hover .card-icon-wrap img {
+  opacity: 1;
+}
+
+.servicio-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── ACTIVE STATE (current cycling selection) ── */
+
+.servicio-card.active {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.06);
+}
+
+.servicio-card.active .card-title {
+  color: #fff;
+}
+
+.servicio-card.active .card-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.servicio-card.active .card-icon-wrap img {
+  opacity: 1;
+}
+
+.servicio-card.active .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── ACTIVE + HOVER OVERRIDE ── */
+
+.servicio-card.active:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 32px rgba(255, 255, 255, 0.1);
+}
+
+/* ── RESPONSIVE (Desktop only) ── */
+
+@media (max-width: 1000px) {
+  .servicios-left {
+    display: none;
+  }
+
+  .servicios-right {
+    width: 100%;
+    padding: 20px 24px;
+  }
+
+  .servicios-cards {
+    max-width: 100%;
+  }
+}
