@@ -16,7 +16,7 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="../">
-    <img src="../assets/Segulap-Logo.png" alt="SEGULAP" style="height:70px;width:auto">
+    <img src="../assets/Segulap-Logo-White.png" alt="SEGULAP" style="height:66px;width:auto;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
   </a>
   <ul class="nav-links">
     <li><a href="./" class="active">Servicios</a></li>
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       title: 'Informes Técnicos',
       desc: 'Elaboración de informes y documentación técnica profesional.',
-      img: '../assets/accesorios-red-incendios.png',
+      img: '../assets/clipboard-writing.png',
       icon: '../assets/clipboard.svg',
       href: '#'
     },
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       title: 'Red Contra Incendios',
       desc: 'Diseño, instalación y mantenimiento de redes contra incendios.',
-      img: '../assets/Extintores.png',
+      img: '../assets/accesorios-red-incendios.png',
       icon: '../assets/extintor-icon.svg',
       href: '#'
     }
@@ -223,6 +223,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Set new image on inactive layer and bring it to front */
     inactiveLayer.style.backgroundImage = 'url(' + servicios[index].img + ')';
+    if (servicios[index].img.indexOf('accesorios-red-incendios') > -1) {
+      inactiveLayer.style.backgroundPosition = '10% center';
+    } else {
+      inactiveLayer.style.backgroundPosition = 'center';
+    }
+
     inactiveLayer.style.opacity = '1';
     inactiveLayer.classList.remove('servicios-bg--back');
     inactiveLayer.classList.add('servicios-bg--front');
