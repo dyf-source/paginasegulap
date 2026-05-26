@@ -13,6 +13,8 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { overflow-x: hidden; }
+
 body, .body {
   font-family: 'Barlow', sans-serif;
   color: var(--black);
@@ -40,6 +42,8 @@ nav {
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  position: relative;
+  z-index: 2;
 }
 
 .logo-shield {
@@ -69,6 +73,58 @@ nav {
   letter-spacing: 2px;
   color: rgba(255,255,255,0.6);
   text-transform: uppercase;
+}
+
+/* Hamburger toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Sidebar */
+.nav-sidebar {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.nav-close {
+  display: none;
+}
+
+.nav-toggle,
+.nav-close {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-links {
@@ -123,6 +179,11 @@ nav {
 }
 
 .nav-cta:hover { background: rgba(255,255,255,0.85); transform: translateY(-1px); }
+
+/* Overlay */
+.nav-overlay {
+  display: none;
+}
 
 /* Force consistency on pages with external CSS */
 nav { display: flex; }
@@ -583,6 +644,10 @@ footer {
   display: flex;
   gap: 12px;
   margin-top: 8px;
+}
+
+.social-row-mobile {
+  display: none;
 }
 
 .social-btn {
@@ -1426,5 +1491,158 @@ footer {
   .products-sidebar {
     width: 100%;
     position: static;
+  }
+}
+
+/* ── MOBILE NAV & FOOTER ── */
+@media (max-width: 1023px) {
+  nav {
+    position: fixed;
+    width: 100%;
+    padding: 0 20px;
+    height: 66px;
+  }
+
+  body {
+    padding-top: 66px;
+  }
+
+  .logo img {
+    height: 53px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 98;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+
+  .nav-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 85vw;
+    background: #8a1a1a;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 80px 24px 24px;
+    z-index: 99;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    overflow-y: auto;
+  }
+
+  .nav-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .nav-close {
+    display: flex;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: rgba(255,255,255,0.85);
+    z-index: 101;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+
+  .nav-close.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .nav-links a.active::after,
+  .nav-links a:hover::after {
+    display: none;
+  }
+
+  .nav-sidebar .nav-cta {
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  .nav-cta {
+    display: flex;
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  /* ── FOOTER MOBILE ── */
+  footer {
+    padding: 40px 20px 0;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .footer-grid .footer-col:nth-child(2) { order: 1; }
+  .footer-grid .footer-col:nth-child(3) { order: 2; }
+  .footer-grid .footer-col:nth-child(4) { order: 3; }
+  .footer-grid .footer-brand { order: 4; }
+
+  .footer-brand p {
+    margin-bottom: 16px;
+  }
+
+  .social-row-mobile {
+    display: flex;
+  }
+
+  .footer-col:last-child .social-row {
+    display: none;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
   }
 }
