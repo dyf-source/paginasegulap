@@ -443,6 +443,7 @@ var categories = [
   "Mantenimiento y Recargas",
   "Elementos de Protección Personal (EPP)",
   "Accesorios para Extintores",
+  "Repuestos para Extintores",
   "Red contra Incendios",
   "Vial y Tránsito",
   "Izaje y Remolque",

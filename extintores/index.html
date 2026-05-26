@@ -31,8 +31,8 @@
       .hero-ext .hero-bg {
         position: absolute;
         inset: 0;
-        background: #000 url('../assets/extintores-trabajo.jpg') 70% center /
-          auto 120% no-repeat;
+        background: #000 url('../assets/extintores-wide.jpg') right center /
+          auto 145% no-repeat;
       }
       .hero-ext .hero-bg::before {
         content: '';
@@ -41,8 +41,8 @@
         background: linear-gradient(
           to right,
           #000 0%,
-          #000 40%,
-          transparent 60%
+          #000 calc(40% + 200px),
+          transparent calc(60% + 200px)
         );
         filter: blur(50px);
         pointer-events: none;
@@ -54,8 +54,8 @@
         background: linear-gradient(
           to right,
           rgba(0, 0, 0, 0.9) 0%,
-          rgba(0, 0, 0, 0.2) 30%,
-          transparent 50%
+          rgba(0, 0, 0, 0.2) calc(30% + 200px),
+          transparent calc(50% + 200px)
         );
         pointer-events: none;
       }
@@ -317,7 +317,7 @@
     <section class="hero-ext">
       <div class="hero-bg"></div>
       <div class="hero-content">
-        <h1>Extintores <span class="hero-accent">y matafuegos</span></h1>
+        <h1>Extintores</h1>
         <p>
           Venta, recarga, mantenimiento y accesorios para todo tipo de
           extintores. Soluciones certificadas para hogares, comercios,
@@ -366,7 +366,7 @@
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 0 0 20 15 15 0 0 0 0-20z"/></svg>
                 </div>
                 <div class="service-title">Venta de extintores</div>
-                <div class="service-desc">Todos los tipos y capacidades. ABC, CO2, AFFF, agua, K y HCFC. Envíos a todo el país.</div>
+                <div class="service-desc">Todos los tipos y capacidades. ABC, CO2, AFFF, agua, K y HCFC.</div>
               </div>
             </div>
           </a>
@@ -382,15 +382,27 @@
               </div>
             </div>
           </a>
-          <a href="../productos/?cat=Accesorios%20para%20Extintores" class="service-card-link">
+          <a href="../productos/?cat=Repuestos%20para%20Extintores" class="service-card-link">
             <div class="service-card">
-              <img class="service-img" src="../assets/accesorios-red-incendios.png" alt="Repuestos para extintores">
+              <img class="service-img" src="../assets/repuestos-extintores.png" alt="Repuestos para extintores">
               <div class="service-body">
                 <div class="service-icon-wrap">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 6v12M6 12h12"/></svg>
                 </div>
                 <div class="service-title">Repuestos</div>
-                <div class="service-desc">Soportes, mangueras, válvulas, manómetros, balizas, precintos y todo lo necesario para su extintor.</div>
+                <div class="service-desc">Mangueras, válvulas, manómetros, precintos y todo lo necesario para su extintor.</div>
+              </div>
+            </div>
+          </a>
+          <a href="../productos/?cat=Accesorios%20para%20Extintores" class="service-card-link">
+            <div class="service-card">
+              <img class="service-img" src="../assets/accesorios-red-incendios.png" alt="Accesorios">
+              <div class="service-body">
+                <div class="service-icon-wrap">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
+                </div>
+                <div class="service-title">Accesorios</div>
+                <div class="service-desc">Mangueras, cartelería, luces de emergencia, botiquines, EPP y más elementos de seguridad.</div>
               </div>
             </div>
           </a>
