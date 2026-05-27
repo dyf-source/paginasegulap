@@ -21,13 +21,13 @@
 .hero-mant .hero-bg {
   position: absolute;
   inset: 0;
-  background: #000 url('../../assets/extintor-revision.png') 70% center / auto 120% no-repeat;
+  background: #000 url('../../assets/extintor-revision.png') right center / auto 140% no-repeat;
 }
 .hero-mant .hero-bg::before {
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
+  background: linear-gradient(to right, #000 0%, #000 50%, transparent 70%);
   filter: blur(50px);
   pointer-events: none;
 }
@@ -35,13 +35,13 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 30%, transparent 50%);
+  background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 40%, transparent 60%);
   pointer-events: none;
 }
 .hero-mant .hero-content {
   position: relative;
   z-index: 2;
-  padding: 60px 80px;
+  padding: 60px 80px 60px 110px;
   max-width: 650px;
   animation: fadeUp .8s ease both;
 }
@@ -171,28 +171,11 @@
   line-height: 1.5;
   margin: 0;
 }
-.cta-mant {
-  background: var(--dark);
-  padding: 48px;
-  text-align: center;
-  color: var(--white);
-}
-.cta-mant h2 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 30px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.cta-mant p {
-  font-size: 15px;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 24px;
-}
-.cta-mant .btn-contacto {
+.hero-mant .btn-contacto {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  margin-top: 24px;
   padding: 14px 32px;
   background: var(--red);
   color: var(--white);
@@ -204,7 +187,7 @@
   text-decoration: none;
   transition: background .15s, transform .15s;
 }
-.cta-mant .btn-contacto:hover {
+.hero-mant .btn-contacto:hover {
   background: var(--red-dark);
   transform: translateY(-2px);
 }
@@ -234,7 +217,7 @@
       <li><a href="../../certificaciones/">Certificaciones</a></li>
       <li><a href="../../capacitaciones/">Capacitaciones</a></li>
       <li><a href="../../izajes/">Izajes</a></li>
-      <li><a href="../../extintores/">Extintores</a></li>
+      <li><a href="../../extintores/" class="active">Extintores</a></li>
       <li><a href="../../red-incendios/">Red contra incendios</a></li>
       <li><a href="../../productos/">Productos</a></li>
     </ul>
@@ -253,6 +236,10 @@
   <div class="hero-content">
     <h1>Mantenimiento <span class="hero-accent">de extintores</span></h1>
     <p>Servicio técnico profesional para la recarga, reparación y control periódico de todo tipo de extintores. Cumplimos con las normativas IRAM y exigencias legales.</p>
+    <a href="https://wa.me/5492216746874?text=Hola%2C%20quisiera%20consultar%20sobre%20el%20servicio%20de%20mantenimiento%20de%20extintores." target="_blank" rel="noopener" class="btn-contacto">
+      <img src="../../assets/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
+      Consultar por WhatsApp
+    </a>
   </div>
 </section>
 
@@ -337,22 +324,23 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-mant">
-  <h2>¿Necesita mantenimiento para sus extintores?</h2>
-  <p>Solicite su presupuesto sin cargo. Uno de nuestros técnicos lo asesorará sobre el servicio que necesita.</p>
-  <a href="../../contacto/" class="btn-contacto">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Consultar ahora
-  </a>
-</section>
-
 <!-- FOOTER -->
 <footer style="margin-top:auto">
   <div class="footer-grid">
     <div class="footer-brand">
       <img src="../../assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
+      <div class="social-row social-row-mobile">
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/matafuegossegulap/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="footer-col">
       <h4>Teléfono</h4>
@@ -375,9 +363,9 @@
     <div class="footer-col">
       <h4>Ubicación</h4>
       <div class="contact-row">
-        <a class="icon-circle" href="https://share.google/q5LJZtAUMqAPQVmmJ" target="_blank" rel="noopener">
+        <div class="icon-circle">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </a>
+        </div>
         <div><a href="https://share.google/q5LJZtAUMqAPQVmmJ" target="_blank" rel="noopener" class="address-link">191, Entre 45 y 46, B1901 La Plata, Provincia de Buenos Aires</a></div>
       </div>
       <div class="social-row">
