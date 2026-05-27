@@ -1,158 +1,73 @@
+var API_BASE = window.SEGULAP_API_URL || (window.location.protocol === 'file:' ? 'http://localhost:3000' : '');
+
 var SegulapDB = (function() {
-  var DB_NAME = 'SegulapDB';
-  var DB_VERSION = 1;
-  var db = null;
+  var readyCallbacks = [];
   var ready = false;
-  var queue = [];
+  var useApi = false;
 
-  function execQueue() {
-    while (queue.length) { queue.shift()(); }
+  function api(method, path, body) {
+    var opts = {
+      method: method,
+      headers: { 'Accept': 'application/json' },
+      cache: 'no-store'
+    };
+    if (body !== undefined) {
+      opts.headers['Content-Type'] = 'application/json';
+      opts.body = JSON.stringify(body);
+    }
+    return fetch(API_BASE + '/api' + path, opts).then(function(r) {
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.error || r.statusText); });
+      return r.json();
+    });
   }
 
-  function open(resolve) {
-    if (db && ready) { resolve(db); return; }
-    queue.push(function() { resolve(db); });
-    if (ready) return;
-    ready = true;
-    var req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = function(e) {
-      var d = e.target.result;
-      if (!d.objectStoreNames.contains('products')) {
-        d.createObjectStore('products', { keyPath: 'id', autoIncrement: true });
-      }
-      if (!d.objectStoreNames.contains('config')) {
-        d.createObjectStore('config', { keyPath: 'key' });
-      }
-      var tx = e.target.transaction;
-      tx.objectStore('config').put({ key: 'whatsapp', value: '5492216746874' });
-      if (typeof productosData !== 'undefined' && typeof categories !== 'undefined') {
-        var store = tx.objectStore('products');
-        var countReq = store.count();
-        countReq.onsuccess = function() {
-          if (countReq.result === 0) {
-            productosData.forEach(function(p) { store.add(p); });
-          }
-        };
-      }
-    };
-    req.onsuccess = function(e) {
-      db = e.target.result;
-      db.onversionchange = function() { db.close(); };
-      execQueue();
-    };
-    req.onerror = function(e) {
-      console.error('SegulapDB error:', e.target.error);
-    };
+  function init() {
+    api('GET', '/health').then(function() {
+      useApi = true;
+      ready = true;
+      while (readyCallbacks.length) readyCallbacks.shift()();
+    }).catch(function() {
+      useApi = false;
+      ready = true;
+      while (readyCallbacks.length) readyCallbacks.shift()();
+    });
   }
 
-  function readyPromise() {
-    return new Promise(function(resolve) { open(resolve); });
-  }
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
 
   return {
     ready: function(cb) {
-      if (db && ready) { cb(db); return; }
-      queue.push(function() { cb(db); });
-      if (!ready) open(null);
+      if (ready) { cb(); return; }
+      readyCallbacks.push(cb);
     },
+    isApiAvailable: function() { return useApi; },
     getProducts: function() {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('products', 'readonly');
-          var store = tx.objectStore('products');
-          var req = store.getAll();
-          req.onsuccess = function() { resolve(req.result); };
-          req.onerror = function() { reject(req.error); };
-        });
-      });
+      return api('GET', '/products');
     },
     getCategories: function() {
-      return new Promise(function(resolve) {
-        if (typeof categories !== 'undefined') { resolve(categories); return; }
-        resolve([]);
-      });
+      return api('GET', '/categories');
     },
     addProduct: function(product) {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('products', 'readwrite');
-          var store = tx.objectStore('products');
-          var req = store.add(product);
-          req.onsuccess = function() { resolve(req.result); };
-          req.onerror = function() { reject(req.error); };
-        });
-      });
+      return api('POST', '/products', product).then(function(r) { return r.id; });
     },
     updateProduct: function(id, product) {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('products', 'readwrite');
-          var store = tx.objectStore('products');
-          product.id = id;
-          var req = store.put(product);
-          req.onsuccess = function() { resolve(); };
-          req.onerror = function() { reject(req.error); };
-        });
-      });
+      return api('PUT', '/products/' + id, product);
     },
     deleteProduct: function(id) {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('products', 'readwrite');
-          var store = tx.objectStore('products');
-          var req = store.delete(id);
-          req.onsuccess = function() { resolve(); };
-          req.onerror = function() { reject(req.error); };
-        });
-      });
+      return api('DELETE', '/products/' + id);
     },
     getConfig: function(key) {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('config', 'readonly');
-          var store = tx.objectStore('config');
-          var req = store.get(key);
-          req.onsuccess = function() { resolve(req.result ? req.result.value : null); };
-          req.onerror = function() { reject(req.error); };
-        });
-      });
+      return api('GET', '/config/' + key).then(function(r) { return r.value; });
     },
     setConfig: function(key, value) {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('config', 'readwrite');
-          var store = tx.objectStore('config');
-          var req = store.put({ key: key, value: value });
-          req.onsuccess = function() { resolve(); };
-          req.onerror = function() { reject(req.error); };
-        });
-      });
+      return api('PUT', '/config/' + key, { value: String(value) });
     },
     getAllProductsJSON: function() {
-      return this.getProducts().then(function(products) {
-        return JSON.stringify(products, null, 2);
-      });
+      return api('GET', '/products/export').then(function(data) { return JSON.stringify(data, null, 2); });
     },
     importProducts: function(data) {
-      return new Promise(function(resolve, reject) {
-        readyPromise().then(function(d) {
-          var tx = d.transaction('products', 'readwrite');
-          var store = tx.objectStore('products');
-          var clearReq = store.clear();
-          clearReq.onsuccess = function() {
-            var added = 0;
-            data.forEach(function(p, i) {
-              var req = store.add(p);
-              req.onsuccess = function() {
-                added++;
-                if (added === data.length) resolve(data.length);
-              };
-            });
-            if (data.length === 0) resolve(0);
-          };
-          clearReq.onerror = function() { reject(clearReq.error); };
-        });
-      });
+      return api('POST', '/products/import', data).then(function(r) { return r.count; });
     }
   };
 })();
