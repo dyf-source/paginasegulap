@@ -140,29 +140,13 @@
   </div>
 </div>
 
-<script src="../assets/js/db.js"></script>
 <script src="../assets/js/productos.js"></script>
 <script src="../assets/js/config.js"></script>
 <script>
 var ADMIN_PASSWORD = 'segulap2024';
 var db = [];
-var useApi = false;
 
 function initDB() {
-  SegulapDB.ready(function() {
-    if (SegulapDB.isApiAvailable()) {
-      useApi = true;
-      SegulapDB.getProducts().then(function(products) {
-        db = products;
-        renderAdminTable();
-      }).catch(function() { loadLocal(); });
-    } else {
-      loadLocal();
-    }
-  });
-}
-
-function loadLocal() {
   var stored = localStorage.getItem('segulap_productos');
   if (stored) {
     try { db = JSON.parse(stored); } catch(e) { db = JSON.parse(JSON.stringify(productosData)); }
@@ -170,7 +154,6 @@ function loadLocal() {
     db = JSON.parse(JSON.stringify(productosData));
     saveDB();
   }
-  renderAdminTable();
 }
 
 function saveDB() {
@@ -316,22 +299,10 @@ function addProduct() {
   if (img && img.startsWith('data:')) {
     product.img = img;
   }
-  function done() {
-    hideAddForm();
-    renderAdminTable();
-  }
-  if (useApi) {
-    SegulapDB.addProduct(product).then(function() {
-      return SegulapDB.getProducts();
-    }).then(function(products) {
-      db = products;
-      done();
-    }).catch(function() { done(); });
-  } else {
-    db.push(product);
-    saveDB();
-    done();
-  }
+  db.push(product);
+  saveDB();
+  hideAddForm();
+  renderAdminTable();
 }
 
 function showDetailModal(idx) {
@@ -375,67 +346,31 @@ function saveDetailModal() {
   var cat = document.getElementById('detailCat').value;
   var desc = document.getElementById('detailDesc').value.trim();
   var prev = document.getElementById('detailImgPreview');
-  var product = { name: name, cat: cat, desc: desc, img: db[detailIdx].img };
+  db[detailIdx].name = name;
+  db[detailIdx].cat = cat;
+  db[detailIdx].desc = desc;
   if (prev.style.display !== 'none' && prev.src) {
-    product.img = prev.src;
+    db[detailIdx].img = prev.src;
   }
-  function done() {
-    hideDetailModal();
-    renderAdminTable();
-  }
-  if (useApi) {
-    var id = db[detailIdx].id;
-    SegulapDB.updateProduct(id, product).then(function() {
-      return SegulapDB.getProducts();
-    }).then(function(products) {
-      db = products;
-      done();
-    }).catch(function() { done(); });
-  } else {
-    db[detailIdx].name = name;
-    db[detailIdx].cat = cat;
-    db[detailIdx].desc = desc;
-    db[detailIdx].img = product.img;
-    saveDB();
-    done();
-  }
+  saveDB();
+  hideDetailModal();
+  renderAdminTable();
 }
 
 function deleteProduct(idx) {
   if (!confirm('¿Eliminar "' + db[idx].name + '"?')) return;
-  function done() { renderAdminTable(); }
-  if (useApi) {
-    SegulapDB.deleteProduct(db[idx].id).then(function() {
-      return SegulapDB.getProducts();
-    }).then(function(products) {
-      db = products;
-      done();
-    }).catch(function() { done(); });
-  } else {
-    db.splice(idx, 1);
-    saveDB();
-    done();
-  }
+  db.splice(idx, 1);
+  saveDB();
+  renderAdminTable();
 }
 
 function exportJSON() {
-  if (useApi) {
-    SegulapDB.getAllProductsJSON().then(function(jsonStr) {
-      var blob = new Blob([jsonStr], { type: 'application/json' });
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'productos.json';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    }).catch(function() { alert('Error al exportar'); });
-  } else {
-    var blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'productos.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  }
+  var blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'productos.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 function importJSON(event) {
@@ -446,19 +381,10 @@ function importJSON(event) {
     try {
       var data = JSON.parse(e.target.result);
       if (!Array.isArray(data)) throw new Error('Formato inválido');
-      function done() { renderAdminTable(); alert('Importados ' + db.length + ' productos.'); }
-      if (useApi) {
-        SegulapDB.importProducts(data).then(function(count) {
-          return SegulapDB.getProducts();
-        }).then(function(products) {
-          db = products;
-          done();
-        }).catch(function() { done(); });
-      } else {
-        db = data;
-        saveDB();
-        done();
-      }
+      db = data;
+      saveDB();
+      renderAdminTable();
+      alert('Importados ' + db.length + ' productos.');
     } catch(err) {
       alert('Error al importar: ' + err.message);
     }
@@ -472,9 +398,6 @@ function saveConfig() {
   var fb = document.getElementById('configFeedback');
   if (!num) { fb.textContent = 'Ingresá un número válido.'; return; }
   setWhatsAppNumber(num);
-  if (typeof SegulapDB !== 'undefined' && SegulapDB.isApiAvailable && SegulapDB.isApiAvailable()) {
-    SegulapDB.setConfig('whatsapp', num).catch(function(){});
-  }
   fb.textContent = 'Número guardado correctamente.';
   fb.style.color = '#2e7d32';
 }

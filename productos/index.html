@@ -177,51 +177,22 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 });
 </script>
-<script src="../assets/js/db.js"></script>
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/productos.js"></script>
 <script>
 var db;
+var stored = localStorage.getItem('segulap_productos');
+if (stored) {
+  try { db = JSON.parse(stored); } catch(e) { db = productosData; }
+} else {
+  db = productosData;
+}
+
 var checkedCategories = {};
 
-function initProductDB(products) {
-  db = products;
-  categories.forEach(function(c) { checkedCategories[c] = false; });
-  var urlParams = new URLSearchParams(window.location.search);
-  var preselectedCat = urlParams.get('cat');
-  if (preselectedCat && categories.indexOf(preselectedCat) > -1) {
-    checkedCategories[preselectedCat] = true;
-  }
-  buildCategoryList();
-  filterProducts();
-}
-
-SegulapDB.ready(function() {
-  if (SegulapDB.isApiAvailable()) {
-    SegulapDB.getProducts().then(function(products) {
-      initProductDB(products);
-    }).catch(function() { fallbackToLocal(); });
-  } else {
-    fallbackToLocal();
-  }
+categories.forEach(function(c) {
+  checkedCategories[c] = false;
 });
-
-function fallbackToLocal() {
-  var stored = localStorage.getItem('segulap_productos');
-  if (stored) {
-    try { db = JSON.parse(stored); } catch(e) { db = productosData; }
-  } else {
-    db = productosData;
-  }
-  categories.forEach(function(c) { checkedCategories[c] = false; });
-  var urlParams = new URLSearchParams(window.location.search);
-  var preselectedCat = urlParams.get('cat');
-  if (preselectedCat && categories.indexOf(preselectedCat) > -1) {
-    checkedCategories[preselectedCat] = true;
-  }
-  buildCategoryList();
-  filterProducts();
-}
 
 var urlParams = new URLSearchParams(window.location.search);
 var preselectedCat = urlParams.get('cat');
@@ -349,6 +320,8 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') hideProductDetail();
 });
 
+buildCategoryList();
+filterProducts();
 </script>
 
 </body>
