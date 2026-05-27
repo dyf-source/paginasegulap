@@ -6,6 +6,31 @@
 <title>Admin – SEGULAP Productos</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<style>
+.admin-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+}
+.admin-tab {
+  padding: 12px 28px;
+  border: none;
+  background: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color .15s, border-color .15s;
+}
+.admin-tab:hover { color: var(--black); }
+.admin-tab.active { color: var(--red); border-bottom-color: var(--red); }
+</style>
 </head>
 <body class="admin-body">
 
@@ -20,80 +45,103 @@
 
 <div id="adminPanel" class="admin-panel" style="display:none">
   <div class="admin-topbar">
-    <h2>Productos – Administración</h2>
+    <h2>Panel de Administración</h2>
     <button class="admin-btn admin-btn-outline" onclick="adminLogout()">Cerrar sesión</button>
   </div>
 
-  <div class="admin-toolbar">
-    <button class="admin-btn admin-btn-primary" onclick="showAddForm()">+ Agregar producto</button>
-    <button class="admin-btn admin-btn-outline" onclick="exportJSON()">Exportar JSON</button>
-    <button class="admin-btn admin-btn-outline" onclick="document.getElementById('importInput').click()">Importar JSON</button>
-    <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
-    <input type="text" id="adminSearch" class="admin-search-input" placeholder="Buscar producto..." oninput="renderAdminTable()">
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchTab('productos')">Productos</button>
+    <button class="admin-tab" onclick="switchTab('configuracion')">Configuración</button>
   </div>
 
-  <div id="addForm" class="admin-form" style="display:none">
-    <h3>Nuevo producto</h3>
-    <input type="text" id="addName" placeholder="Nombre del producto">
-    <select id="addCat"></select>
-    <div class="admin-form-field">
-      <label>Imagen</label>
-      <input type="file" id="addImg" accept="image/*" onchange="previewAddImg(event)">
-      <img id="addImgPreview" class="admin-img-preview" style="display:none">
+  <div id="sectionProductos">
+    <div class="admin-toolbar">
+      <button class="admin-btn admin-btn-primary" onclick="showAddForm()">+ Agregar producto</button>
+      <button class="admin-btn admin-btn-outline" onclick="exportJSON()">Exportar JSON</button>
+      <button class="admin-btn admin-btn-outline" onclick="document.getElementById('importInput').click()">Importar JSON</button>
+      <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
+      <input type="text" id="adminSearch" class="admin-search-input" placeholder="Buscar producto..." oninput="renderAdminTable()">
     </div>
-    <div class="admin-form-field">
-      <label>Descripción</label>
-      <textarea id="addDesc" class="admin-textarea" placeholder="Descripción del producto..." rows="3"></textarea>
+
+    <div id="addForm" class="admin-form" style="display:none">
+      <h3>Nuevo producto</h3>
+      <input type="text" id="addName" placeholder="Nombre del producto">
+      <select id="addCat"></select>
+      <div class="admin-form-field">
+        <label>Imagen</label>
+        <input type="file" id="addImg" accept="image/*" onchange="previewAddImg(event)">
+        <img id="addImgPreview" class="admin-img-preview" style="display:none">
+      </div>
+      <div class="admin-form-field">
+        <label>Descripción</label>
+        <textarea id="addDesc" class="admin-textarea" placeholder="Descripción del producto..." rows="3"></textarea>
+      </div>
+      <div class="admin-form-actions">
+        <button class="admin-btn admin-btn-primary" onclick="addProduct()">Guardar</button>
+        <button class="admin-btn admin-btn-outline" onclick="hideAddForm()">Cancelar</button>
+      </div>
     </div>
-    <div class="admin-form-actions">
-      <button class="admin-btn admin-btn-primary" onclick="addProduct()">Guardar</button>
-      <button class="admin-btn admin-btn-outline" onclick="hideAddForm()">Cancelar</button>
+
+    <div id="detailOverlay" class="admin-overlay" style="display:none" onclick="if(event.target===this)hideDetailModal()">
+      <div class="admin-modal">
+        <h3>Detalle del producto</h3>
+        <div class="admin-form-field">
+          <label>Nombre</label>
+          <input type="text" id="detailName" placeholder="Nombre del producto">
+        </div>
+        <div class="admin-form-field">
+          <label>Categoría</label>
+          <select id="detailCat"></select>
+        </div>
+        <div class="admin-form-field">
+          <label>Imagen</label>
+          <input type="file" id="detailImg" accept="image/*" onchange="previewDetailImg(event)">
+          <img id="detailImgPreview" class="admin-img-preview" style="display:none">
+        </div>
+        <div class="admin-form-field">
+          <label>Descripción</label>
+          <textarea id="detailDesc" class="admin-textarea" placeholder="Descripción del producto..." rows="4"></textarea>
+        </div>
+        <div class="admin-form-actions">
+          <button class="admin-btn admin-btn-primary" id="detailSaveBtn">Guardar</button>
+          <button class="admin-btn admin-btn-outline" onclick="hideDetailModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="adminTable">
+        <thead>
+          <tr>
+            <th style="width:60px">Imagen</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th style="width:140px">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody"></tbody>
+      </table>
     </div>
   </div>
 
-<div id="detailOverlay" class="admin-overlay" style="display:none" onclick="if(event.target===this)hideDetailModal()">
-  <div class="admin-modal">
-    <h3>Detalle del producto</h3>
-    <div class="admin-form-field">
-      <label>Nombre</label>
-      <input type="text" id="detailName" placeholder="Nombre del producto">
+  <div id="sectionConfiguracion" style="display:none">
+    <div class="admin-form" style="max-width:560px">
+      <h3>Configuración general</h3>
+      <div class="admin-form-field">
+        <label>Número de WhatsApp</label>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:8px">Código de país + número, sin + ni espacios. Ej: 5492216746874</p>
+        <input type="text" id="configWhatsapp" placeholder="ej: 5492216746874">
+      </div>
+      <div class="admin-form-actions">
+        <button class="admin-btn admin-btn-primary" onclick="saveConfig()">Guardar</button>
+      </div>
+      <div id="configFeedback" style="font-size:13px;margin-top:8px;color:var(--red);min-height:20px"></div>
     </div>
-    <div class="admin-form-field">
-      <label>Categoría</label>
-      <select id="detailCat"></select>
-    </div>
-    <div class="admin-form-field">
-      <label>Imagen</label>
-      <input type="file" id="detailImg" accept="image/*" onchange="previewDetailImg(event)">
-      <img id="detailImgPreview" class="admin-img-preview" style="display:none">
-    </div>
-    <div class="admin-form-field">
-      <label>Descripción</label>
-      <textarea id="detailDesc" class="admin-textarea" placeholder="Descripción del producto..." rows="4"></textarea>
-    </div>
-    <div class="admin-form-actions">
-      <button class="admin-btn admin-btn-primary" id="detailSaveBtn">Guardar</button>
-      <button class="admin-btn admin-btn-outline" onclick="hideDetailModal()">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-  <div class="admin-table-wrap">
-    <table class="admin-table" id="adminTable">
-      <thead>
-        <tr>
-          <th style="width:60px">Imagen</th>
-          <th>Nombre</th>
-          <th>Categoría</th>
-          <th style="width:140px">Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="adminTableBody"></tbody>
-    </table>
   </div>
 </div>
 
 <script src="../assets/js/productos.js"></script>
+<script src="../assets/js/config.js"></script>
 <script>
 var ADMIN_PASSWORD = 'segulap2024';
 var db = [];
@@ -128,10 +176,25 @@ function sessionValid() {
   return Date.now() < parseInt(stored, 10);
 }
 
+function switchTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('sectionProductos').style.display = 'none';
+  document.getElementById('sectionConfiguracion').style.display = 'none';
+  if (tab === 'productos') {
+    document.querySelector('.admin-tab').classList.add('active');
+    document.getElementById('sectionProductos').style.display = 'block';
+    renderAdminTable();
+  } else {
+    document.querySelectorAll('.admin-tab')[1].classList.add('active');
+    document.getElementById('sectionConfiguracion').style.display = 'block';
+    document.getElementById('configWhatsapp').value = getWhatsAppNumber();
+  }
+}
+
 function showAdminPanel() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('adminPanel').style.display = 'block';
-  renderAdminTable();
+  switchTab('productos');
 }
 
 function initSession() {
@@ -328,6 +391,15 @@ function importJSON(event) {
   };
   reader.readAsText(file);
   event.target.value = '';
+}
+
+function saveConfig() {
+  var num = document.getElementById('configWhatsapp').value.trim();
+  var fb = document.getElementById('configFeedback');
+  if (!num) { fb.textContent = 'Ingresá un número válido.'; return; }
+  setWhatsAppNumber(num);
+  fb.textContent = 'Número guardado correctamente.';
+  fb.style.color = '#2e7d32';
 }
 
 populateCatSelect('addCat', categories[0]);
