@@ -17,19 +17,34 @@
   <a class="logo" href="../">
     <img src="../assets/Segulap-Logo-White.png" alt="SEGULAP" style="height:66px;width:auto;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
   </a>
-  <ul class="nav-links">
-    <li><a href="../servicios/">Servicios</a></li>
-    <li><a href="../certificaciones/">Certificaciones</a></li>
-    <li><a href="./" class="active">Capacitaciones</a></li>
-    <li><a href="../izajes/">Izajes</a></li>
-    <li><a href="../extintores/">Extintores</a></li>
-    <li><a href="../red-incendios/">Red contra incendios</a></li>
-    <li><a href="../productos/">Productos</a></li>
-  </ul>
-  <a href="../contacto/" class="nav-cta">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Solicitar Asesoramiento
-  </a>
+
+  <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <button class="nav-close" aria-label="Cerrar menú">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="nav-sidebar" id="navSidebar">
+    <ul class="nav-links">
+      <li><a href="../servicios/">Servicios</a></li>
+      <li><a href="../certificaciones/">Certificaciones</a></li>
+      <li><a href="./" class="active">Capacitaciones</a></li>
+      <li><a href="../izajes/">Izajes</a></li>
+      <li><a href="../extintores/">Extintores</a></li>
+      <li><a href="../red-incendios/">Red contra incendios</a></li>
+      <li><a href="../productos/">Productos</a></li>
+    </ul>
+    <a href="../contacto/" class="nav-cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Solicitar Asesoramiento
+    </a>
+  </div>
+
+  <div class="nav-overlay" id="navOverlay"></div>
 </nav>
 
 <section class="section" style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px;text-align:center">
@@ -94,5 +109,19 @@
   </div>
 </footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.querySelector('.nav-toggle');
+  var sidebar = document.getElementById('navSidebar');
+  var overlay = document.getElementById('navOverlay');
+  var closeBtn = document.querySelector('.nav-close');
+  function openNav() { sidebar.classList.add('is-open'); overlay.classList.add('is-open'); closeBtn.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true'); document.body.classList.add('nav-open'); }
+  function closeNav() { sidebar.classList.remove('is-open'); overlay.classList.remove('is-open'); closeBtn.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); document.body.classList.remove('nav-open'); }
+  if (toggle && sidebar) { toggle.addEventListener('click', function() { var isOpen = sidebar.classList.contains('is-open'); if (isOpen) closeNav(); else openNav(); }); }
+  if (closeBtn) closeBtn.addEventListener('click', closeNav);
+  if (overlay) overlay.addEventListener('click', closeNav);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
+});
+</script>
 </body>
 </html>
