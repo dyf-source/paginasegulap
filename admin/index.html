@@ -141,23 +141,21 @@
 </div>
 
 <script src="../assets/js/productos.js"></script>
+<script src="../assets/js/db.js"></script>
 <script src="../assets/js/config.js"></script>
 <script>
 var ADMIN_PASSWORD = 'segulap2024';
 var db = [];
 
-function initDB() {
-  var stored = localStorage.getItem('segulap_productos');
-  if (stored) {
-    try { db = JSON.parse(stored); } catch(e) { db = JSON.parse(JSON.stringify(productosData)); }
-  } else {
-    db = JSON.parse(JSON.stringify(productosData));
-    saveDB();
-  }
+function loadDB(callback) {
+  SegulapDB.getProducts().then(function(products) {
+    db = products;
+    if (callback) callback();
+  });
 }
 
 function saveDB() {
-  localStorage.setItem('segulap_productos', JSON.stringify(db));
+  SegulapDB.importProducts(db);
 }
 
 function setSession() {
@@ -187,19 +185,29 @@ function switchTab(tab) {
   } else {
     document.querySelectorAll('.admin-tab')[1].classList.add('active');
     document.getElementById('sectionConfiguracion').style.display = 'block';
-    document.getElementById('configWhatsapp').value = getWhatsAppNumber();
+    getWhatsAppNumber(function(num) {
+      document.getElementById('configWhatsapp').value = num;
+    });
   }
 }
 
 function showAdminPanel() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('adminPanel').style.display = 'block';
-  switchTab('productos');
+  SegulapDB.ready(function() {
+    loadDB(function() {
+      switchTab('productos');
+    });
+  });
 }
 
 function initSession() {
   if (sessionValid()) {
-    showAdminPanel();
+    SegulapDB.ready(function() {
+      loadDB(function() {
+        showAdminPanel();
+      });
+    });
   }
 }
 
@@ -299,10 +307,12 @@ function addProduct() {
   if (img && img.startsWith('data:')) {
     product.img = img;
   }
-  db.push(product);
-  saveDB();
-  hideAddForm();
-  renderAdminTable();
+  SegulapDB.addProduct(product).then(function() {
+    loadDB(function() {
+      hideAddForm();
+      renderAdminTable();
+    });
+  });
 }
 
 function showDetailModal(idx) {
@@ -341,36 +351,45 @@ function previewDetailImg(e) {
 }
 
 function saveDetailModal() {
+  var id = db[detailIdx].id;
+  if (!id) return;
   var name = document.getElementById('detailName').value.trim();
   if (!name) return;
   var cat = document.getElementById('detailCat').value;
   var desc = document.getElementById('detailDesc').value.trim();
   var prev = document.getElementById('detailImgPreview');
-  db[detailIdx].name = name;
-  db[detailIdx].cat = cat;
-  db[detailIdx].desc = desc;
+  var product = { name: name, cat: cat, desc: desc };
   if (prev.style.display !== 'none' && prev.src) {
-    db[detailIdx].img = prev.src;
+    product.img = prev.src;
   }
-  saveDB();
-  hideDetailModal();
-  renderAdminTable();
+  SegulapDB.updateProduct(id, product).then(function() {
+    loadDB(function() {
+      hideDetailModal();
+      renderAdminTable();
+    });
+  });
 }
 
 function deleteProduct(idx) {
+  var id = db[idx].id;
+  if (!id) return;
   if (!confirm('¿Eliminar "' + db[idx].name + '"?')) return;
-  db.splice(idx, 1);
-  saveDB();
-  renderAdminTable();
+  SegulapDB.deleteProduct(id).then(function() {
+    loadDB(function() {
+      renderAdminTable();
+    });
+  });
 }
 
 function exportJSON() {
-  var blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'productos.json';
-  a.click();
-  URL.revokeObjectURL(a.href);
+  SegulapDB.getAllProductsJSON().then(function(json) {
+    var blob = new Blob([json], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'productos.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
 }
 
 function importJSON(event) {
@@ -381,10 +400,12 @@ function importJSON(event) {
     try {
       var data = JSON.parse(e.target.result);
       if (!Array.isArray(data)) throw new Error('Formato inválido');
-      db = data;
-      saveDB();
-      renderAdminTable();
-      alert('Importados ' + db.length + ' productos.');
+      SegulapDB.importProducts(data).then(function(count) {
+        loadDB(function() {
+          renderAdminTable();
+          alert('Importados ' + count + ' productos.');
+        });
+      });
     } catch(err) {
       alert('Error al importar: ' + err.message);
     }
@@ -397,13 +418,13 @@ function saveConfig() {
   var num = document.getElementById('configWhatsapp').value.trim();
   var fb = document.getElementById('configFeedback');
   if (!num) { fb.textContent = 'Ingresá un número válido.'; return; }
-  setWhatsAppNumber(num);
-  fb.textContent = 'Número guardado correctamente.';
-  fb.style.color = '#2e7d32';
+  setWhatsAppNumber(num, function() {
+    fb.textContent = 'Número guardado correctamente.';
+    fb.style.color = '#2e7d32';
+  });
 }
 
 populateCatSelect('addCat', categories[0]);
-initDB();
 initSession();
 </script>
 </body>
