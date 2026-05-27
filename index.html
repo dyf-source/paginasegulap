@@ -350,51 +350,25 @@
       var rightArrow = document.querySelector('.scroll-arrow--right');
       var card = grid.querySelector('.service-card');
       var scrollAmount = card ? card.offsetWidth + 24 : 344;
+      var fadeW = 40;
 
-      function updateArrows() {
-        if (leftArrow) leftArrow.style.display = wrap.scrollLeft <= 4 ? 'none' : 'flex';
-        if (rightArrow) rightArrow.style.display = wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4 ? 'none' : 'flex';
-      }
-
-      function updateCardMasks() {
-        var gr = wrap.getBoundingClientRect();
-        var vl = gr.left, vr = gr.left + wrap.clientWidth;
-        grid.querySelectorAll('.service-card').forEach(function(c) {
-          var cr = c.getBoundingClientRect();
-          var cw = cr.width;
-          var cl = Math.max(0, vl - cr.left) / cw;
-          var cr_clip = Math.max(0, cr.right - vr) / cw;
-          if (cl + cr_clip > 0.05) {
-            var fd = 0.12, s = [];
-            s.push('transparent 0%');
-            if (cl > 0) {
-              s.push('transparent ' + (cl * 100) + '%');
-              s.push('black ' + (Math.min(cl + fd, 1) * 100) + '%');
-            }
-            if (cr_clip > 0) {
-              if (cl === 0) s.push('black 0%');
-              s.push('black ' + (Math.max(0, 1 - cr_clip - fd) * 100) + '%');
-              s.push('transparent ' + ((1 - cr_clip) * 100) + '%');
-              s.push('transparent 100%');
-            } else {
-              s.push('black 100%');
-            }
-            var m = 'linear-gradient(to right,' + s.join(',') + ')';
-            c.style.setProperty('-webkit-mask-image', m);
-            c.style.setProperty('mask-image', m);
-          } else {
-            c.style.removeProperty('-webkit-mask-image');
-            c.style.removeProperty('mask-image');
-          }
-        });
+      function updateMask() {
+        var atLeft = wrap.scrollLeft <= 4;
+        var atRight = wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4;
+        if (leftArrow) leftArrow.style.display = atLeft ? 'none' : 'flex';
+        if (rightArrow) rightArrow.style.display = atRight ? 'none' : 'flex';
+        var l = atLeft ? 0 : fadeW;
+        var r = atRight ? 0 : fadeW;
+        var m = 'linear-gradient(to right, transparent 0, black ' + l + 'px, black calc(100% - ' + r + 'px), transparent 100%)';
+        wrap.style.setProperty('-webkit-mask-image', m);
+        wrap.style.setProperty('mask-image', m);
       }
 
       if (leftArrow) leftArrow.addEventListener('click', function() { wrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
       if (rightArrow) rightArrow.addEventListener('click', function() { wrap.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
 
-      wrap.addEventListener('scroll', function() { updateArrows(); updateCardMasks(); });
-      updateArrows();
-      updateCardMasks();
+      wrap.addEventListener('scroll', updateMask);
+      updateMask();
     }
   });
 </script>

@@ -271,6 +271,24 @@
         text-transform: uppercase;
         margin: 0;
       }
+      @media (max-width: 768px) {
+        .serv-ext-grid {
+          display: flex;
+          gap: 16px;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          padding-bottom: 8px;
+        }
+        .serv-ext-grid::-webkit-scrollbar {
+          display: none;
+        }
+        .serv-ext-grid .serv-ext-item {
+          flex: 0 0 280px;
+          scroll-snap-align: start;
+        }
+      }
     </style>
   </head>
   <body style="display: flex; flex-direction: column; min-height: 100vh">
@@ -372,55 +390,57 @@
     <!-- CARDS -->
     <section class="services" style="padding:40px 48px 50px">
       <div class="container">
-        <div class="services-grid">
-          <a href="../productos/?cat=Extintores" class="service-card-link">
-            <div class="service-card">
-              <img class="service-img" src="../assets/extintores-trabajo.jpg" alt="Venta de extintores">
-              <div class="service-body">
-                <div class="service-icon-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 0 0 20 15 15 0 0 0 0-20z"/></svg>
+        <div class="services-scroll-wrap" style="padding:0;margin:0">
+          <div class="services-grid">
+            <a href="../productos/?cat=Extintores" class="service-card-link">
+              <div class="service-card">
+                <img class="service-img" src="../assets/extintores-trabajo.jpg" alt="Venta de extintores">
+                <div class="service-body">
+                  <div class="service-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 0 0 20 15 15 0 0 0 0-20z"/></svg>
+                  </div>
+                  <div class="service-title">Venta de extintores</div>
+                  <div class="service-desc">Todos los tipos y capacidades. ABC, CO2, AFFF, agua, K y HCFC.</div>
                 </div>
-                <div class="service-title">Venta de extintores</div>
-                <div class="service-desc">Todos los tipos y capacidades. ABC, CO2, AFFF, agua, K y HCFC.</div>
               </div>
-            </div>
-          </a>
-          <a href="mantenimiento/" class="service-card-link">
-            <div class="service-card">
-              <img class="service-img" src="../assets/extintor-revision.png" alt="Mantenimiento de extintores">
-              <div class="service-body">
-                <div class="service-icon-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+            </a>
+            <a href="mantenimiento/" class="service-card-link">
+              <div class="service-card">
+                <img class="service-img" src="../assets/extintor-revision.png" alt="Mantenimiento de extintores">
+                <div class="service-body">
+                  <div class="service-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                  </div>
+                  <div class="service-title">Mantenimiento de extintores</div>
+                  <div class="service-desc">Recarga, prueba hidráulica, cambio de válvulas y control periódico. Servicio técnico habilitado.</div>
                 </div>
-                <div class="service-title">Mantenimiento de extintores</div>
-                <div class="service-desc">Recarga, prueba hidráulica, cambio de válvulas y control periódico. Servicio técnico habilitado.</div>
               </div>
-            </div>
-          </a>
-          <a href="../productos/?cat=Repuestos%20para%20Extintores" class="service-card-link">
-            <div class="service-card">
-              <img class="service-img" src="../assets/repuestos-extintores.png" alt="Repuestos para extintores">
-              <div class="service-body">
-                <div class="service-icon-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 6v12M6 12h12"/></svg>
+            </a>
+            <a href="../productos/?cat=Repuestos%20para%20Extintores" class="service-card-link">
+              <div class="service-card">
+                <img class="service-img" src="../assets/repuestos-extintores.png" alt="Repuestos para extintores">
+                <div class="service-body">
+                  <div class="service-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 6v12M6 12h12"/></svg>
+                  </div>
+                  <div class="service-title">Repuestos</div>
+                  <div class="service-desc">Mangueras, válvulas, manómetros, precintos y todo lo necesario para su extintor.</div>
                 </div>
-                <div class="service-title">Repuestos</div>
-                <div class="service-desc">Mangueras, válvulas, manómetros, precintos y todo lo necesario para su extintor.</div>
               </div>
-            </div>
-          </a>
-          <a href="../productos/?cat=Accesorios%20para%20Extintores" class="service-card-link">
-            <div class="service-card">
-              <img class="service-img" src="../assets/accesorios-red-incendios.png" alt="Accesorios">
-              <div class="service-body">
-                <div class="service-icon-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
+            </a>
+            <a href="../productos/?cat=Accesorios%20para%20Extintores" class="service-card-link">
+              <div class="service-card">
+                <img class="service-img" src="../assets/accesorios-red-incendios.png" alt="Accesorios">
+                <div class="service-body">
+                  <div class="service-icon-wrap">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
+                  </div>
+                  <div class="service-title">Accesorios</div>
+                  <div class="service-desc">Mangueras, cartelería, luces de emergencia, botiquines, EPP y más elementos de seguridad.</div>
                 </div>
-                <div class="service-title">Accesorios</div>
-                <div class="service-desc">Mangueras, cartelería, luces de emergencia, botiquines, EPP y más elementos de seguridad.</div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </section>
