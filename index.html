@@ -353,6 +353,11 @@
       var fadeW = 40;
 
       function updateMask() {
+        if (window.innerWidth <= 768) {
+          wrap.style.removeProperty('-webkit-mask-image');
+          wrap.style.removeProperty('mask-image');
+          return;
+        }
         var atLeft = wrap.scrollLeft <= 4;
         var atRight = wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4;
         if (leftArrow) leftArrow.style.display = atLeft ? 'none' : 'flex';

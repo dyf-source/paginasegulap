@@ -1667,9 +1667,6 @@ footer {
     display: none;
   }
 
-  .service-card-link {
-    flex: 0 0 calc(50% - 12px) !important;
-  }
   .services {
     padding-left: clamp(24px, 4vw, 48px) !important;
     padding-right: clamp(24px, 4vw, 48px) !important;
@@ -1686,5 +1683,17 @@ footer {
     flex-direction: column;
     text-align: center;
     gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card-link {
+    flex: 0 0 280px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .service-card-link {
+    flex: 0 0 calc(50% - 12px) !important;
   }
 }
