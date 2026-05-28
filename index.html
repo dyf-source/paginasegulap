@@ -63,10 +63,10 @@
 <!-- SERVICES -->
 <section class="services">
   <div class="container">
-    <div class="services-scroll-wrap">
+      <div class="services-scroll-wrap">
       <div class="services-grid">
 
-      <a href="red-incendios/" class="service-card-link">
+      <a href="extintores/" class="service-card-link">
         <div class="service-card">
           <img class="service-img" src="assets/extintores-trabajo.jpg" alt="Venta de extintores">
           <div class="service-body">
@@ -131,7 +131,7 @@
         </div>
       </a>
 
-      <a href="servicios/" class="service-card-link">
+      <a href="/extintores/mantenimiento/" class="service-card-link">
         <div class="service-card">
           <img class="service-img" src="assets/extintor-revision.png" alt="Mantenimiento y control de equipos">
           <div class="service-body">
@@ -145,13 +145,13 @@
       </a>
 
     </div>
+  </div>
     <button class="scroll-arrow scroll-arrow--left" aria-label="Desplazar a la izquierda">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <button class="scroll-arrow scroll-arrow--right" aria-label="Desplazar a la derecha">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-  </div>
 </div>
 </section>
 
@@ -357,11 +357,23 @@
         var atRight = wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4;
         if (leftArrow) leftArrow.style.display = atLeft ? 'none' : 'flex';
         if (rightArrow) rightArrow.style.display = atRight ? 'none' : 'flex';
-        var l = atLeft ? 0 : fadeW;
-        var r = atRight ? 0 : fadeW;
-        var m = 'linear-gradient(to right, transparent 0, black ' + l + 'px, black calc(100% - ' + r + 'px), transparent 100%)';
-        wrap.style.setProperty('-webkit-mask-image', m);
-        wrap.style.setProperty('mask-image', m);
+        var m;
+        if (atLeft && atRight) {
+          m = 'none';
+        } else if (atLeft) {
+          m = 'linear-gradient(to right, black 0, black calc(100% - ' + fadeW + 'px), transparent 100%)';
+        } else if (atRight) {
+          m = 'linear-gradient(to right, transparent 0, black ' + fadeW + 'px, black 100%)';
+        } else {
+          m = 'linear-gradient(to right, transparent 0, black ' + fadeW + 'px, black calc(100% - ' + fadeW + 'px), transparent 100%)';
+        }
+        if (m === 'none') {
+          wrap.style.removeProperty('-webkit-mask-image');
+          wrap.style.removeProperty('mask-image');
+        } else {
+          wrap.style.setProperty('-webkit-mask-image', m);
+          wrap.style.setProperty('mask-image', m);
+        }
       }
 
       if (leftArrow) leftArrow.addEventListener('click', function() { wrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });

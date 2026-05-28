@@ -361,12 +361,25 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   opacity: 1;
 }
 
+.services-arrows-wrap {
+  position: absolute;
+  inset: 0;
+  max-width: 1600px;
+  margin: 0 auto;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.services-arrows-wrap .scroll-arrow {
+  pointer-events: auto;
+}
+
 .scroll-arrow--left {
-  left: -4px;
+  left: 4px;
 }
 
 .scroll-arrow--right {
-  right: -4px;
+  right: 4px;
 }
 
 .service-card-link {
@@ -1652,6 +1665,21 @@ footer {
 
   .footer-col:last-child .social-row {
     display: none;
+  }
+
+  .service-card-link {
+    flex: 0 0 calc(50% - 12px) !important;
+  }
+  .services {
+    padding-left: clamp(24px, 4vw, 48px) !important;
+    padding-right: clamp(24px, 4vw, 48px) !important;
+  }
+  .services-scroll-wrap {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .scroll-arrow {
+    display: none !important;
   }
 
   .footer-bottom {
