@@ -1638,7 +1638,7 @@ footer {
     margin-bottom: 8px;
   }
   .products-header {
-    padding-top: 4rem;
+    padding-top: 2rem;
   }
   .products-header .products-title {
     font-size: clamp(1.4rem, 5vw, 1.8rem);
@@ -1792,10 +1792,6 @@ footer {
 
   .social-row-mobile {
     display: flex;
-  }
-
-  .footer-col:last-child .social-row {
-    display: none;
   }
 
   .services {
