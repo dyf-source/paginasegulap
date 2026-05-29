@@ -31,7 +31,7 @@
   <div class="nav-sidebar" id="navSidebar">
     <ul class="nav-links">
       <li><a href="../servicios/">Servicios</a></li>
-      <li><a href="../certificaciones/">Certificaciones</a></li>
+      <li><a href="../servicios/inspecciones/">Inspecciones</a></li>
       <li><a href="../capacitaciones/">Capacitaciones</a></li>
       <li><a href="../izajes/">Izajes</a></li>
       <li><a href="../extintores/">Extintores</a></li>
@@ -68,6 +68,13 @@
 
       <div class="sidebar-categories">
         <h3>Categorías</h3>
+        <div class="category-dropdown">
+          <button class="category-dropdown-trigger" type="button" onclick="toggleCategoryDropdown(event)">
+            <span id="categoryDropdownLabel">Todas las categorías</span>
+            <svg class="dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="category-dropdown-menu" id="categoryDropdownMenu"></div>
+        </div>
         <ul id="categoryList"></ul>
       </div>
     </aside>
@@ -98,7 +105,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -203,6 +209,8 @@ if (preselectedCat && categories.indexOf(preselectedCat) > -1) {
 function buildCategoryList() {
   var list = document.getElementById('categoryList');
   list.innerHTML = '';
+  var menu = document.getElementById('categoryDropdownMenu');
+  menu.innerHTML = '';
   categories.forEach(function(c) {
     var count = db.filter(function(p) { return p.cat === c; }).length;
     var li = document.createElement('li');
@@ -214,8 +222,45 @@ function buildCategoryList() {
       toggleCategory(c);
     });
     list.appendChild(li);
+
+    var label = document.createElement('label');
+    label.className = 'dropdown-item';
+    label.dataset.cat = c;
+    label.innerHTML = '<span class="dropdown-cb' + (checkedCategories[c] ? ' checked' : '') + '">' + (checkedCategories[c] ? '&#10003;' : '') + '</span><span class="dropdown-cb-name">' + c + '</span>';
+    label.addEventListener('click', function(e) {
+      e.preventDefault();
+      toggleCategory(c);
+    });
+    menu.appendChild(label);
   });
 }
+
+function toggleCategoryDropdown(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('categoryDropdownMenu').classList.toggle('is-open');
+}
+
+function updateCategoryDropdownLabel() {
+  var selected = [];
+  for (var c in checkedCategories) {
+    if (checkedCategories[c]) selected.push(c);
+  }
+  var label = document.getElementById('categoryDropdownLabel');
+  if (selected.length === 0) {
+    label.textContent = 'Todas las categorías';
+  } else if (selected.length === 1) {
+    label.textContent = selected[0];
+  } else {
+    label.textContent = selected.length + ' categorías seleccionadas';
+  }
+}
+
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('categoryDropdownMenu');
+  if (menu && menu.classList.contains('is-open') && !e.target.closest('.category-dropdown')) {
+    menu.classList.remove('is-open');
+  }
+});
 
 function toggleCategory(cat) {
   checkedCategories[cat] = !checkedCategories[cat];
@@ -234,6 +279,18 @@ function updateCategoryUI() {
       li.querySelector('.category-check').innerHTML = '';
     }
   });
+  document.querySelectorAll('.dropdown-item').forEach(function(label) {
+    var cat = label.dataset.cat;
+    var cb = label.querySelector('.dropdown-cb');
+    if (checkedCategories[cat]) {
+      cb.classList.add('checked');
+      cb.innerHTML = '&#10003;';
+    } else {
+      cb.classList.remove('checked');
+      cb.innerHTML = '';
+    }
+  });
+  updateCategoryDropdownLabel();
 }
 
 function anyCategoryChecked() {
@@ -322,6 +379,7 @@ document.addEventListener('keydown', function(e) {
 
 buildCategoryList();
 filterProducts();
+updateCategoryUI();
 </script>
 
 </body>
