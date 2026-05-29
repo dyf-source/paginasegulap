@@ -15,7 +15,7 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="./">
-    <img src="assets/Segulap-Logo-White.png" alt="SEGULAP" style="height:66px;width:auto;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
+    <img src="assets/Segulap-Logo-White.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
   </a>
 
   <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -300,12 +300,12 @@
     var sidebar = document.getElementById('navSidebar');
     var overlay = document.getElementById('navOverlay');
     var closeBtn = document.querySelector('.nav-close');
-
     function openNav() {
       sidebar.classList.add('is-open');
       overlay.classList.add('is-open');
       closeBtn.classList.add('is-open');
       toggle.setAttribute('aria-expanded', 'true');
+      document.documentElement.classList.add('nav-open');
       document.body.classList.add('nav-open');
     }
 
@@ -314,6 +314,7 @@
       overlay.classList.remove('is-open');
       closeBtn.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('nav-open');
       document.body.classList.remove('nav-open');
     }
 

@@ -46,6 +46,11 @@ nav {
   z-index: 2;
 }
 
+.logo img {
+  height: clamp(2.9rem, 6vw, 4.125rem);
+  width: auto;
+}
+
 .logo-shield {
   width: 44px;
   height: 44px;
@@ -1534,9 +1539,7 @@ footer {
     padding-top: 66px;
   }
 
-  .logo img {
-    height: 53px;
-  }
+
 
   .nav-toggle {
     display: flex;
@@ -1565,6 +1568,8 @@ footer {
     bottom: 0;
     width: 300px;
     max-width: 85vw;
+    height: -webkit-fill-available;
+    height: 100dvh;
     background: #8a1a1a;
     flex-direction: column;
     justify-content: flex-start;
@@ -1635,6 +1640,7 @@ footer {
     display: flex;
   }
 
+  html.nav-open,
   body.nav-open {
     overflow: hidden;
   }
@@ -1687,6 +1693,30 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: clamp(200px, 30vh, 300px);
+  }
+
+  .hero-content {
+    padding: 32px 24px;
+  }
+
+  .hero p {
+    max-width: 260px;
+  }
+
+  .hero-bg {
+    background-size: cover;
+  }
+
+  .hero-accent {
+    display: block;
+  }
+
+  .hero h1 br {
+    display: none;
+  }
+
   .service-card-link {
     flex: 0 0 280px !important;
   }
