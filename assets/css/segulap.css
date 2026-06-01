@@ -413,6 +413,96 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   transform: translateX(4px);
 }
 
+/* ── SERVICE CARDS (shared across sub-pages) ── */
+.service-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+}
+
+.service-card-link .service-card {
+  width: 100%;
+}
+
+.service-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform .25s, box-shadow .25s;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card-link:hover .service-card {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 32px rgba(180,20,20,0.15);
+}
+
+.service-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #ddd;
+}
+
+.service-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.service-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.service-desc {
+  flex: 1;
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+.services-scroll-wrap {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 30px 0 80px;
+  margin-bottom: -60px;
+}
+
+.services-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.services-grid {
+  display: flex;
+  gap: 24px;
+}
+
 
 
 /* ── WHY US ── */
@@ -1768,6 +1858,7 @@ footer {
 
   .hero-bg {
     background-size: cover;
+    background-position: 100% center;
   }
 
   .hero-accent {
@@ -1778,6 +1869,21 @@ footer {
     display: none;
   }
 
+  .services-scroll-wrap {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding: 20px 0;
+    margin-bottom: 0;
+  }
+
+  .services-grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .service-card-link {
+    flex: 1 1 100%;
+  }
 }
 
 @media (max-width: 400px) {
@@ -1792,7 +1898,7 @@ footer {
     top: auto;
     bottom: 0;
     height: 120px;
-    background: #000 url('../Banner-1.png') center / cover no-repeat;
+    background: #000 url('../Banner-1.png') 100% center / cover no-repeat;
   }
 
   .hero-bg::before {

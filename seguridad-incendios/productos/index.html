@@ -6,16 +6,16 @@
 <title>SEGULAP – Productos</title>
 <meta name="description" content="Segulap - Productos de seguridad contra incendios e industrial. Extintores, mangueras, carteles, luces de emergencia y más.">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
-<link href="../assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
-<link href="../assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<link href="../../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../../assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../../assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh">
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="../">
-    <img src="../assets/Segulap-Logo-White.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
+  <a class="logo" href="../../">
+    <img src="../../assets/Segulap-Logo-White.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
   </a>
 
   <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -28,21 +28,18 @@
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
 
-  <div class="nav-sidebar" id="navSidebar">
-    <ul class="nav-links">
-      <li><a href="../servicios/">Servicios</a></li>
-      <li><a href="../servicios/inspecciones/">Inspecciones</a></li>
-      <li><a href="../capacitaciones/">Capacitaciones</a></li>
-      <li><a href="../izajes/">Izajes</a></li>
-      <li><a href="../extintores/">Extintores</a></li>
-      <li><a href="../red-incendios/">Red contra incendios</a></li>
-      <li><a href="./" class="active">Productos</a></li>
-    </ul>
-    <a href="../contacto/" class="nav-cta">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Solicitar Asesoramiento
-    </a>
-  </div>
+      <div class="nav-sidebar" id="navSidebar">
+        <ul class="nav-links">
+          <li><a href="../">Seguridad Contra Incendios</a></li>
+          <li><a href="../extintores/">Extintores</a></li>
+          <li><a href="../red-incendios/">Red Contra Incendios</a></li>
+          <li><a href="./" class="active">Productos</a></li>
+        </ul>
+        <a href="../../contacto/" class="nav-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Solicitar Asesoramiento
+        </a>
+      </div>
 
   <div class="nav-overlay" id="navOverlay"></div>
 </nav>
@@ -99,7 +96,7 @@
         </div>
         <div class="product-detail-body">
           <button class="product-detail-wa" onclick="consultarWhatsApp()">
-            <img src="../assets/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
+            <img src="../../assets/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
             Consultar por WhatsApp
           </button>
         </div>
@@ -113,7 +110,7 @@
   <div class="footer-grid">
 
     <div class="footer-brand">
-      <img src="../assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
+      <img src="../../assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
     </div>
 
@@ -183,8 +180,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 });
 </script>
-<script src="../assets/js/config.js"></script>
-<script src="../assets/js/productos.js"></script>
+<script src="../../assets/js/config.js"></script>
+<script src="../../assets/js/productos.js"></script>
 <script>
 var db;
 var stored = localStorage.getItem('segulap_productos');

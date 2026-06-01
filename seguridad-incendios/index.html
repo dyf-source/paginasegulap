@@ -9,6 +9,57 @@
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<style>
+.hero-fuego {
+  position: relative;
+  min-height: clamp(360px, 45vh, 520px);
+  display: flex;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+}
+.hero-fuego .hero-bg {
+  background: #000 url('../assets/accesorios-red-incendios.png') 100% center / auto 140% no-repeat;
+}
+.hero-fuego .hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-fuego .hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 30%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-fuego .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 60px 48px;
+  color: var(--white);
+}
+.hero-fuego h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(38px, 5vw, 60px);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+.hero-fuego p {
+  font-size: clamp(15px, 1.2vw, 18px);
+  opacity: .9;
+  margin: 0 0 28px;
+  max-width: 420px;
+}
+</style>
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh">
 
@@ -30,13 +81,10 @@
 
   <div class="nav-sidebar" id="navSidebar">
     <ul class="nav-links">
-      <li><a href="../servicios/">Servicios</a></li>
-      <li><a href="../servicios/inspecciones/">Inspecciones</a></li>
-      <li><a href="../capacitaciones/">Capacitaciones</a></li>
-      <li><a href="../izajes/">Izajes</a></li>
-      <li><a href="../extintores/" class="active">Extintores</a></li>
-      <li><a href="../red-incendios/">Red contra incendios</a></li>
-      <li><a href="../productos/">Productos</a></li>
+      <li><a href="./" class="active">Seguridad Contra Incendios</a></li>
+      <li><a href="extintores/">Extintores</a></li>
+      <li><a href="red-incendios/">Red Contra Incendios</a></li>
+      <li><a href="productos/">Productos</a></li>
     </ul>
     <a href="../contacto/" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -47,40 +95,117 @@
   <div class="nav-overlay" id="navOverlay"></div>
 </nav>
 
-<section class="section" style="flex:1;padding:60px 24px">
+<!-- HERO -->
+<section class="hero-fuego">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg hero-bg--alt" id="heroBgAlt"></div>
+  <div class="hero-content">
+    <h1>Seguridad<br>Contra Incendios</h1>
+    <p>Protegemos su empresa con equipos certificados, instalaciones profesionales y servicios integrales contra incendios.</p>
+    <a href="productos/" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Ver productos
+    </a>
+  </div>
+</section>
+
+<!-- SERVICE CARDS -->
+<section class="services">
   <div class="container" style="max-width:1000px">
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:48px;text-transform:uppercase;color:var(--black);margin-bottom:12px">Seguridad Contra Incendios</h1>
-    <p style="font-size:18px;color:var(--gray);max-width:600px;margin:0 0 48px">Soluciones integrales para la protección de su empresa contra incendios. Equipos, instalaciones y servicios certificados.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
-
-      <a href="../extintores/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:32px;margin-bottom:12px">🧯</div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Extintores</h3>
-        <p style="color:var(--gray);margin:0;font-size:14px">Venta, recarga, mantenimiento y control periódico de extintores de todo tipo y capacidad.</p>
+      <a href="extintores/" style="display:block;background:var(--white);border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 32px rgba(180,20,20,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="height:180px;background:#ddd url('../assets/extintores-trabajo.jpg') center/cover no-repeat"></div>
+        <div style="padding:24px">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:var(--black);margin:0 0 10px">Extintores</h3>
+          <p style="font-size:14px;color:var(--gray);margin:0;line-height:1.6">Venta, recarga, mantenimiento y control periódico de extintores de todo tipo y capacidad.</p>
+        </div>
       </a>
 
-      <a href="../red-incendios/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:32px;margin-bottom:12px">🔧</div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Red Contra Incendios</h3>
-        <p style="color:var(--gray);margin:0;font-size:14px">Diseño, instalación y mantenimiento de redes de incendio, gabinetes, detectores, mangueras y válvulas.</p>
+      <a href="red-incendios/" style="display:block;background:var(--white);border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 32px rgba(180,20,20,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="height:180px;background:#ddd url('../assets/accesorios-red-incendios.png') center/cover no-repeat"></div>
+        <div style="padding:24px">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:var(--black);margin:0 0 10px">Red Contra Incendios</h3>
+          <p style="font-size:14px;color:var(--gray);margin:0;line-height:1.6">Diseño, instalación y mantenimiento de redes de incendio, gabinetes, detectores, mangueras y válvulas.</p>
+        </div>
       </a>
 
-      <a href="../capacitaciones/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:32px;margin-bottom:12px">📚</div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Capacitaciones</h3>
-        <p style="color:var(--gray);margin:0;font-size:14px">Formación teórica y práctica en seguridad contra incendios, uso de extintores y primeros auxilios.</p>
-      </a>
-
-      <a href="../servicios/inspecciones/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:32px;margin-bottom:12px">🔍</div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Inspecciones</h3>
-        <p style="color:var(--gray);margin:0;font-size:14px">Verificación y certificación de extintores, redes contra incendios y equipos de seguridad.</p>
+      <a href="productos/" style="display:block;background:var(--white);border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 32px rgba(180,20,20,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="height:180px;background:#ddd url('../assets/accesorios-red-incendios.png') center/cover no-repeat"></div>
+        <div style="padding:24px">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:var(--black);margin:0 0 10px">Productos</h3>
+          <p style="font-size:14px;color:var(--gray);margin:0;line-height:1.6">Mangueras, cartelería, luces de emergencia, botiquines, EPP y más elementos de seguridad contra incendios.</p>
+        </div>
       </a>
 
     </div>
   </div>
 </section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="container">
+    <h2 class="why-header">¿Por qué elegirnos?</h2>
+    <div class="why-grid">
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3>Equipos certificados</h3>
+          <p>Todos nuestros productos cumplen con las normativas vigentes.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <h3>Asesoramiento técnico</h3>
+          <p>Acompañamiento profesional en cada etapa del proyecto.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
+        </div>
+        <div>
+          <h3>Servicio integral</h3>
+          <p>Soluciones completas: venta, instalación, mantenimiento y certificación.</p>
+        </div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <h3>Amplia experiencia</h3>
+          <p>Años de trayectoria en el mercado de seguridad contra incendios.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-banner-text">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+    <div>
+      <h2>Proteja su empresa contra incendios.</h2>
+      <p>Estamos para ayudarlo.</p>
+    </div>
+  </div>
+  <a href="../contacto/" class="cta-white">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Solicitar Asesoramiento
+  </a>
+</div>
 
 <!-- FOOTER -->
 <footer style="margin-top:auto">
@@ -149,6 +274,30 @@ document.addEventListener('DOMContentLoaded', function() {
   if (closeBtn) closeBtn.addEventListener('click', closeNav);
   if (overlay) overlay.addEventListener('click', closeNav);
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
+
+  var heroImages = [
+    '../assets/Banner-1.png',
+    '../assets/extintores-wide-banner.png',
+    '../assets/mantenimiento-extintor-banner.png',
+    '../assets/accesorios-red-incendios.png'
+  ];
+  var heroBg1 = document.getElementById('heroBg');
+  var heroBg2 = document.getElementById('heroBgAlt');
+  if (heroBg1 && heroBg2 && heroImages.length > 1) {
+    var idx = 0;
+    var active = heroBg1;
+    var inactive = heroBg2;
+    setInterval(function () {
+      idx = (idx + 1) % heroImages.length;
+      inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
+      inactive.style.backgroundSize = 'auto 140%';
+      inactive.style.backgroundPosition = '100% center';
+      inactive.style.backgroundRepeat = 'no-repeat';
+      inactive.style.opacity = '1';
+      active.style.opacity = '0';
+      var tmp = active; active = inactive; inactive = tmp;
+    }, 5000);
+  }
 });
 </script>
 </body>
