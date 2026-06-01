@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEGULAP – Seguridad Industrial</title>
+<meta name="description" content="Soluciones en seguridad industrial. EPP, izajes, señalización, informes técnicos y más.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../assets/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../assets/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh">
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="../">
+    <img src="../assets/Segulap-Logo-White.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
+  </a>
+
+  <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <button class="nav-close" aria-label="Cerrar menú">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="nav-sidebar" id="navSidebar">
+    <ul class="nav-links">
+      <li><a href="../servicios/">Servicios</a></li>
+      <li><a href="../servicios/inspecciones/">Inspecciones</a></li>
+      <li><a href="../capacitaciones/">Capacitaciones</a></li>
+      <li><a href="../izajes/" class="active">Izajes</a></li>
+      <li><a href="../extintores/">Extintores</a></li>
+      <li><a href="../red-incendios/">Red contra incendios</a></li>
+      <li><a href="../productos/">Productos</a></li>
+    </ul>
+    <a href="../contacto/" class="nav-cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Solicitar Asesoramiento
+    </a>
+  </div>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+</nav>
+
+<section class="section" style="flex:1;padding:60px 24px">
+  <div class="container" style="max-width:1000px">
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:48px;text-transform:uppercase;color:var(--black);margin-bottom:12px">Seguridad Industrial</h1>
+    <p style="font-size:18px;color:var(--gray);max-width:600px;margin:0 0 48px">Equipos, inspecciones y servicios para la seguridad de sus trabajadores y sus instalaciones industriales.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+
+      <a href="../izajes/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-size:32px;margin-bottom:12px">🏗️</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Izajes</h3>
+        <p style="color:var(--gray);margin:0;font-size:14px">Inspección y certificación de equipos de izaje: eslingas, grilletes, ganchos y accesorios.</p>
+      </a>
+
+      <a href="../productos/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-size:32px;margin-bottom:12px">🛡️</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Elementos de Protección Personal</h3>
+        <p style="color:var(--gray);margin:0;font-size:14px">Cascos, guantes, arneses, protección respiratoria y más EPP para toda actividad laboral.</p>
+      </a>
+
+      <a href="../servicios/inspecciones/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-size:32px;margin-bottom:12px">📋</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Informes Técnicos</h3>
+        <p style="color:var(--gray);margin:0;font-size:14px">Elaboración de informes y documentación técnica profesional en seguridad industrial.</p>
+      </a>
+
+      <a href="../servicios/ingenieria/" style="display:block;background:var(--light-gray);border-radius:12px;padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="font-size:32px;margin-bottom:12px">⚙️</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;color:var(--black);margin:0 0 8px">Ingeniería</h3>
+        <p style="color:var(--gray);margin:0;font-size:14px">Proyectos de ingeniería en seguridad: diseño, cálculo y dirección de obras.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="margin-top:auto">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="../assets/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
+      <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Teléfono</h4>
+      <div class="contact-row">
+        <div class="icon-circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+        </div>
+        <div>+54 11 1234 5678<br>+54 11 8765 4321</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Email</h4>
+      <div class="contact-row">
+        <div class="icon-circle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>info@segulap.com.ar<br>ventas@segulap.com.ar</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Ubicación</h4>
+      <div class="contact-row">
+        <a class="icon-circle" href="https://share.google/q5LJZtAUMqAPQVmmJ" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </a>
+        <div><a href="https://share.google/q5LJZtAUMqAPQVmmJ" target="_blank" rel="noopener" class="address-link">191, Entre 45 y 46, B1901 La Plata, Provincia de Buenos Aires</a></div>
+      </div>
+      <div class="social-row">
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/matafuegossegulap/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2024 SEGULAP. Todos los derechos reservados.</span>
+    <div style="display:flex;gap:24px">
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.querySelector('.nav-toggle');
+  var sidebar = document.getElementById('navSidebar');
+  var overlay = document.getElementById('navOverlay');
+  var closeBtn = document.querySelector('.nav-close');
+  function openNav() { sidebar.classList.add('is-open'); overlay.classList.add('is-open'); closeBtn.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true'); document.documentElement.classList.add('nav-open'); document.body.classList.add('nav-open'); }
+  function closeNav() { sidebar.classList.remove('is-open'); overlay.classList.remove('is-open'); closeBtn.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('nav-open'); document.body.classList.remove('nav-open'); }
+  if (toggle && sidebar) { toggle.addEventListener('click', function() { var isOpen = sidebar.classList.contains('is-open'); if (isOpen) closeNav(); else openNav(); }); }
+  if (closeBtn) closeBtn.addEventListener('click', closeNav);
+  if (overlay) overlay.addEventListener('click', closeNav);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
+});
+</script>
+</body>
+</html>

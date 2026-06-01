@@ -30,13 +30,9 @@
 
   <div class="nav-sidebar" id="navSidebar">
     <ul class="nav-links">
-      <li><a href="servicios/">Servicios</a></li>
-      <li><a href="servicios/inspecciones/">Inspecciones</a></li>
+      <li><a href="seguridad-incendios/">Seguridad Contra Incendios</a></li>
+      <li><a href="seguridad-industrial/">Seguridad Industrial</a></li>
       <li><a href="capacitaciones/">Capacitaciones</a></li>
-      <li><a href="izajes/">Izajes</a></li>
-      <li><a href="extintores/">Extintores</a></li>
-      <li><a href="red-incendios/">Red contra incendios</a></li>
-      <li><a href="productos/">Productos</a></li>
     </ul>
 
     <a href="contacto/" class="nav-cta">
@@ -50,109 +46,50 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg hero-bg--alt" id="heroBgAlt"></div>
   <div class="hero-content">
     <h1>Soluciones <span class="hero-accent">integrales</span><br>en seguridad</h1>
     <p>Venta, capacitación, inspección y protección para su empresa.</p>
-
   </div>
-
-
 </section>
 
 <!-- SERVICES -->
-<section class="services">
+<section class="services services--categories">
   <div class="container">
-      <div class="services-scroll-wrap">
-      <div class="services-grid">
-
-      <a href="extintores/" class="service-card-link">
-        <div class="service-card">
-          <img class="service-img" src="assets/extintores-trabajo.jpg" alt="Venta de extintores">
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <img src="assets/extintor-icon.svg" width="28" height="28" alt="icon">
-            </div>
-            <div class="service-title">Venta de extintores / matafuegos</div>
-            <div class="service-desc">Extintores de todo tipo y capacidad. Recargas y accesorios.</div>
-          </div>
+    <div class="category-grid">
+      <a href="seguridad-incendios/" class="category-card">
+        <div class="category-img" style="background-image:url(assets/accesorios-red-incendios.png)"></div>
+        <div class="category-overlay">
+          <h2 class="category-title">Seguridad<br>Contra Incendios</h2>
+          <p class="category-desc">Extintores, redes, capacitaciones, inspecciones y más.</p>
+          <span class="category-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
         </div>
       </a>
-
-      <a href="red-incendios/" class="service-card-link">
-        <div class="service-card">
-          <img class="service-img" src="assets/accesorios-red-incendios.png" alt="Accesorios para instalaciones contra incendio">
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <img src="assets/extintor-icon.svg" width="28" height="28" alt="icon">
-            </div>
-            <div class="service-title">Accesorios para instalaciones contra incendio</div>
-            <div class="service-desc">Mangueras, válvulas, hidrantes, conexiones y más.</div>
-          </div>
+      <a href="seguridad-industrial/" class="category-card">
+        <div class="category-img" style="background-image:url(assets/izajes.jpg)"></div>
+        <div class="category-overlay">
+          <h2 class="category-title">Seguridad<br>Industrial</h2>
+          <p class="category-desc">Izajes, EPP, informes técnicos e ingeniería.</p>
+          <span class="category-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
         </div>
       </a>
-
-      <a href="productos/" class="service-card-link">
-        <div class="service-card">
-          <img class="service-img" src="assets/PPE.jpg" alt="Elementos de protección personal">
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <img src="assets/casco-icon.svg" width="28" height="28" alt="icon">
-            </div>
-            <div class="service-title">Elementos de protección personal (EPP)</div>
-            <div class="service-desc">Protección para cada riesgo y actividad laboral.</div>
-          </div>
+      <a href="capacitaciones/" class="category-card">
+        <div class="category-img" style="background-image:url(assets/capacitaciones-banner.png)"></div>
+        <div class="category-overlay">
+          <h2 class="category-title">Capacitaciones</h2>
+          <p class="category-desc">Formación en seguridad, uso de extintores y primeros auxilios.</p>
+          <span class="category-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </span>
         </div>
       </a>
-
-      <a href="capacitaciones/" class="service-card-link">
-        <div class="service-card">
-          <img class="service-img" src="assets/capacitaciones-placeholder.png" alt="Capacitaciones">
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div class="service-title">Capacitaciones</div>
-            <div class="service-desc">Formación teórica y práctica en seguridad, uso de extintores, primeros auxilios y más.</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="izajes/" class="service-card-link">
-        <div class="service-card">
-          <img class="service-img" src="assets/izajes.jpg" alt="Inspección de equipos de izaje">
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <img src="assets/crane.svg" width="28" height="28" alt="icon">
-            </div>
-            <div class="service-title">Inspección de equipos de izaje y accesorios</div>
-            <div class="service-desc">Inspección y certificación de eslingas, grilletes, ganchos y accesorios de izaje.</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="/extintores/mantenimiento/" class="service-card-link">
-        <div class="service-card">
-          <img class="service-img" src="assets/extintor-revision.png" alt="Mantenimiento y control de equipos">
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <img src="assets/extintor-icon.svg" width="28" height="28" alt="icon">
-            </div>
-            <div class="service-title">Mantenimiento y control de equipos</div>
-            <div class="service-desc">Servicio técnico, recarga, mantenimiento y control periódico.</div>
-          </div>
-        </div>
-      </a>
-
     </div>
   </div>
-    <button class="scroll-arrow scroll-arrow--left" aria-label="Desplazar a la izquierda">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="scroll-arrow scroll-arrow--right" aria-label="Desplazar a la derecha">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-</div>
 </section>
 
 <!-- WHY US -->
@@ -333,6 +270,31 @@
     });
     var badge = document.querySelector('.w-webflow-badge, a[href="https://webflow.com"]');
     if (badge) badge.remove();
+    /* ── Hero background crossfade ── */
+    var heroImages = [
+      'assets/Banner-1.png',
+      'assets/capacitaciones-banner.png',
+      'assets/forklift-banner.png',
+      'assets/ingenieria-grua-banner.png'
+    ];
+    var heroBg1 = document.getElementById('heroBg');
+    var heroBg2 = document.getElementById('heroBgAlt');
+    if (heroBg1 && heroBg2 && heroImages.length > 1) {
+      var idx = 0;
+      var active = heroBg1;
+      var inactive = heroBg2;
+      setInterval(function () {
+        idx = (idx + 1) % heroImages.length;
+        inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
+        inactive.style.backgroundSize = 'auto 140%';
+        inactive.style.backgroundPosition = '100% center';
+        inactive.style.backgroundRepeat = 'no-repeat';
+        inactive.style.opacity = '1';
+        active.style.opacity = '0';
+        var tmp = active; active = inactive; inactive = tmp;
+      }, 5000);
+    }
+
     new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
         mutation.addedNodes.forEach(function(node) {
@@ -344,50 +306,7 @@
       });
     }).observe(document.body, { childList: true, subtree: true });
 
-    var grid = document.querySelector('.services-grid');
-    if (grid) {
-      var wrap = document.querySelector('.services-scroll-wrap');
-      var leftArrow = document.querySelector('.scroll-arrow--left');
-      var rightArrow = document.querySelector('.scroll-arrow--right');
-      var card = grid.querySelector('.service-card');
-      var scrollAmount = card ? card.offsetWidth + 24 : 344;
-      var fadeW = 40;
 
-      function updateMask() {
-        if (window.innerWidth <= 768) {
-          wrap.style.removeProperty('-webkit-mask-image');
-          wrap.style.removeProperty('mask-image');
-          return;
-        }
-        var atLeft = wrap.scrollLeft <= 4;
-        var atRight = wrap.scrollLeft >= wrap.scrollWidth - wrap.clientWidth - 4;
-        if (leftArrow) leftArrow.style.display = atLeft ? 'none' : 'flex';
-        if (rightArrow) rightArrow.style.display = atRight ? 'none' : 'flex';
-        var m;
-        if (atLeft && atRight) {
-          m = 'none';
-        } else if (atLeft) {
-          m = 'linear-gradient(to right, black 0, black calc(100% - ' + fadeW + 'px), transparent 100%)';
-        } else if (atRight) {
-          m = 'linear-gradient(to right, transparent 0, black ' + fadeW + 'px, black 100%)';
-        } else {
-          m = 'linear-gradient(to right, transparent 0, black ' + fadeW + 'px, black calc(100% - ' + fadeW + 'px), transparent 100%)';
-        }
-        if (m === 'none') {
-          wrap.style.removeProperty('-webkit-mask-image');
-          wrap.style.removeProperty('mask-image');
-        } else {
-          wrap.style.setProperty('-webkit-mask-image', m);
-          wrap.style.setProperty('mask-image', m);
-        }
-      }
-
-      if (leftArrow) leftArrow.addEventListener('click', function() { wrap.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
-      if (rightArrow) rightArrow.addEventListener('click', function() { wrap.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
-
-      wrap.addEventListener('scroll', updateMask);
-      updateMask();
-    }
   });
 </script>
 </body>
