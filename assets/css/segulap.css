@@ -404,6 +404,8 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   border-radius: 50%;
   background: var(--red);
   color: var(--white);
+  flex-shrink: 0;
+  align-self: flex-end;
   transition: background .2s, transform .2s;
 }
 
@@ -763,6 +765,25 @@ footer {
 }
 .contact-row:has(.address-link):hover .address-link {
   color: #e53935 !important;
+}
+
+.footer-col .phone-row {
+  align-items: center;
+}
+.footer-col .phone-row .icon-circle {
+  margin-top: 0;
+}
+.phone-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color .25s;
+}
+.phone-link:hover {
+  color: #e53935 !important;
+}
+.contact-row:has(.phone-link):hover .icon-circle {
+  background: var(--red);
+  border-color: var(--red);
 }
 
 /* ── WEBSITE PAGES (shared content styles) ── */
@@ -1890,15 +1911,15 @@ footer {
   .hero {
     flex-direction: column;
     min-height: auto;
-    padding-bottom: 120px;
+    padding-bottom: 160px;
     background: #000;
   }
 
   .hero-bg {
     top: auto;
     bottom: 0;
-    height: 120px;
-    background: #000 url('../Banner-1.png') 100% center / cover no-repeat;
+    height: 160px;
+    background: #000 url('../Banner-1.png') center center / cover no-repeat;
   }
 
   .hero-bg::before {

@@ -271,6 +271,43 @@
         text-transform: uppercase;
         margin: 0;
       }
+      @media (max-width: 400px) {
+        .hero-ext {
+          flex-direction: column;
+          min-height: auto;
+          padding-bottom: 160px;
+          background: #000;
+        }
+        .hero-ext .hero-bg {
+          top: auto;
+          bottom: 0;
+          height: 160px;
+          background: #000 url('../../assets/images/extintores-wide.jpg') center center / cover no-repeat;
+        }
+        .hero-ext .hero-bg::before {
+          display: none;
+        }
+        .hero-ext .hero-bg::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.15) 20%, transparent 35%);
+          pointer-events: none;
+        }
+        .hero-ext .hero-content {
+          position: relative;
+          max-width: 100%;
+          padding: 16px 24px;
+          background: #000;
+        }
+        .hero-ext h1 {
+          margin-bottom: 8px;
+        }
+        .hero-ext p {
+          max-width: 100%;
+          margin-bottom: 12px;
+        }
+      }
       @media (max-width: 768px) {
         .serv-ext-grid {
           display: flex;
@@ -763,8 +800,8 @@
         </div>
         <div class="footer-col">
           <h4>Teléfono</h4>
-          <div class="contact-row">
-            <div class="icon-circle">
+          <div class="contact-row phone-row">
+            <a class="icon-circle" href="../../contacto/">
               <svg
                 width="16"
                 height="16"
@@ -777,8 +814,8 @@
                   d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"
                 />
               </svg>
-            </div>
-            <div><a href="https://wa.me/5492216746874" target="_blank" rel="noopener">+54 9 221 674-6874</a></div>
+            </a>
+            <div><a href="../../contacto/" class="phone-link">+54 9 221 674-6874</a></div>
           </div>
         </div>
         <div class="footer-col">
