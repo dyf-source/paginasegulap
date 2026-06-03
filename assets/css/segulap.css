@@ -209,7 +209,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: #000 url('../Banner-1.png') 100% center / auto 140% no-repeat;
+  background: #000 url('../images/Banner-1.png') 100% center / auto 140% no-repeat;
   transition: opacity 1s ease;
 }
 .hero-bg--alt {
@@ -315,7 +315,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 /* ── SERVICES ── */
 .services {
   background: var(--light-gray);
-  padding: clamp(20px, 2vw, 40px) clamp(16px, 4vw, 48px) clamp(50px, 5vw, 80px);
+  padding: clamp(50px, 5vw, 80px) clamp(16px, 4vw, 48px) clamp(50px, 5vw, 80px);
   position: relative;
 }
 
@@ -1919,7 +1919,7 @@ footer {
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../Banner-1.png') center center / cover no-repeat;
+    background: #000 url('../images/Banner-1.png') center center / cover no-repeat;
   }
 
   .hero-bg::before {

@@ -19,7 +19,7 @@
   overflow: hidden;
 }
 .hero-industrial .hero-bg {
-  background: #000 url('../assets/images/forklift-banner.png') 100% center / auto 140% no-repeat;
+  background: #000 url('../assets/images/forklift-banner.png') 100% center / 66% auto no-repeat;
 }
 .hero-industrial .hero-bg::before {
   content: '';
@@ -123,7 +123,7 @@
       <li><a href="certificaciones/">Certificaciones</a></li>
       <li><a href="informes/">Informes Técnicos</a></li>
       <li><a href="ingenieria/">Ingeniería</a></li>
-      <li><a href="../equipos-elevacion/">Equipos de Elevación</a></li>
+      <li><a href="equipos-elevacion/">Equipos de Elevación</a></li>
     </ul>
     <a href="../contacto/" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -185,7 +185,7 @@
         </div>
       </a>
 
-      <a href="../equipos-elevacion/" style="display:block;background:var(--white);border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 32px rgba(180,20,20,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <a href="equipos-elevacion/" style="display:block;background:var(--white);border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 32px rgba(180,20,20,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
         <div style="height:180px;background:#ddd url('../assets/images/izajes.jpg') center/cover no-repeat"></div>
         <div style="padding:24px">
           <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;color:var(--black);margin:0 0 10px">Equipos de Elevación</h3>
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(function () {
       idx = (idx + 1) % heroImages.length;
       inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
-      inactive.style.backgroundSize = 'auto 140%';
+      inactive.style.backgroundSize = '66% auto';
       inactive.style.backgroundPosition = '100% center';
       inactive.style.backgroundRepeat = 'no-repeat';
       inactive.style.opacity = '1';
