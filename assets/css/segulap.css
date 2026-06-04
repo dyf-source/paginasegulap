@@ -321,6 +321,9 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 
 .services .container {
   position: relative;
+  max-width: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 
@@ -328,13 +331,13 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 /* ── CATEGORY CARDS (home page) ── */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1350px) {
   .category-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -344,8 +347,24 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   border-radius: 16px;
   overflow: hidden;
   text-decoration: none;
-  height: clamp(180px, 15vw, 260px);
+  height: clamp(240px, 22vw, 320px);
   transition: transform .3s ease, box-shadow .3s ease;
+}
+
+@media (max-width: 860px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+  .category-overlay {
+    padding: 20px 24px;
+  }
+  .category-title {
+    font-size: clamp(20px, 5vw, 30px);
+  }
+  .category-desc {
+    font-size: clamp(12px, 2.8vw, 15px);
+    min-height: 0;
+  }
 }
 
 .category-card:hover {

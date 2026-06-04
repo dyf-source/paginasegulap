@@ -4,6 +4,7 @@
 - **Elementos de Seg. Vial** (Conos, cadenas, barreras, etc.)
 - **Indumentaria** (Ropa de trabajo) y Calzado
 - **Kit Antiderrame**
+- **Calzado**
 
 ---
 
