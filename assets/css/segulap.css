@@ -391,6 +391,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   opacity: .85;
   margin: 0 0 16px;
   max-width: 280px;
+  min-height: 2.8em;
 }
 
 .category-arrow {
