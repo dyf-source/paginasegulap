@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEGULAP – Seguridad Industrial</title>
-<meta name="description" content="Soluciones en seguridad industrial. EPP, indumentaria, calzado de seguridad, elementos viales y kits antiderrame.">
+<title>SEGULAP – Indumentaria</title>
+<meta name="description" content="Indumentaria de seguridad industrial. Camillas y chalecos reflectivos, ropa laboral, ignífuga, para soldador, impermeable y delantales.">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
-<link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
-<link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<link href="../../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
 <style>
 .hero-industrial {
   position: relative;
@@ -19,7 +19,7 @@
   overflow: hidden;
 }
 .hero-industrial .hero-bg {
-  background: #000 url('../assets/images/forklift-banner.png') 100% center / 66% auto no-repeat;
+  background: #000 url('../../assets/images/forklift-banner.png') 100% center / 66% auto no-repeat;
 }
 .hero-industrial .hero-bg::before {
   content: '';
@@ -70,7 +70,7 @@
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../assets/images/forklift-banner.png') center center / cover no-repeat;
+    background: #000 url('../../assets/images/forklift-banner.png') center center / cover no-repeat;
   }
   .hero-industrial .hero-bg::before {
     display: none;
@@ -103,7 +103,7 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="../">
-    <img src="../assets/images/logos/Segulap-Seguridad-Logo-white.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
+    <img src="../../assets/images/logos/Segulap-Seguridad-Logo-white.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
   </a>
 
   <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -118,13 +118,13 @@
 
   <div class="nav-sidebar" id="navSidebar">
     <ul class="nav-links">
-      <li><a href="epp/">EPP</a></li>
-      <li><a href="indumentaria/">Indumentaria</a></li>
-      <li><a href="calzado-seguridad/">Calzado</a></li>
-      <li><a href="elementos-viales/">Viales</a></li>
-      <li><a href="kits-antiderrame/">Antiderrame</a></li>
+      <li><a href="../epp/">EPP</a></li>
+      <li><a href="../indumentaria/">Indumentaria</a></li>
+      <li><a href="../calzado-seguridad/">Calzado</a></li>
+      <li><a href="../elementos-viales/">Viales</a></li>
+      <li><a href="../kits-antiderrame/">Antiderrame</a></li>
     </ul>
-    <a href="../contacto/" class="nav-cta">
+    <a href="../../contacto/" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Solicitar Asesoramiento
     </a>
@@ -138,94 +138,79 @@
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-bg hero-bg--alt" id="heroBgAlt"></div>
   <div class="hero-content">
-    <h1>Seguridad<br>Industrial</h1>
-    <p>EPP, indumentaria, calzado de seguridad, elementos viales y kits antiderrame para proteger a su personal e instalaciones.</p>
-    <a href="../contacto/" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
+    <h1>Indumentaria<br>de Seguridad</h1>
+    <p>Camillas y chalecos reflectivos, ropa laboral, ignífuga, para soldador, impermeable, delantales y mandiles de protección.</p>
+    <a href="../../contacto/" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Solicitar asesoramiento
     </a>
   </div>
 </section>
 
-<!-- CATEGORY CARDS -->
+<!-- PRODUCTOS -->
 <section class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
 
-      <a href="epp/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="service-title">EPP</div>
-            <div class="service-desc">Equipos de Protección Personal: cascos, protectores auditivos y oculares, respiradores, arneses, y guantes.</div>
-          </div>
+      <div class="service-card" style="width:100%">
+        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-      </a>
+        <div class="service-body">
+          <div class="service-title">Camillas y Chalecos Reflectivos</div>
+          <div class="service-desc">Camillas de seguridad industrial y chalecos reflectivos de alta visibilidad normativa.</div>
+        </div>
+      </div>
 
-      <a href="indumentaria/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <div class="service-title">Indumentaria</div>
-            <div class="service-desc">Chalecos reflectivos, y ropa laboral.</div>
-          </div>
+      <div class="service-card" style="width:100%">
+        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M6 5h12l2 4-8 12-8-12 2-4z"/><path d="M6 9h12"/></svg>
         </div>
-      </a>
+        <div class="service-body">
+          <div class="service-title">Ropa Laboral</div>
+          <div class="service-desc">Pantalones, camisas, overoles y buzos de trabajo en distintos materiales y colores corporativos.</div>
+        </div>
+      </div>
 
-      <a href="calzado-seguridad/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
-          </div>
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
-            </div>
-            <div class="service-title">Calzado de Seguridad</div>
-            <div class="service-desc">Zapatos y botas punta de acero, calzado dieléctrico, botas de goma con puntera y calzado ESD.</div>
-          </div>
+      <div class="service-card" style="width:100%">
+        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-      </a>
+        <div class="service-body">
+          <div class="service-title">Ropa Ignífuga</div>
+          <div class="service-desc">Indumentaria resistente al fuego y al arco eléctrico. Overoles, camisas y pantalones con certificación.</div>
+        </div>
+      </div>
 
-      <a href="elementos-viales/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <div class="service-title">Elementos Viales</div>
-            <div class="service-desc">Conos, balizas, cintas de señalización, y cartelería reflectiva.</div>
-          </div>
+      <div class="service-card" style="width:100%">
+        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M23 7l-7 5-5-5-5 5-5-5"/><path d="M23 17l-7 5-5-5-5 5-5-5"/></svg>
         </div>
-      </a>
+        <div class="service-body">
+          <div class="service-title">Ropa para Soldador</div>
+          <div class="service-desc">Chaquetas, mandiles, mangas y polainas de cuero cromado y materiales resistentes a chispas.</div>
+        </div>
+      </div>
 
-      <a href="kits-antiderrame/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </div>
-            <div class="service-title">Kits Antiderrame</div>
-            <div class="service-desc">Kits universales, hidrofóbicos y químicos. Absorbentes en rollo, almohadas, barreras, tapones para desagües y diques de contención.</div>
-          </div>
+      <div class="service-card" style="width:100%">
+        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><circle cx="6" cy="20" r="2"/></svg>
         </div>
-      </a>
+        <div class="service-body">
+          <div class="service-title">Ropa Impermeable</div>
+          <div class="service-desc">Camperas, pantalones y conjuntos impermeables para trabajo en exteriores con condiciones climáticas adversas.</div>
+        </div>
+      </div>
+
+      <div class="service-card" style="width:100%">
+        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
+        </div>
+        <div class="service-body">
+          <div class="service-title">Delantales y Mandiles</div>
+          <div class="service-desc">Delantales de trabajo en distintos materiales: algodón, cuero, PVC y descartables para uso industrial.</div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -240,7 +225,7 @@
       <p>Estamos para ayudarlo.</p>
     </div>
   </div>
-  <a href="../contacto/" class="cta-white">
+  <a href="../../contacto/" class="cta-white">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     Solicitar Asesoramiento
   </a>
@@ -250,7 +235,7 @@
 <footer style="margin-top:auto">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="../assets/images/logos/Segulap-Seguridad-Logo-white.png" alt="Segulap" class="footer-logo">
+      <img src="../../assets/images/logos/Segulap-Seguridad-Logo-white.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
       <div class="social-row social-row-mobile">
         <a class="social-btn" href="#">
@@ -267,10 +252,10 @@
     <div class="footer-col">
       <h4>Teléfono</h4>
       <div class="contact-row phone-row">
-        <a class="icon-circle" href="../contacto/">
+        <a class="icon-circle" href="../../contacto/">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
         </a>
-        <div><a href="../contacto/" class="phone-link">+54 9 221 674-6874</a></div>
+        <div><a href="../../contacto/" class="phone-link">+54 9 221 674-6874</a></div>
       </div>
     </div>
     <div class="footer-col">
@@ -326,8 +311,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 
   var heroImages = [
-    '../assets/images/PPE.jpg',
-    '../assets/images/forklift-banner.png'
+    '../../assets/images/PPE.jpg',
+    '../../assets/images/forklift-banner.png'
   ];
   var heroBg1 = document.getElementById('heroBg');
   var heroBg2 = document.getElementById('heroBgAlt');

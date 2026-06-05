@@ -1969,3 +1969,49 @@ footer {
   }
 
 }
+
+/* ── SEGURIDAD INDUSTRIAL THEME (orange accent) ── */
+.seguridad {
+  --red: #ff6700;
+  --red-dark: #e55d00;
+  --red-light: #ff8533;
+  --primary: #ff6700;
+}
+
+.seguridad nav {
+  background: #d45500;
+}
+
+.seguridad .nav-cta {
+  color: #d45500 !important;
+}
+
+.seguridad .hero,
+.seguridad .hero-uc {
+  background: linear-gradient(100deg, #111 0%, #1e1e1e 40%, #3a2a00 100%) !important;
+}
+
+.seguridad .hero-industrial .hero-bg::before,
+.seguridad .hero-bg::before {
+  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
+}
+
+.seguridad .address-link:hover,
+.seguridad .phone-link:hover {
+  color: #ff6700 !important;
+}
+
+.seguridad .contact-row:has(.address-link):hover .icon-circle,
+.seguridad .contact-row:has(.phone-link):hover .icon-circle {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.seguridad .service-card-link:hover .service-card {
+  box-shadow: 0 10px 32px rgba(255,103,0,0.15);
+}
+
+.seguridad .social-btn:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
