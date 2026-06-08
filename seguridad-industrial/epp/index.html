@@ -118,7 +118,7 @@
 
   <div class="nav-sidebar" id="navSidebar">
     <ul class="nav-links">
-      <li><a href="../epp/">EPP</a></li>
+      <li><a href="../epp/" class="active">EPP</a></li>
       <li><a href="../indumentaria/">Indumentaria</a></li>
       <li><a href="../calzado-seguridad/">Calzado</a></li>
       <li><a href="../elementos-viales/">Viales</a></li>
@@ -189,16 +189,6 @@
         <div class="service-body">
           <div class="service-title">Protección Respiratoria</div>
           <div class="service-desc">Respiradores descartables y reutilizables, máscaras completas, cartuchos y filtros multipropósito.</div>
-        </div>
-      </div>
-
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="service-body">
-          <div class="service-title">Arneses y Líneas de Vida</div>
-          <div class="service-desc">Arneses de seguridad, líneas de vida, absorbedores de energía, eslingas y mosquetones.</div>
         </div>
       </div>
 
@@ -323,8 +313,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(function () {
       idx = (idx + 1) % heroImages.length;
       inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
-      inactive.style.backgroundSize = '66% auto';
-      inactive.style.backgroundPosition = '100% center';
+      inactive.style.backgroundSize = window.innerWidth < 768 ? 'cover' : '66% auto';
+      inactive.style.backgroundPosition = window.innerWidth < 768 ? 'center center' : '100% center';
       inactive.style.backgroundRepeat = 'no-repeat';
       inactive.style.opacity = '1';
       active.style.opacity = '0';

@@ -96,6 +96,15 @@
     margin-bottom: 12px;
   }
 }
+
+@media (max-width: 768px) {
+  .services .container > div {
+    grid-template-columns: 1fr !important;
+  }
+  .service-img {
+    height: 140px !important;
+  }
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -154,13 +163,10 @@
 
       <a href="epp/" class="service-card-link" style="flex:1;min-width:0">
         <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="service-img">
+            <img src="../assets/images/seguridad-arnes.png" alt="EPP" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
             <div class="service-title">EPP</div>
             <div class="service-desc">Equipos de Protección Personal: cascos, protectores auditivos y oculares, respiradores, arneses, y guantes.</div>
           </div>
@@ -169,13 +175,10 @@
 
       <a href="indumentaria/" class="service-card-link" style="flex:1;min-width:0">
         <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <div class="service-img">
+            <img src="../assets/images/seguridad-chalecos.png" alt="Indumentaria" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
             <div class="service-title">Indumentaria</div>
             <div class="service-desc">Chalecos reflectivos, y ropa laboral.</div>
           </div>
@@ -184,13 +187,10 @@
 
       <a href="calzado-seguridad/" class="service-card-link" style="flex:1;min-width:0">
         <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
+          <div class="service-img">
+            <img src="../assets/images/seguridad-calzado.png" alt="Calzado de Seguridad" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
-            </div>
             <div class="service-title">Calzado de Seguridad</div>
             <div class="service-desc">Zapatos y botas punta de acero, calzado dieléctrico, botas de goma con puntera y calzado ESD.</div>
           </div>
@@ -199,13 +199,10 @@
 
       <a href="elementos-viales/" class="service-card-link" style="flex:1;min-width:0">
         <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <div class="service-img">
+            <img src="../assets/images/seguirdad-vial-banner.png" alt="Elementos Viales" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
             <div class="service-title">Elementos Viales</div>
             <div class="service-desc">Conos, balizas, cintas de señalización, y cartelería reflectiva.</div>
           </div>
@@ -214,13 +211,10 @@
 
       <a href="kits-antiderrame/" class="service-card-link" style="flex:1;min-width:0">
         <div class="service-card" style="width:100%">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div class="service-img">
+            <img src="../assets/images/seguridad-antiderrame.png" alt="Kits Antiderrame" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </div>
             <div class="service-title">Kits Antiderrame</div>
             <div class="service-desc">Kits universales, hidrofóbicos y químicos. Absorbentes en rollo, almohadas, barreras, tapones para desagües y diques de contención.</div>
           </div>
@@ -326,8 +320,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 
   var heroImages = [
-    '../assets/images/PPE.jpg',
-    '../assets/images/forklift-banner.png'
+    '../assets/images/seguridad-arnes.png',
+    '../assets/images/seguridad-chalecos.png',
+    '../assets/images/seguridad-calzado.png',
+    '../assets/images/seguridad-trabajador.png',
+    '../assets/images/seguirdad-vial-banner.png',
+    '../assets/images/seguridad-antiderrame.png'
   ];
   var heroBg1 = document.getElementById('heroBg');
   var heroBg2 = document.getElementById('heroBgAlt');
@@ -338,8 +336,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(function () {
       idx = (idx + 1) % heroImages.length;
       inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
-      inactive.style.backgroundSize = '66% auto';
-      inactive.style.backgroundPosition = '100% center';
+      inactive.style.backgroundSize = window.innerWidth < 768 ? 'cover' : '66% auto';
+      inactive.style.backgroundPosition = window.innerWidth < 768 ? 'center center' : '100% center';
       inactive.style.backgroundRepeat = 'no-repeat';
       inactive.style.opacity = '1';
       active.style.opacity = '0';

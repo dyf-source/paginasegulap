@@ -9,13 +9,37 @@
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<style>
+.inspecciones nav {
+  background: #f6b926;
+}
+.inspecciones .nav-links a {
+  color: #222;
+}
+.inspecciones .nav-links a.active::after,
+.inspecciones .nav-links a:hover::after {
+  background: #222;
+}
+.inspecciones .nav-links a.active,
+.inspecciones .nav-links a:hover {
+  color: #111;
+}
+.inspecciones .nav-cta {
+  color: #222 !important;
+  border-color: #222 !important;
+}
+.inspecciones .nav-cta:hover {
+  background: rgba(0,0,0,0.1);
+  color: #111 !important;
+}
+</style>
 </head>
-<body style="display:flex;flex-direction:column;min-height:100vh">
+<body class="inspecciones" style="display:flex;flex-direction:column;min-height:100vh">
 
 <!-- NAV -->
 <nav>
   <a class="logo" href="../">
-    <img src="../assets/images/Segulap-Logo-White.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
+    <img src="../assets/images/logos/Segulap-Inspecciones-Logo.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
   </a>
 
   <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -49,7 +73,7 @@
 <footer style="margin-top:auto">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="../assets/images/Segulap-Logo-White.png" alt="Segulap" class="footer-logo">
+      <img src="../assets/images/logos/Segulap-Inspecciones-Logo-white.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
     </div>
     <div class="footer-col">
