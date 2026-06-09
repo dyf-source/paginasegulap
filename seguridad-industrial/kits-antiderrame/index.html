@@ -96,6 +96,24 @@
     margin-bottom: 12px;
   }
 }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 570px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+  }
+}
+
+@media (min-width: 1221px) {
+  .card-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -151,57 +169,82 @@
 <!-- PRODUCTOS -->
 <section class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+    <div class="card-grid">
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="service-title">Kits Universales, Hidrofóbicos y Químicos</div>
+            <div class="service-desc">Kits antiderrame completos para respuesta inmediata. Versiones universales, hidrofóbicas y para químicos agresivos.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Kits Universales, Hidrofóbicos y Químicos</div>
-          <div class="service-desc">Kits antiderrame completos para respuesta inmediata. Versiones universales, hidrofóbicas y para químicos agresivos.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20"/><path d="M8 2v20"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20"/><path d="M8 2v20"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20"/><path d="M8 2v20"/></svg>
+            </div>
+            <div class="service-title">Absorbentes en Rollo, Almohadas y Barreras</div>
+            <div class="service-desc">Material absorbente en rollo, almohadas absorbentes y barreras de contención para derrames de líquidos.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Absorbentes en Rollo, Almohadas y Barreras</div>
-          <div class="service-desc">Material absorbente en rollo, almohadas absorbentes y barreras de contención para derrames de líquidos.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="service-title">Tapones y Sellos para Desagües</div>
+            <div class="service-desc">Tapones y cubiertas para desagües y sumideros que evitan el paso de contaminantes al drenaje.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Tapones y Sellos para Desagües</div>
-          <div class="service-desc">Tapones y cubiertas para desagües y sumideros que evitan el paso de contaminantes al drenaje.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="service-title">Señalización para Áreas de Almacenamiento</div>
+            <div class="service-desc">Cartelería y señalización para identificación de áreas de almacenamiento de sustancias peligrosas.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Señalización para Áreas de Almacenamiento</div>
-          <div class="service-desc">Cartelería y señalización para identificación de áreas de almacenamiento de sustancias peligrosas.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
+            </div>
+            <div class="service-title">Elementos de Contención</div>
+            <div class="service-desc">Diques de contención, bolsas para residuos peligrosos y recipientes para almacenamiento temporal de derrames.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Elementos de Contención</div>
-          <div class="service-desc">Diques de contención, bolsas para residuos peligrosos y recipientes para almacenamiento temporal de derrames.</div>
-        </div>
-      </div>
+      </a>
 
     </div>
   </div>

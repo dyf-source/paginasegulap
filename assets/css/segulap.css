@@ -477,6 +477,23 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   flex-direction: column;
 }
 
+.service-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.service-icon-wrap svg {
+  width: 20px;
+  height: 20px;
+}
+
 .service-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;

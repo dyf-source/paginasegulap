@@ -96,6 +96,24 @@
     margin-bottom: 12px;
   }
 }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 570px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+  }
+}
+
+@media (min-width: 1446px) {
+  .card-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -151,67 +169,97 @@
 <!-- PRODUCTOS -->
 <section class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+    <div class="card-grid">
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="service-title">Conos y Balizas</div>
+            <div class="service-desc">Conos de señalización vial reflectivos y balizas lumínicas portátiles para advertencia y demarcación.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Conos y Balizas</div>
-          <div class="service-desc">Conos de señalización vial reflectivos y balizas lumínicas portátiles para advertencia y demarcación.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 8h20"/></svg>
+            </div>
+            <div class="service-title">Cintas y Barreras de Señalización</div>
+            <div class="service-desc">Cintas de peligro, precaución y demarcación. Barreras plegables y extensibles para control de acceso.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Cintas y Barreras de Señalización</div>
-          <div class="service-desc">Cintas de peligro, precaución y demarcación. Barreras plegables y extensibles para control de acceso.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="service-title">Cartelería Vial Reflectiva</div>
+            <div class="service-desc">Señales de tránsito verticales, carteles preventivos y reflectivos para obra y vía pública.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Cartelería Vial Reflectiva</div>
-          <div class="service-desc">Señales de tránsito verticales, carteles preventivos y reflectivos para obra y vía pública.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="service-title">Lámparas Estroboscópicas y Rotativas</div>
+            <div class="service-desc">Luces estroboscópicas LED, rotativas electromecánicas y torretas lumínicas para vehículos y zonas de riesgo.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Lámparas Estroboscópicas y Rotativas</div>
-          <div class="service-desc">Luces estroboscópicas LED, rotativas electromecánicas y torretas lumínicas para vehículos y zonas de riesgo.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#d45500,#a03800)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
+            </div>
+            <div class="service-title">Espejos Convexos</div>
+            <div class="service-desc">Espejos de seguridad convexos para cruces, estacionamientos y zonas ciegas en instalaciones industriales.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Espejos Convexos</div>
-          <div class="service-desc">Espejos de seguridad convexos para cruces, estacionamientos y zonas ciegas en instalaciones industriales.</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="service-card" style="width:100%">
-        <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
+        <div class="service-card" style="width:100%">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="service-title">Tachas y Reductores de Velocidad</div>
+            <div class="service-desc">Tachas reflectivas, delineadores viales y reductores de velocidad tipo lomo de burro para seguridad vehicular.</div>
+          </div>
         </div>
-        <div class="service-body">
-          <div class="service-title">Tachas y Reductores de Velocidad</div>
-          <div class="service-desc">Tachas reflectivas, delineadores viales y reductores de velocidad tipo lomo de burro para seguridad vehicular.</div>
-        </div>
-      </div>
+      </a>
 
     </div>
   </div>
