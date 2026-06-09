@@ -92,3 +92,36 @@ a.service-card-link > div.service-card > div.service-img + div.service-body
 - Cards are laid out in a CSS grid: `grid-template-columns:repeat(5,1fr);gap:16px` (for 5 cards to fit on 1080p).
 - Link the whole card to its subsite via `href`. If no subsite exists yet, point to `../contacto/`.
 - Pull product info lists from `charla.md` under the matching section title.
+
+## Card Grid (`.card-grid`) — Responsive Behavior
+
+Used on sub-pages under `seguridad-industrial/*/` and similar. Wraps product-category cards in a CSS grid that adapts to viewport width.
+
+**Implementation (inline `<style>` in each page):**
+```css
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 570px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+  }
+}
+
+@media (min-width: 1221px) {
+  .card-grid {
+    grid-template-columns: repeat(N, 1fr); /* N = number of cards */
+  }
+}
+```
+
+**Behavior:**
+- **< 570px** — single column (mobile).
+- **570–1220px** — 2 columns. Each column has a minimum of 225px via `minmax()`, so cards never shrink below that before the layout switches.
+- **≥ 1221px** — all cards in one row, each `1fr`. The wide breakpoint accounts for all cards fitting at ≥225px each + gaps (e.g. 5 cards = 1221px, 6 cards = 1446px). Adjust `N` to match the number of cards on the page.
+
+**Odd-card asymmetry in 2-column layout:**
+- With an odd number of cards (e.g. 5 → rows 2+2+1), the lone last card auto-places into column 1 at the same `1fr` width. Column 2 of that row remains empty. No special CSS needed — Grid auto-placement handles it.

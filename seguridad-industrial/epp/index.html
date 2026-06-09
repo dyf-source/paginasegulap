@@ -96,6 +96,24 @@
     margin-bottom: 12px;
   }
 }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 570px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+  }
+}
+
+@media (min-width: 1221px) {
+  .card-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -151,7 +169,7 @@
 <!-- PRODUCTOS -->
 <section class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px">
+    <div class="card-grid">
 
       <div class="service-card" style="width:100%">
         <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
