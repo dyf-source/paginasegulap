@@ -6,43 +6,13 @@
 <title>SEGULAP – Productos</title>
 <meta name="description" content="Segulap - Productos de seguridad contra incendios e industrial. Extintores, mangueras, carteles, luces de emergencia y más.">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="../../assets/css/segulap.css" rel="stylesheet" type="text/css">
-<link href="../../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
-<link href="../../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
 </head>
-<body style="display:flex;flex-direction:column;min-height:100vh">
+<body id="productosBody" style="display:flex;flex-direction:column;min-height:100vh">
 
-<!-- NAV -->
-<nav>
-  <a class="logo" href="../">
-    <img src="../../assets/images/logos/Segulap-Incendios-Logo-white.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
-  </a>
-
-  <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <button class="nav-close" aria-label="Cerrar menú">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-
-      <div class="nav-sidebar" id="navSidebar">
-        <ul class="nav-links">
-          <li><a href="../">Seguridad Contra Incendios</a></li>
-          <li><a href="../extintores/">Extintores</a></li>
-          <li><a href="../red-incendios/">Red Contra Incendios</a></li>
-          <li><a href="./" class="active">Productos</a></li>
-        </ul>
-        <a href="../../contacto/" class="nav-cta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Solicitar Asesoramiento
-        </a>
-      </div>
-
-  <div class="nav-overlay" id="navOverlay"></div>
-</nav>
+<nav id="dynamicNav"></nav>
 
 <!-- PAGE HEADER -->
 <section class="products-header">
@@ -96,7 +66,7 @@
         </div>
         <div class="product-detail-body">
           <button class="product-detail-wa" onclick="consultarWhatsApp()">
-            <img src="../../assets/images/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
+            <img src="../assets/images/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
             Consultar por WhatsApp
           </button>
         </div>
@@ -110,17 +80,17 @@
   <div class="footer-grid">
 
     <div class="footer-brand">
-      <img src="../../assets/images/logos/Segulap-Incendios-Logo-white.png" alt="Segulap" class="footer-logo">
+      <img src="../assets/images/logos/Segulap-Logo-white.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
     </div>
 
     <div class="footer-col">
       <h4>Teléfono</h4>
       <div class="contact-row phone-row">
-        <a class="icon-circle" href="../../contacto/">
+        <a class="icon-circle" href="../contacto/">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
         </a>
-        <div><a href="../../contacto/" class="phone-link">+54 9 221 674-6874</a></div>
+        <div><a href="../contacto/" class="phone-link">+54 9 221 674-6874</a></div>
       </div>
     </div>
 
@@ -167,7 +137,90 @@
 </footer>
 
 <script>
+var navThemes = {
+  home: {
+    logoHref: '../',
+    bodyClass: '',
+    logo: '../assets/images/logos/Segulap-Logo-white.png',
+    links: [
+      { href: '../proteccion-incendios/', text: 'Protección Contra Incendios' },
+      { href: '../seguridad-industrial/', text: 'Seguridad Industrial' },
+      { href: '../inspecciones/', text: 'Inspecciones' },
+      { href: '../capacitaciones/', text: 'Capacitaciones' }
+    ]
+  },
+  incendios: {
+    logoHref: '../proteccion-incendios/',
+    bodyClass: '',
+    logo: '../assets/images/logos/Segulap-Incendios-Logo-white.png',
+    links: [
+      { href: '../proteccion-incendios/extintores/', text: 'Extintores' },
+      { href: '../proteccion-incendios/red-incendios/', text: 'Red Contra Incendios' }
+    ]
+  },
+  seguridad: {
+    logoHref: '../seguridad-industrial/',
+    bodyClass: 'seguridad',
+    logo: '../assets/images/logos/Segulap-Seguridad-Logo-white.png',
+    links: [
+      { href: '../seguridad-industrial/epp/', text: 'EPP' },
+      { href: '../seguridad-industrial/indumentaria/', text: 'Indumentaria' },
+      { href: '../seguridad-industrial/calzado-seguridad/', text: 'Calzado' },
+      { href: '../seguridad-industrial/elementos-viales/', text: 'Viales' },
+      { href: '../seguridad-industrial/kits-antiderrame/', text: 'Antiderrame' }
+    ]
+  },
+  capacitaciones: {
+    logoHref: '../capacitaciones/',
+    bodyClass: 'capacitaciones',
+    logo: '../assets/images/logos/Segulap-Capacitaciones-Logo-white.png'
+  },
+  inspecciones: {
+    logoHref: '../inspecciones/',
+    bodyClass: 'inspecciones',
+    logo: '../assets/images/logos/Segulap-Inspecciones-Logo-white.png'
+  }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+  var ref = document.referrer;
+  var theme;
+  if (ref.indexOf('seguridad-industrial') > -1) theme = navThemes.seguridad;
+  else if (ref.indexOf('proteccion-incendios') > -1) theme = navThemes.incendios;
+  else if (ref.indexOf('capacitaciones') > -1) theme = navThemes.capacitaciones;
+  else if (ref.indexOf('inspecciones') > -1) theme = navThemes.inspecciones;
+  else theme = navThemes.home;
+
+  var body = document.getElementById('productosBody');
+  if (theme.bodyClass) body.className = theme.bodyClass;
+
+  var linksHtml = '';
+  if (theme.links) {
+    theme.links.forEach(function(l) {
+      linksHtml += '<li><a href="' + l.href + '">' + l.text + '</a></li>';
+    });
+    linksHtml += '<li><a href="./" class="active">Productos</a></li>';
+  }
+
+  document.getElementById('dynamicNav').innerHTML =
+    '<a class="logo" href="' + theme.logoHref + '">' +
+      '<img src="' + theme.logo + '" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">' +
+    '</a>' +
+    '<button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">' +
+      '<span></span><span></span><span></span>' +
+    '</button>' +
+    '<button class="nav-close" aria-label="Cerrar menú">' +
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+    '</button>' +
+    '<div class="nav-sidebar" id="navSidebar">' +
+      (linksHtml ? '<ul class="nav-links">' + linksHtml + '</ul>' : '') +
+      '<a href="../contacto/" class="nav-cta">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+        'Solicitar Asesoramiento' +
+      '</a>' +
+    '</div>' +
+    '<div class="nav-overlay" id="navOverlay"></div>';
+
   var toggle = document.querySelector('.nav-toggle');
   var sidebar = document.getElementById('navSidebar');
   var overlay = document.getElementById('navOverlay');
@@ -180,8 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 });
 </script>
-<script src="../../assets/js/config.js"></script>
-<script src="../../assets/js/productos.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/productos.js"></script>
 <script>
 var db;
 var stored = localStorage.getItem('segulap_productos');
