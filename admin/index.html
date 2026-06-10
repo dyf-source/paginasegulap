@@ -32,6 +32,21 @@
 }
 .admin-tab:hover { color: var(--black); }
 .admin-tab.active { color: var(--red); border-bottom-color: var(--red); }
+
+.cat-child-row td {
+  font-size: 13px;
+}
+
+.cat-child-row td:first-child {
+  padding-left: 32px;
+}
+
+.cat-child-indent {
+  color: var(--border);
+  font-family: monospace;
+  font-size: 13px;
+}
+
 </style>
 </head>
 <body class="admin-body">
@@ -53,6 +68,7 @@
 
   <div class="admin-tabs">
     <button class="admin-tab active" onclick="switchTab('productos')">Productos</button>
+    <button class="admin-tab" onclick="switchTab('categorias')">Categorías</button>
     <button class="admin-tab" onclick="switchTab('configuracion')">Configuración</button>
   </div>
 
@@ -140,6 +156,77 @@
       <div id="configFeedback" style="font-size:13px;margin-top:8px;color:var(--red);min-height:20px"></div>
     </div>
   </div>
+
+  <div id="sectionCategorias" style="display:none">
+    <div class="admin-toolbar">
+      <button class="admin-btn admin-btn-primary" onclick="showCategoryForm()">+ Agregar categoría</button>
+      <button class="admin-btn admin-btn-outline" onclick="showGroupForm()">+ Agregar grupo</button>
+      <button class="admin-btn admin-btn-outline" onclick="exportCatConfig()">Exportar JSON</button>
+    </div>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="catTable">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Grupo</th>
+            <th style="width:80px">Productos</th>
+            <th style="width:140px">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="catTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Category modal -->
+    <div id="catFormOverlay" class="admin-overlay" style="display:none" onclick="if(event.target===this)hideCategoryForm()">
+      <div class="admin-modal">
+        <h3 id="catFormTitle">Nueva categoría</h3>
+        <div class="admin-form-field">
+          <label>Nombre</label>
+          <input type="text" id="catFormName" placeholder="Nombre de la categoría">
+        </div>
+        <div class="admin-form-field">
+          <label>Grupo padre</label>
+          <select id="catFormGroup">
+            <option value="">— Ninguno (categoría principal) —</option>
+          </select>
+        </div>
+        <div class="admin-form-actions">
+          <button class="admin-btn admin-btn-primary" onclick="saveCategory()">Guardar</button>
+          <button class="admin-btn admin-btn-outline" onclick="hideCategoryForm()">Cancelar</button>
+        </div>
+        <div id="catFormFeedback" style="font-size:13px;margin-top:8px;color:var(--red);min-height:20px"></div>
+      </div>
+    </div>
+
+    <!-- Group modal -->
+    <div id="groupFormOverlay" class="admin-overlay" style="display:none" onclick="if(event.target===this)hideGroupForm()">
+      <div class="admin-modal">
+        <h3 id="groupFormTitle">Nuevo grupo</h3>
+        <div class="admin-form-field">
+          <label>Nombre del grupo</label>
+          <input type="text" id="groupFormName" placeholder="ej: Elementos de Protección Personal (EPP)">
+        </div>
+        <div class="admin-form-field">
+          <label>Categorías hijas</label>
+          <p style="font-size:12px;color:var(--gray);margin-bottom:8px">Seleccioná las categorías que pertenecen a este grupo.</p>
+          <div id="groupFormChildren" style="max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;padding:8px"></div>
+        </div>
+        <div class="admin-form-actions">
+          <button class="admin-btn admin-btn-primary" onclick="saveGroup()">Guardar grupo</button>
+          <button class="admin-btn admin-btn-outline" onclick="hideGroupForm()">Cancelar</button>
+        </div>
+        <div id="groupFormFeedback" style="font-size:13px;margin-top:8px;color:var(--red);min-height:20px"></div>
+      </div>
+    </div>
+
+    <!-- Existing groups list -->
+    <div class="admin-form" style="max-width:100%;margin-top:24px">
+      <h3>Grupos existentes</h3>
+      <div id="adminGroupsList"></div>
+    </div>
+  </div>
 </div>
 
 <script src="../assets/js/productos.js"></script>
@@ -181,16 +268,396 @@ function sessionValid() {
 function switchTab(tab) {
   document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
   document.getElementById('sectionProductos').style.display = 'none';
+  document.getElementById('sectionCategorias').style.display = 'none';
   document.getElementById('sectionConfiguracion').style.display = 'none';
   if (tab === 'productos') {
     document.querySelector('.admin-tab').classList.add('active');
     document.getElementById('sectionProductos').style.display = 'block';
     renderAdminTable();
-  } else {
+  } else if (tab === 'categorias') {
     document.querySelectorAll('.admin-tab')[1].classList.add('active');
+    document.getElementById('sectionCategorias').style.display = 'block';
+    renderCatTable();
+  } else {
+    document.querySelectorAll('.admin-tab')[2].classList.add('active');
     document.getElementById('sectionConfiguracion').style.display = 'block';
     document.getElementById('configWhatsapp').value = getWhatsAppNumber();
   }
+}
+
+// ── Categories config persistence ──
+
+function loadCatConfig() {
+  var stored = localStorage.getItem('segulap_categories_config');
+  if (stored) {
+    try { return JSON.parse(stored); } catch(e) {}
+  }
+  return {
+    categories: JSON.parse(JSON.stringify(categories)),
+    groups: JSON.parse(JSON.stringify(categoryGroups))
+  };
+}
+
+function saveCatConfig(config) {
+  localStorage.setItem('segulap_categories_config', JSON.stringify(config));
+}
+
+var catConfig = loadCatConfig();
+
+// ── Render category table ──
+
+function renderCatTable() {
+  var tbody = document.getElementById('catTableBody');
+  var flatCats = catConfig.categories;
+  var groups = catConfig.groups;
+
+  // product count helper
+  function productCount(cat) {
+    return db.filter(function(p) { return p.cat === cat; }).length;
+  }
+
+  function getParent(cat) {
+    for (var g in groups) {
+      if (groups[g].indexOf(cat) > -1) return g;
+    }
+    return '';
+  }
+
+  var html = '';
+  flatCats.forEach(function(c) {
+    if (isChildOfGroup(c, groups)) return;
+
+    var parent = getParent(c);
+    if (parent) return;
+
+    var cnt = productCount(c);
+    html += '<tr>' +
+      '<td><strong>' + escHtml(c) + '</strong></td>' +
+      '<td style="color:var(--gray);font-size:13px">—</td>' +
+      '<td>' + cnt + '</td>' +
+      '<td>' +
+        '<button class="admin-btn-sm admin-btn-edit" onclick="showCategoryForm(\'' + escJs(c) + '\')">Editar</button> ' +
+        '<button class="admin-btn-sm admin-btn-del" onclick="deleteCategory(\'' + escJs(c) + '\')">Eliminar</button>' +
+      '</td>' +
+    '</tr>';
+
+    // Children
+    for (var g in groups) {
+      if (g === c) {
+        var children = groups[g];
+        children.forEach(function(ch) {
+          var chCnt = productCount(ch);
+          html += '<tr class="cat-child-row">' +
+            '<td><span class="cat-child-indent">├ </span>' + escHtml(ch) + '</td>' +
+            '<td style="color:var(--gray);font-size:13px">' + escHtml(g) + '</td>' +
+            '<td>' + chCnt + '</td>' +
+            '<td>' +
+              '<button class="admin-btn-sm admin-btn-edit" onclick="showCategoryForm(\'' + escJs(ch) + '\')">Editar</button> ' +
+              '<button class="admin-btn-sm admin-btn-del" onclick="deleteCategory(\'' + escJs(ch) + '\')">Eliminar</button>' +
+            '</td>' +
+          '</tr>';
+        });
+      }
+    }
+  });
+  tbody.innerHTML = html;
+  renderGroupsList();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function escJs(s) {
+  return s.replace(/'/g,"\\'").replace(/"/g,"\\\"");
+}
+
+function isChildOfGroup(cat, groups) {
+  for (var g in groups) {
+    if (groups[g].indexOf(cat) > -1) return true;
+  }
+  return false;
+}
+
+// ── Category CRUD ──
+
+var editingCategory = null;
+
+function showCategoryForm(catName) {
+  editingCategory = catName || null;
+  document.getElementById('catFormTitle').textContent = editingCategory ? 'Editar categoría' : 'Nueva categoría';
+  document.getElementById('catFormName').value = editingCategory || '';
+  document.getElementById('catFormFeedback').textContent = '';
+
+  var sel = document.getElementById('catFormGroup');
+  sel.innerHTML = '<option value="">— Ninguno (categoría principal) —</option>';
+
+  var groups = catConfig.groups;
+  var flatCats = catConfig.categories;
+
+  for (var g in groups) {
+    if (g === editingCategory) continue;
+    var opt = document.createElement('option');
+    opt.value = g;
+    opt.textContent = g;
+    sel.appendChild(opt);
+  }
+
+  // Pre-select current parent
+  if (editingCategory) {
+    var currentParent = '';
+    for (var g in groups) {
+      if (groups[g].indexOf(editingCategory) > -1) { currentParent = g; break; }
+    }
+    if (currentParent) sel.value = currentParent;
+
+  }
+
+  document.getElementById('catFormOverlay').style.display = 'flex';
+  document.getElementById('catFormName').focus();
+}
+
+function hideCategoryForm() {
+  document.getElementById('catFormOverlay').style.display = 'none';
+  editingCategory = null;
+}
+
+function saveCategory() {
+  var name = document.getElementById('catFormName').value.trim();
+  var parent = document.getElementById('catFormGroup').value;
+  var fb = document.getElementById('catFormFeedback');
+
+  if (!name) { fb.textContent = 'El nombre es obligatorio.'; return; }
+  fb.textContent = '';
+
+  if (!editingCategory && catConfig.categories.indexOf(name) > -1) {
+    fb.textContent = 'Ya existe una categoría con ese nombre.';
+    return;
+  }
+
+  if (editingCategory && name !== editingCategory && catConfig.categories.indexOf(name) > -1) {
+    fb.textContent = 'Ya existe una categoría con ese nombre.';
+    return;
+  }
+
+  // Remove old name references
+  if (editingCategory && editingCategory !== name) {
+    var idx = catConfig.categories.indexOf(editingCategory);
+    if (idx > -1) catConfig.categories.splice(idx, 1);
+    // Remove from old parent group
+    for (var g in catConfig.groups) {
+      var ci = catConfig.groups[g].indexOf(editingCategory);
+      if (ci > -1) { catConfig.groups[g].splice(ci, 1); break; }
+    }
+
+    // Update products
+    db.forEach(function(p) { if (p.cat === editingCategory) p.cat = name; });
+    saveDB();
+  }
+
+  // Add/update
+  if (!editingCategory || editingCategory !== name) {
+    if (catConfig.categories.indexOf(name) === -1) catConfig.categories.push(name);
+  }
+  // Remove from old parent
+  for (var g in catConfig.groups) {
+    var ci = catConfig.groups[g].indexOf(name);
+    if (ci > -1) { catConfig.groups[g].splice(ci, 1); break; }
+  }
+
+  // Add to new parent
+  if (parent) {
+    if (!catConfig.groups[parent]) catConfig.groups[parent] = [];
+    if (catConfig.groups[parent].indexOf(name) === -1) catConfig.groups[parent].push(name);
+  }
+
+  saveCatConfig(catConfig);
+  hideCategoryForm();
+  renderCatTable();
+}
+
+function deleteCategory(catName) {
+  if (catName === 'Otros') { alert('No se puede eliminar la categoría "Otros".'); return; }
+  var cnt = db.filter(function(p) { return p.cat === catName; }).length;
+  var msg = '¿Eliminar la categoría "' + catName + '"?';
+  if (cnt > 0) msg += '\n\n' + cnt + ' producto(s) serán reasignados a "Otros".';
+  if (catConfig.groups[catName]) msg += '\n\nADVERTENCIA: Es un grupo padre. Sus hijos serán reasignados a "Otros".';
+
+  if (!confirm(msg)) return;
+
+  // Move products to "Otros"
+  db.forEach(function(p) { if (p.cat === catName) p.cat = 'Otros'; });
+
+  // If it's a group parent, move children to "Otros" too
+  if (catConfig.groups[catName]) {
+    catConfig.groups[catName].forEach(function(ch) {
+      db.forEach(function(p) { if (p.cat === ch) p.cat = 'Otros'; });
+    });
+    delete catConfig.groups[catName];
+  }
+
+  // Remove from groups
+  for (var g in catConfig.groups) {
+    var ci = catConfig.groups[g].indexOf(catName);
+    if (ci > -1) catConfig.groups[g].splice(ci, 1);
+  }
+
+  // Remove from categories list
+  var idx = catConfig.categories.indexOf(catName);
+  if (idx > -1) catConfig.categories.splice(idx, 1);
+  saveDB();
+  saveCatConfig(catConfig);
+  renderCatTable();
+}
+
+// ── Group CRUD ──
+
+var editingGroup = null;
+
+function showGroupForm(groupName) {
+  editingGroup = groupName || null;
+  document.getElementById('groupFormTitle').textContent = editingGroup ? 'Editar grupo' : 'Nuevo grupo';
+  document.getElementById('groupFormName').value = editingGroup || '';
+  document.getElementById('groupFormFeedback').textContent = '';
+
+  // Build children checkboxes
+  var container = document.getElementById('groupFormChildren');
+  container.innerHTML = '';
+
+  var selectedChildren = editingGroup ? (catConfig.groups[editingGroup] || []) : [];
+
+  catConfig.categories.forEach(function(c) {
+    if (c === editingGroup) return;
+
+    // Check if already in some other group
+    var inOtherGroup = false;
+    var parentOf = '';
+    for (var g in catConfig.groups) {
+      if (g === editingGroup) continue;
+      if (catConfig.groups[g].indexOf(c) > -1) { inOtherGroup = true; parentOf = g; break; }
+    }
+
+    var isSelected = selectedChildren.indexOf(c) > -1;
+    var disabled = inOtherGroup && !isSelected;
+
+    var label = document.createElement('label');
+    label.style.cssText = 'display:flex;align-items:center;gap:8px;padding:6px 8px;cursor:pointer;font-size:13px;border-radius:4px';
+    label.onmouseenter = function() { this.style.background = '#f4f4f4'; };
+    label.onmouseleave = function() { this.style.background = ''; };
+
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.value = c;
+    cb.checked = isSelected;
+    cb.disabled = disabled;
+    if (disabled) {
+      label.style.opacity = '0.4';
+      label.title = 'Ya pertenece al grupo "' + parentOf + '"';
+    }
+
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(c));
+    container.appendChild(label);
+  });
+
+  document.getElementById('groupFormOverlay').style.display = 'flex';
+  document.getElementById('groupFormName').focus();
+}
+
+function hideGroupForm() {
+  document.getElementById('groupFormOverlay').style.display = 'none';
+  editingGroup = null;
+}
+
+function saveGroup() {
+  var name = document.getElementById('groupFormName').value.trim();
+  var fb = document.getElementById('groupFormFeedback');
+
+  if (!name) { fb.textContent = 'El nombre del grupo es obligatorio.'; return; }
+  fb.textContent = '';
+
+  // Get selected children
+  var checkboxes = document.querySelectorAll('#groupFormChildren input[type="checkbox"]:checked');
+  var children = [];
+  checkboxes.forEach(function(cb) { children.push(cb.value); });
+
+  // If new name (not editing), add to categories
+  if (!editingGroup || editingGroup !== name) {
+    if (catConfig.categories.indexOf(name) === -1) catConfig.categories.push(name);
+  }
+
+  // Remove old group ref if renamed
+  if (editingGroup && editingGroup !== name) {
+    delete catConfig.groups[editingGroup];
+    var idx = catConfig.categories.indexOf(editingGroup);
+    if (idx > -1) catConfig.categories.splice(idx, 1);
+
+    // Reassign products
+    db.forEach(function(p) { if (p.cat === editingGroup) p.cat = name; });
+    saveDB();
+  }
+
+  // Update children - remove old children from this group
+  if (editingGroup && catConfig.groups[editingGroup]) {
+    catConfig.groups[editingGroup].forEach(function(oldCh) {
+      // Remove from other groups if they were reassigned
+    });
+  }
+
+  // Remove children from other groups
+  for (var g in catConfig.groups) {
+    if (g === name) continue;
+    catConfig.groups[g] = catConfig.groups[g].filter(function(ch) { return children.indexOf(ch) === -1; });
+  }
+
+  catConfig.groups[name] = children;
+
+  saveCatConfig(catConfig);
+  hideGroupForm();
+  renderCatTable();
+}
+
+function deleteGroup(groupName) {
+  if (!confirm('¿Eliminar el grupo "' + groupName + '"?\n\nLas categorías hijas pasarán a ser categorías principales.')) return;
+
+  delete catConfig.groups[groupName];
+  saveCatConfig(catConfig);
+  renderCatTable();
+}
+
+function renderGroupsList() {
+  var container = document.getElementById('adminGroupsList');
+  var groups = catConfig.groups;
+  var keys = Object.keys(groups);
+  if (keys.length === 0) {
+    container.innerHTML = '<p style="color:var(--gray);font-size:14px">No hay grupos creados.</p>';
+    return;
+  }
+  var html = '';
+  keys.forEach(function(g) {
+    var children = groups[g];
+    var childNames = children.length > 0 ? children.join(', ') : '<em style="color:var(--gray)">sin hijos</em>';
+    html +=
+      '<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px">' +
+        '<span style="flex:1;font-weight:600">' + escHtml(g) + '</span>' +
+        '<span style="color:var(--gray);font-size:13px">' + children.length + ' hijo(s)</span>' +
+        '<button class="admin-btn-sm admin-btn-edit" onclick="showGroupForm(\'' + escJs(g) + '\')">Editar</button> ' +
+        '<button class="admin-btn-sm admin-btn-del" onclick="deleteGroup(\'' + escJs(g) + '\')">Eliminar</button>' +
+      '</div>' +
+      '<div style="font-size:13px;color:var(--gray);padding:0 16px 12px 40px;margin-top:-4px">' + childNames + '</div>';
+  });
+  container.innerHTML = html;
+}
+
+// ── Export/Import ──
+
+function exportCatConfig() {
+  var blob = new Blob([JSON.stringify(catConfig, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'categorias.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 function showAdminPanel() {

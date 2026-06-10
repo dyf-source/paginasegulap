@@ -239,21 +239,75 @@ document.addEventListener('DOMContentLoaded', function() {
 var db;
 var stored = localStorage.getItem('segulap_productos');
 if (stored) {
-  try { db = JSON.parse(stored); } catch(e) { db = productosData; }
+  try {
+    db = JSON.parse(stored);
+    if (db.length !== productosData.length) {
+      db = productosData;
+      localStorage.removeItem('segulap_productos');
+    }
+  } catch(e) { db = productosData; }
 } else {
   db = productosData;
 }
 
-var checkedCategories = {};
+// ── Categories config (from localStorage or source) ──
+var catConfigStored = localStorage.getItem('segulap_categories_config');
+var activeCategories, activeGroups;
+if (catConfigStored) {
+  try {
+    var cc = JSON.parse(catConfigStored);
+    activeCategories = cc.categories || categories;
+    activeGroups = cc.groups || categoryGroups;
+  } catch(e) {
+    activeCategories = categories;
+    activeGroups = categoryGroups;
+  }
+} else {
+  activeCategories = categories;
+  activeGroups = categoryGroups;
+}
 
-categories.forEach(function(c) {
+var checkedCategories = {};
+var expandedGroups = {};
+
+activeCategories.forEach(function(c) {
   checkedCategories[c] = false;
 });
 
 var urlParams = new URLSearchParams(window.location.search);
 var preselectedCat = urlParams.get('cat');
-if (preselectedCat && categories.indexOf(preselectedCat) > -1) {
+if (preselectedCat && activeCategories.indexOf(preselectedCat) > -1) {
   checkedCategories[preselectedCat] = true;
+}
+
+function isGroupParent(cat) {
+  return activeGroups && activeGroups.hasOwnProperty(cat);
+}
+
+function isGroupChild(cat) {
+  if (!activeGroups) return false;
+  for (var g in activeGroups) {
+    if (activeGroups[g].indexOf(cat) > -1) return true;
+  }
+  return false;
+}
+
+function getParentOf(cat) {
+  if (!activeGroups) return null;
+  for (var g in activeGroups) {
+    if (activeGroups[g].indexOf(cat) > -1) return g;
+  }
+  return null;
+}
+
+// Init expanded state
+if (typeof activeGroups !== 'undefined') {
+  for (var g in activeGroups) {
+    expandedGroups[g] = false;
+    if (preselectedCat && activeGroups[g].indexOf(preselectedCat) > -1) {
+      expandedGroups[g] = true;
+    }
+  }
 }
 
 function buildCategoryList() {
@@ -261,28 +315,109 @@ function buildCategoryList() {
   list.innerHTML = '';
   var menu = document.getElementById('categoryDropdownMenu');
   menu.innerHTML = '';
-  categories.forEach(function(c) {
-    var count = db.filter(function(p) { return p.cat === c; }).length;
-    var li = document.createElement('li');
-    li.className = 'category-item' + (checkedCategories[c] ? ' active' : '');
-    li.dataset.cat = c;
-    li.innerHTML = '<span class="category-check">' + (checkedCategories[c] ? '&#10003;' : '') + '</span><span class="category-name">' + c + '</span><span class="category-count">' + count + '</span>';
-    li.addEventListener('click', function(e) {
-      e.stopPropagation();
-      toggleCategory(c);
-    });
-    list.appendChild(li);
 
-    var label = document.createElement('label');
-    label.className = 'dropdown-item';
-    label.dataset.cat = c;
-    label.innerHTML = '<span class="dropdown-cb' + (checkedCategories[c] ? ' checked' : '') + '">' + (checkedCategories[c] ? '&#10003;' : '') + '</span><span class="dropdown-cb-name">' + c + '</span>';
-    label.addEventListener('click', function(e) {
-      e.preventDefault();
-      toggleCategory(c);
-    });
-    menu.appendChild(label);
+  activeCategories.forEach(function(c) {
+    if (isGroupChild(c)) return;
+
+    if (isGroupParent(c)) {
+      var count = db.filter(function(p) { return p.cat === c; }).length;
+      var isExpanded = expandedGroups[c] || false;
+      var children = activeGroups[c] || [];
+
+      var groupLi = document.createElement('li');
+      groupLi.className = 'category-group' + (isExpanded ? ' is-expanded' : '');
+      groupLi.dataset.group = c;
+      groupLi.innerHTML =
+        '<div class="category-group-header">' +
+          '<span class="category-check' + (checkedCategories[c] ? ' active' : '') + '">' + (checkedCategories[c] ? '&#10003;' : '') + '</span>' +
+          '<span class="category-name">' + c + '</span>' +
+          '<span class="category-group-chevron' + (isExpanded ? ' is-open' : '') + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></span>' +
+        '</div>' +
+        '<ul class="category-group-children' + (isExpanded ? ' is-open' : '') + '"></ul>';
+
+      // Parent checkbox toggles all children
+      groupLi.querySelector('.category-check').addEventListener('click', function(e) {
+        e.stopPropagation();
+        var newState = !checkedCategories[c];
+        checkedCategories[c] = newState;
+        children.forEach(function(ch) { checkedCategories[ch] = newState; });
+        filterProducts();
+        updateCategoryUI();
+      });
+
+      // Header (name/chevron) toggle expand
+      groupLi.querySelector('.category-group-header').addEventListener('click', function(e) {
+        if (e.target.closest('.category-check')) return;
+        toggleGroup(c);
+      });
+
+      list.appendChild(groupLi);
+
+      // Render children
+      var childrenContainer = groupLi.querySelector('.category-group-children');
+      children.forEach(function(child) {
+        var childCount = db.filter(function(p) { return p.cat === child; }).length;
+        var childLi = document.createElement('li');
+        childLi.className = 'category-item category-item--child' + (checkedCategories[child] ? ' active' : '');
+        childLi.dataset.cat = child;
+        childLi.innerHTML = '<span class="category-check">' + (checkedCategories[child] ? '&#10003;' : '') + '</span><span class="category-name">' + child + '</span><span class="category-count">' + childCount + '</span>';
+        childLi.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleCategory(child);
+        });
+        childrenContainer.appendChild(childLi);
+      });
+
+      // Add to dropdown (flat)
+      var groupLabel = document.createElement('label');
+      groupLabel.className = 'dropdown-item dropdown-item--parent';
+      groupLabel.dataset.cat = c;
+      groupLabel.innerHTML = '<span class="dropdown-cb' + (checkedCategories[c] ? ' checked' : '') + '">' + (checkedCategories[c] ? '&#10003;' : '') + '</span><span class="dropdown-cb-name">' + c + '</span>';
+      groupLabel.addEventListener('click', function(e) { e.preventDefault(); var ns = !checkedCategories[c]; checkedCategories[c] = ns; children.forEach(function(ch) { checkedCategories[ch] = ns; }); filterProducts(); updateCategoryUI(); });
+      menu.appendChild(groupLabel);
+
+      children.forEach(function(child) {
+        var childLabel = document.createElement('label');
+        childLabel.className = 'dropdown-item dropdown-item--child';
+        childLabel.dataset.cat = child;
+        childLabel.innerHTML = '<span class="dropdown-cb' + (checkedCategories[child] ? ' checked' : '') + '">' + (checkedCategories[child] ? '&#10003;' : '') + '</span><span class="dropdown-cb-name">' + child + '</span>';
+        childLabel.addEventListener('click', function(e) { e.preventDefault(); toggleCategory(child); });
+        menu.appendChild(childLabel);
+      });
+    } else {
+      var count = db.filter(function(p) { return p.cat === c; }).length;
+      var li = document.createElement('li');
+      li.className = 'category-item' + (checkedCategories[c] ? ' active' : '');
+      li.dataset.cat = c;
+      li.innerHTML = '<span class="category-check">' + (checkedCategories[c] ? '&#10003;' : '') + '</span><span class="category-name">' + c + '</span><span class="category-count">' + count + '</span>';
+      li.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleCategory(c);
+      });
+      list.appendChild(li);
+
+      var label = document.createElement('label');
+      label.className = 'dropdown-item';
+      label.dataset.cat = c;
+      label.innerHTML = '<span class="dropdown-cb' + (checkedCategories[c] ? ' checked' : '') + '">' + (checkedCategories[c] ? '&#10003;' : '') + '</span><span class="dropdown-cb-name">' + c + '</span>';
+      label.addEventListener('click', function(e) { e.preventDefault(); toggleCategory(c); });
+      menu.appendChild(label);
+    }
   });
+}
+
+function toggleGroup(parent) {
+  expandedGroups[parent] = !expandedGroups[parent];
+  var groupLi = document.querySelector('.category-group[data-group="' + parent.replace(/"/g, '') + '"]');
+  if (groupLi) {
+    var children = groupLi.querySelector('.category-group-children');
+    if (children) children.classList.toggle('is-open');
+    groupLi.classList.toggle('is-expanded');
+    var chevron = groupLi.querySelector('.category-group-chevron');
+    if (chevron) chevron.classList.toggle('is-open');
+  }
+  updateCategoryUI();
+  filterProducts();
 }
 
 function toggleCategoryDropdown(e) {
@@ -340,12 +475,26 @@ function updateCategoryUI() {
       cb.innerHTML = '';
     }
   });
+  // Update group header checkboxes
+  document.querySelectorAll('.category-group-header .category-check').forEach(function(el) {
+    var header = el.closest('.category-group-header');
+    var nameEl = header.querySelector('.category-name');
+    if (!nameEl) return;
+    var cat = nameEl.textContent;
+    if (checkedCategories[cat]) {
+      el.classList.add('active');
+      el.innerHTML = '&#10003;';
+    } else {
+      el.classList.remove('active');
+      el.innerHTML = '';
+    }
+  });
   updateCategoryDropdownLabel();
 }
 
 function anyCategoryChecked() {
-  for (var i = 0; i < categories.length; i++) {
-    if (checkedCategories[categories[i]]) return true;
+  for (var i = 0; i < activeCategories.length; i++) {
+    if (checkedCategories[activeCategories[i]]) return true;
   }
   return false;
 }

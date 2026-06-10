@@ -97,6 +97,94 @@
   }
 }
 
+.sec {
+  padding: 56px 48px;
+}
+.sec .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sec h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sec h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.sec p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+}
+.sec-white {
+  background: var(--white);
+}
+.sec-gray {
+  background: var(--light-gray);
+}
+.epp-cats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.epp-cat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.epp-cat-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 6px 24px rgba(204,16,16,0.08);
+  transform: translateY(-3px);
+}
+.epp-cat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(204,16,16,0.06);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.epp-cat-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.epp-cat-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.epp-cat-card .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  background: rgba(204,16,16,0.06);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -172,8 +260,8 @@
   <div class="container" style="max-width:none;padding:0">
     <div class="card-grid">
 
-      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
+      <a href="../../productos/?cat=Cascos%20de%20Seguridad" class="service-card-link">
+        <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff6700,#cc5200)">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
@@ -187,8 +275,8 @@
         </div>
       </a>
 
-      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
+      <a href="../../productos/?cat=Protectores%20Auditivos" class="service-card-link">
+        <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff8533,#d45500)">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3z"/><path d="M5 8h14M6 8v9a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8"/></svg>
           </div>
@@ -202,8 +290,8 @@
         </div>
       </a>
 
-      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
+      <a href="../../productos/?cat=Protecci%C3%B3n%20Ocular%20y%20Facial" class="service-card-link">
+        <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
           </div>
@@ -217,8 +305,8 @@
         </div>
       </a>
 
-      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
+      <a href="../../productos/?cat=Protecci%C3%B3n%20Respiratoria" class="service-card-link">
+        <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f07020,#c45400)">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
@@ -232,8 +320,8 @@
         </div>
       </a>
 
-      <a href="../../contacto/" class="service-card-link" style="flex:1;min-width:0">
-        <div class="service-card" style="width:100%">
+      <a href="../../productos/?cat=Guantes%20de%20Seguridad" class="service-card-link">
+        <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="4" y="6" width="16" height="16" rx="2"/><path d="M8 2v4M16 2v4"/><path d="M9 14h6M12 11v6"/></svg>
           </div>
@@ -247,6 +335,74 @@
         </div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="sec sec-white">
+  <div class="container">
+    <h2>Categorías de EPP</h2>
+    <p>
+      Los Equipos de Protección Personal se clasifican según la zona del cuerpo que protegen.
+      Trabajamos con todas las categorías, adaptándonos a los riesgos específicos de cada
+      industria y a las normativas vigentes.
+    </p>
+
+    <div class="epp-cats-grid">
+      <div class="epp-cat-card">
+        <div class="epp-cat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Protección de Cabeza</h3>
+        <p>Cascos de seguridad industrial con y sin visera, ajuste ratchet y suspensión dieléctrica. Ideales para construcción, minería e industria en general.</p>
+        <span class="tag">Clase A · Clase B · Clase C</span>
+      </div>
+
+      <div class="epp-cat-card">
+        <div class="epp-cat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3z"/><path d="M5 8h14M6 8v9a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8"/></svg>
+        </div>
+        <h3>Protección Auditiva</h3>
+        <p>Tapones desechables y reutilizables, orejeras acústicas y protectores tipo copa para entornos con ruido superior a 85 dB.</p>
+        <span class="tag">SNR 19-33 dB · NRR 22-31 dB</span>
+      </div>
+
+      <div class="epp-cat-card">
+        <div class="epp-cat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg>
+        </div>
+        <h3>Protección Ocular y Facial</h3>
+        <p>Antiparras, lentes de seguridad, protectores faciales y pantallas para soldador. Protegen contra impactos, salpicaduras y radiación.</p>
+        <span class="tag">Impacto · Salpicaduras · Radiación UV</span>
+      </div>
+
+      <div class="epp-cat-card">
+        <div class="epp-cat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Protección Respiratoria</h3>
+        <p>Respiradores descartables y reutilizables, máscaras completas, cartuchos y filtros para polvo, gases, vapores y partículas nocivas.</p>
+        <span class="tag">N95 · N100 · P100 · Cartuchos químicos</span>
+      </div>
+
+      <div class="epp-cat-card">
+        <div class="epp-cat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="16" rx="2"/><path d="M8 2v4M16 2v4"/><path d="M9 14h6M12 11v6"/></svg>
+        </div>
+        <h3>Protección de Manos</h3>
+        <p>Guantes de uso general, alta resistencia al corte, químicos, dieléctricos y para soldador. Cada tarea requiere un nivel específico de protección.</p>
+        <span class="tag">Corte · Químico · Dieléctrico · Térmico</span>
+      </div>
+
+      <div class="epp-cat-card">
+        <div class="epp-cat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg>
+        </div>
+        <h3>Protección en Altura</h3>
+        <p>Arneses, líneas de vida, eslingas, bloqueadores y ganchos. Equipos certificados para trabajos en altura según normativa vigente.</p>
+        <span class="tag">Arneses · Líneas de vida · Eslingas</span>
+      </div>
     </div>
   </div>
 </section>
