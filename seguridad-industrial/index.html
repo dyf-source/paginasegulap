@@ -105,6 +105,90 @@
     height: 140px !important;
   }
 }
+.sec {
+  padding: 56px 48px;
+}
+.sec .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sec h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sec h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.sec p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+}
+.sec-white {
+  background: var(--white);
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.info-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 6px 24px rgba(204,16,16,0.08);
+  transform: translateY(-3px);
+}
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(204,16,16,0.06);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.info-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.info-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.info-card .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  background: rgba(204,16,16,0.06);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -253,6 +337,53 @@
         </div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- ÁREAS -->
+<section class="sec sec-white">
+  <div class="container">
+    <h2>Áreas de Seguridad Industrial</h2>
+    <p>La seguridad industrial abarca múltiples disciplinas y equipos. En SEGULAP ofrecemos soluciones integrales para cada área de protección, cumpliendo con las normativas vigentes.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Protección Personal</h3>
+        <p>Cascos, protectores auditivos, oculares, respiradores, arneses y guantes para protección integral del trabajador frente a riesgos laborales.</p>
+        <span class="tag">EPP · Cabeza · Oído · Ojos · Manos</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12l2 4-8 12-8-12 2-4z"/></svg></div>
+        <h3>Indumentaria Laboral</h3>
+        <p>Camperas, pantalones, chalecos reflectivos, delantales y ropa de trabajo diseñada para brindar seguridad y comodidad en cada tarea.</p>
+        <span class="tag">Reflectivo · Algodón · Cuero · PVC</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg></div>
+        <h3>Calzado de Seguridad</h3>
+        <p>Zapatos y botas con punta de acero, calzado dieléctrico, botas de goma y calzado ESD para protección de los pies en entornos laborales exigentes.</p>
+        <span class="tag">Punta de acero · Dieléctrico · ESD</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="8 22 16 22 18 10 14 2 10 2 6 10 8 22"/></svg></div>
+        <h3>Elementos Viales</h3>
+        <p>Conos, balizas, cintas de señalización, cartelería reflectiva y reductores de velocidad para seguridad vehicular y peatonal.</p>
+        <span class="tag">Señalización · Balizas · Conos</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+        <h3>Control de Derrames</h3>
+        <p>Kits antiderrame universales, hidrofóbicos y químicos. Absorbentes, barreras y diques de contención para respuesta rápida ante derrames.</p>
+        <span class="tag">Universal · Químico · Hidrofóbico</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg></div>
+        <h3>Trabajo en Altura</h3>
+        <p>Arneses, líneas de vida, eslingas, bloqueadores, ganchos y todos los equipos certificados para trabajo seguro en altura.</p>
+        <span class="tag">Arneses · Líneas de vida · Eslingas</span>
+      </div>
     </div>
   </div>
 </section>

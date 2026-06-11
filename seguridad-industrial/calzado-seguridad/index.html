@@ -114,6 +114,90 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
+.sec {
+  padding: 56px 48px;
+}
+.sec .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sec h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sec h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.sec p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+}
+.sec-white {
+  background: var(--white);
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.info-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 6px 24px rgba(204,16,16,0.08);
+  transform: translateY(-3px);
+}
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(204,16,16,0.06);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.info-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.info-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.info-card .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  background: rgba(204,16,16,0.06);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -247,6 +331,47 @@
         </div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="sec sec-white">
+  <div class="container">
+    <h2>Tipos de Calzado de Seguridad</h2>
+    <p>El calzado de seguridad protege los pies contra impactos, perforaciones, químicos, electricidad y condiciones climáticas extremas. Cada modelo está diseñado para un riesgo específico.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg></div>
+        <h3>Punta de Acero</h3>
+        <p>Zapatos y botas con puntera de acero que protegen contra impactos y compresiones. Ideales para construcción, logística e industria pesada.</p>
+        <span class="tag">200 J · Compresión 15 kN</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg></div>
+        <h3>Calzado Dieléctrico</h3>
+        <p>Botas y zapatos sin componentes metálicos que aíslan al trabajador de descargas eléctricas. Esenciales para electricistas y personal de mantenimiento.</p>
+        <span class="tag">20 kV · 30 kV</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M4 20V4M4 20l4-12 4 8 4-6 4 10"/></svg></div>
+        <h3>Botas de Goma</h3>
+        <p>Botas impermeables con puntera de acero para trabajo en ambientes húmedos, cámaras frigoríficas, pesca y construcción civil.</p>
+        <span class="tag">Impermeable · Puntera de acero</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Calzado ESD</h3>
+        <p>Calzado con descarga electrostática controlada para entornos sensibles a la electricidad estática como electrónica, laboratorios y farmacéutica.</p>
+        <span class="tag">ESD · Antiestático</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg></div>
+        <h3>Calzado con Protección Metatarsal</h3>
+        <p>Botas con protección adicional en el empeine y metatarso. Recomendadas para tareas con riesgo de impacto en la parte superior del pie.</p>
+        <span class="tag">Metatarsal · Empeine</span>
+      </div>
     </div>
   </div>
 </section>

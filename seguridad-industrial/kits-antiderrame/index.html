@@ -114,6 +114,90 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
+.sec {
+  padding: 56px 48px;
+}
+.sec .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sec h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sec h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.sec p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+}
+.sec-white {
+  background: var(--white);
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.info-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 6px 24px rgba(204,16,16,0.08);
+  transform: translateY(-3px);
+}
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(204,16,16,0.06);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.info-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.info-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.info-card .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  background: rgba(204,16,16,0.06);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -247,6 +331,53 @@
         </div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="sec sec-white">
+  <div class="container">
+    <h2>Tipos de Kits Antiderrame</h2>
+    <p>Los kits antiderrame permiten una respuesta rápida y eficaz ante derrames de sustancias peligrosas. Se clasifican según el tipo de líquido y el volumen de contención requerido.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+        <h3>Kits Universales</h3>
+        <p>Absorbentes de uso general para líquidos industriales no agresivos. Ideales para derrames de agua, aceites, refrigerantes y solventes no corrosivos.</p>
+        <span class="tag">20 L · 40 L · 60 L · 120 L · 240 L</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg></div>
+        <h3>Kits Químicos</h3>
+        <p>Absorbentes resistentes a ácidos, álcalis y solventes agresivos. Contienen el derrame y neutralizan sustancias peligrosas de forma segura.</p>
+        <span class="tag">Ácidos · Álcalis · Solventes</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>Kits Hidrofóbicos</h3>
+        <p>Absorbentes que repelen el agua y absorben exclusivamente hidrocarburos. Ideales para derrames de combustible en superficies acuáticas.</p>
+        <span class="tag">Hidrocarburos · Combustible · Flotante</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M9 12h6M12 9v6"/></svg></div>
+        <h3>Absorbentes en Rollo</h3>
+        <p>Rollos absorbentes universales y químicos para cubrir grandes superficies. Se cortan a medida según la magnitud del derrame.</p>
+        <span class="tag">Universal · Químico · 40 cm x 50 m</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Barreras y Diques</h3>
+        <p>Barreras de contención, diques plegables y tapones para desagües que evitan la propagación del derrame hacia áreas sensibles.</p>
+        <span class="tag">Contención · Diques · Tapones</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4"/></svg></div>
+        <h3>Accesorios para Derrames</h3>
+        <p>Almohadas absorbentes, paños, kits portátiles, bolsas para residuos peligrosos y recipientes para almacenamiento temporal.</p>
+        <span class="tag">Almohadas · Paños · Portátiles</span>
+      </div>
     </div>
   </div>
 </section>

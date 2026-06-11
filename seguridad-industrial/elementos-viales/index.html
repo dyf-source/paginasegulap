@@ -114,6 +114,90 @@
     grid-template-columns: repeat(6, 1fr);
   }
 }
+.sec {
+  padding: 56px 48px;
+}
+.sec .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sec h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sec h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.sec p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+}
+.sec-white {
+  background: var(--white);
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.info-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 6px 24px rgba(204,16,16,0.08);
+  transform: translateY(-3px);
+}
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(204,16,16,0.06);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.info-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.info-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.info-card .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red);
+  background: rgba(204,16,16,0.06);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -262,6 +346,53 @@
         </div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="sec sec-white">
+  <div class="container">
+    <h2>Elementos de Seguridad Vial</h2>
+    <p>La seguridad vial en entornos industriales y urbanos requiere elementos de señalización, delimitación y protección que alerten y guíen a conductores y peatones.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="8 22 16 22 18 10 14 2 10 2 6 10 8 22"/></svg></div>
+        <h3>Conos y Balizas</h3>
+        <p>Conos de seguridad reflectivos en distintos tamaños y balizas luminosas para delimitación de áreas y alerta en zonas de trabajo.</p>
+        <span class="tag">28 cm · 52 cm · 70 cm · 100 cm</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></div>
+        <h3>Cintas de Señalización</h3>
+        <p>Cintas preventivas, reflectivas y de advertencia para delimitar zonas peligrosas, obras y perímetros de seguridad.</p>
+        <span class="tag">Preventiva · Reflectiva · Peligro</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3>Cartelería Reflectiva</h3>
+        <p>Carteles de tránsito, señales de seguridad y paneles reflectivos para interiores y exteriores. Cumplen con normativas viales.</p>
+        <span class="tag">Pare · Ceda el paso · Prohibido estacionar</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+        <h3>Espejos de Seguridad</h3>
+        <p>Espejos convexos para cruces, estacionamientos y zonas ciegas en instalaciones industriales. Mejoran la visibilidad y previenen accidentes.</p>
+        <span class="tag">30 cm · 40 cm · 60 cm · 80 cm</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg></div>
+        <h3>Reductores de Velocidad</h3>
+        <p>Tachas reflectivas, delineadores viales y reductores tipo lomo de burro para control de velocidad en playas de estacionamiento y accesos.</p>
+        <span class="tag">Tachas · Lomo de burro · Delineadores</span>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>Barreras de Seguridad</h3>
+        <p>Barreras vehiculares, defensas metálicas y separadores de carril para protección de peatones y delimitación de áreas de circulación.</p>
+        <span class="tag">Metálicas · Plásticas · Desmontables</span>
+      </div>
     </div>
   </div>
 </section>
