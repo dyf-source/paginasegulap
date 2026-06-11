@@ -4,33 +4,367 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Inspecciones</title>
-<meta name="description" content="Inspección técnica de equipos, instalaciones y sistemas de seguridad.">
+<meta name="description" content="Inspección técnica de equipos de izaje, levantamiento, grupos electrógenos, trabajo en altura, redes contra incendio e informes LCA/LCM. La Plata, Buenos Aires.">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
 <style>
+/* ── Inspecciones yellow theme ── */
+html { scroll-behavior: smooth; }
+#servicios, #areas, #proceso { scroll-margin-top: 90px; }
+@media (max-width: 1023px) { #servicios, #areas, #proceso { scroll-margin-top: 70px; } }
+.inspecciones {
+  --red: #f6b926;
+  --red-dark: #c8961b;
+  --red-light: #ffc94d;
+  --primary: #f6b926;
+  --nav-bg: #f6b926;
+}
 .inspecciones nav {
-  background: #f6b926;
+  background: var(--nav-bg);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
 }
 .inspecciones .nav-links a {
-  color: #222;
+  color: #1a1a1a;
 }
 .inspecciones .nav-links a.active::after,
 .inspecciones .nav-links a:hover::after {
-  background: #222;
+  background: #1a1a1a;
 }
 .inspecciones .nav-links a.active,
 .inspecciones .nav-links a:hover {
-  color: #111;
+  color: #000;
 }
 .inspecciones .nav-cta {
-  color: #222 !important;
-  border-color: #222 !important;
+  color: #1a1a1a !important;
+  background: #fff;
 }
 .inspecciones .nav-cta:hover {
-  background: rgba(0,0,0,0.1);
-  color: #111 !important;
+  background: rgba(0,0,0,0.08);
+  color: #000 !important;
+}
+.inspecciones .why-icon,
+.inspecciones .category-arrow,
+.inspecciones .service-icon-wrap,
+.inspecciones .info-icon,
+.inspecciones .why-header::after,
+.inspecciones .sec h2::after,
+.inspecciones .info-card:hover .info-icon {
+  background: var(--red);
+}
+.inspecciones .service-card-link:hover .service-card {
+  box-shadow: 0 10px 32px rgba(246,185,38,0.28);
+}
+.inspecciones .info-card:hover,
+.inspecciones .info-card .tag {
+  border-color: var(--red);
+  color: var(--red);
+}
+.inspecciones .info-card .tag {
+  background: rgba(246,185,38,0.10);
+}
+.inspecciones .phone-link:hover,
+.inspecciones .address-link:hover,
+.inspecciones .contact-row:has(.phone-link):hover .icon-circle,
+.inspecciones .contact-row:has(.address-link):hover .icon-circle {
+  color: var(--red) !important;
+  border-color: var(--red);
+  background: var(--red);
+}
+
+/* ── Hero ── */
+.hero-insp {
+  position: relative;
+  min-height: clamp(360px, 45vh, 520px);
+  display: flex;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+}
+.hero-insp .hero-bg {
+  background: #000 url('../assets/images/ingenieria-grua-banner.png') 100% center / auto 140% no-repeat;
+}
+.hero-insp .hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-insp .hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 30%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-insp .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 60px 48px;
+  color: var(--white);
+}
+.hero-insp h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(38px, 5vw, 60px);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+.hero-insp h1 .hero-accent { color: var(--red-light); }
+.hero-insp p {
+  font-size: clamp(15px, 1.2vw, 18px);
+  opacity: .9;
+  margin: 0 0 28px;
+  max-width: 420px;
+}
+@media (max-width: 400px) {
+  .hero-insp {
+    flex-direction: column;
+    min-height: auto;
+    padding-bottom: 160px;
+    background: #000;
+  }
+  .hero-insp .hero-bg {
+    top: auto;
+    bottom: 0;
+    height: 160px;
+    background: #000 url('../assets/images/ingenieria-grua-banner.png') center center / cover no-repeat;
+  }
+  .hero-insp .hero-bg::before { display: none; }
+  .hero-insp .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.15) 20%, transparent 35%);
+    pointer-events: none;
+  }
+  .hero-insp .hero-content {
+    position: relative;
+    max-width: 100%;
+    padding: 16px 24px;
+    background: #000;
+  }
+  .hero-insp h1 { margin-bottom: 8px; }
+  .hero-insp p { max-width: 100%; margin-bottom: 12px; }
+}
+
+/* ── Sections ── */
+.sec {
+  padding: 56px 48px;
+}
+.sec .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sec h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.sec h2::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.sec p.lead {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+}
+.sec-white { background: var(--white); }
+.sec-gray  { background: var(--light-gray); }
+
+/* ── Service card grid (6 cards → all in one row on desktop) ── */
+.services-grid-6 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 570px) {
+  .services-grid-6 {
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+  }
+}
+@media (min-width: 1446px) {
+  .services-grid-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ── Info grid (sub-areas) ── */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.info-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 6px 24px rgba(246,185,38,0.18);
+  transform: translateY(-3px);
+}
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(246,185,38,0.12);
+  color: var(--red-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.info-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  color: var(--black);
+}
+.info-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.55;
+}
+.info-card .tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--red-dark);
+  background: rgba(246,185,38,0.10);
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: border-color .2s;
+}
+.info-card:hover .tag { border-color: var(--red); }
+
+/* ── Process strip (4 steps) ── */
+.process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.process-step {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 24px 24px 24px;
+}
+.process-num {
+  position: absolute;
+  top: -16px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #1a1a1a;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.process-step h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  color: var(--black);
+}
+.process-step p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.55;
+}
+
+/* ── Yellow-tinted CTA banner ── */
+.cta-banner-insp {
+  background: #1a1a1a url('../assets/images/clipboard-writing.png') 100% center / auto 140% no-repeat;
+  padding: 36px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  position: relative;
+}
+.cta-banner-insp::before {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  background: linear-gradient(to right, #1a1a1a 0%, #1a1a1a 40%, transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+.cta-banner-insp::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.25) 30%, transparent 55%);
+  pointer-events: none;
+}
+.cta-banner-insp > * { position: relative; z-index: 1; }
+.cta-banner-insp .cta-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+}
+.cta-banner-insp h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.cta-banner-insp p { color: rgba(255,255,255,0.85); }
+.cta-banner-insp .cta-white {
+  background: var(--red);
+  color: #1a1a1a;
+}
+.cta-banner-insp .cta-white:hover { background: #ffd166; color: #1a1a1a; }
+
+.inspecciones .hero-insp .cta-white,
+.inspecciones .hero-insp .cta-white:visited {
+  color: #1a1a1a;
+}
+
+@media (max-width: 1023px) {
+  .sec { padding: 40px 20px; }
+  .cta-banner-insp { padding: 32px 20px; }
 }
 </style>
 </head>
@@ -53,6 +387,11 @@
   </button>
 
   <div class="nav-sidebar" id="navSidebar">
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#areas">Áreas</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+    </ul>
     <a href="../contacto/" class="nav-cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Solicitar Asesoramiento
@@ -62,12 +401,284 @@
   <div class="nav-overlay" id="navOverlay"></div>
 </nav>
 
-<section class="section" style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px;text-align:center">
-  <div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:48px;text-transform:uppercase;color:var(--black);margin-bottom:16px">Inspecciones</h1>
-    <p style="font-size:18px;color:var(--gray);max-width:480px;margin:0 auto">Esta página está en construcción. Pronto estará disponible.</p>
+<!-- HERO -->
+<section class="hero-insp">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg hero-bg--alt" id="heroBgAlt"></div>
+  <div class="hero-content">
+    <h1>Inspección<br><span class="hero-accent">técnica</span> y certificaciones</h1>
+    <p>Inspeccionamos equipos de izaje, levantamiento, grupos electrógenos, trabajo en altura y redes contra incendio. Emisión de informes LCA / LCM y certificaciones IRAM.</p>
+    <a href="../contacto/" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Solicitar inspección
+    </a>
   </div>
 </section>
+
+<!-- SERVICE CARDS -->
+<section id="servicios" class="services" style="padding-left:3rem;padding-right:3rem">
+  <div class="container" style="max-width:none;padding:0">
+    <div class="services-grid-6">
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img">
+            <img src="../assets/images/izajes.jpg" alt="Equipos de Izaje" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg>
+            </div>
+            <div class="service-title">Equipos de Izaje</div>
+            <div class="service-desc">Autoelevadores, manipuladores telescópicos, grúas móviles y de brazo articulado. Verificación estructural, mecánica y de sistemas de seguridad.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img">
+            <img src="../assets/images/forklift-banner.png" alt="Equipos de Levantamiento" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="service-title">Equipos de Levantamiento</div>
+            <div class="service-desc">Puentes grúa, polipastos, gatos hidráulicos y malacates. Control de carga, frenos, cables, cadenas y dispositivos de seguridad.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img">
+            <img src="../assets/images/ingenieria-grua.png" alt="Accesorios de Izaje" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+            </div>
+            <div class="service-title">Accesorios de Izaje</div>
+            <div class="service-desc">Ganchos, eslingas de cadena, cable y sintéticas, grilletes, balancines y estrobos. Ensayo de carga y trazabilidad por número de serie.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a1a,#3a2a00)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#f6b926" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+            </div>
+            <div class="service-title">Grupos Electrógenos</div>
+            <div class="service-desc">Verificación de puesta a tierra, aislación, protecciones, tableros de transferencia y autonomía. Protocolo de medición según IRAM.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2a1a00,#1a1a1a)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#f6b926" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg>
+            </div>
+            <div class="service-title">Trabajo en Altura</div>
+            <div class="service-desc">Arneses, líneas de vida, anclajes, absorbedores y conectores. Revisión periódica anual obligatoria con planilla y registro fotográfico.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3a2a00,#1a1a1a)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#f6b926" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8-4 8-4 8-4-4-4-8 4-8 4-8z"/><path d="M5 22h14"/><path d="M5 18h14"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8-4 8-4 8-4-4-4-8 4-8 4-8z"/></svg>
+            </div>
+            <div class="service-title">Red Contra Incendio</div>
+            <div class="service-desc">Gabinetes, mangueras, válvulas, detectores, centrales de alarma, rociadores y luces de emergencia. Habilitación y mantenimiento.</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ÁREAS DE INSPECCIÓN -->
+<section id="areas" class="sec sec-white">
+  <div class="container">
+    <h2>Áreas de Inspección</h2>
+    <p class="lead">
+      Cubrimos todas las áreas donde la normativa exige inspección periódica documentada.
+      Cada visita se cierra con un informe técnico firmado por profesional matriculado
+      y, cuando corresponde, con la certificación IRAM / IRAM-IAS correspondiente.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg>
+        </div>
+        <h3>Equipo de Izaje</h3>
+        <p>Autoelevadores, manipuladores telescópicos, grúas móviles y de brazo articulado. Estructura, tren de fuerza, sistemas de elevación y elementos de seguridad.</p>
+        <span class="tag">Mecánica · Estructural · Seguridad</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
+        </div>
+        <h3>Equipo de Levantamiento</h3>
+        <p>Puentes grúa, pórticos, polipastos eléctricos y manuales, malacates, gatos hidráulicos y tecles. Verificación de freno, capacidad y protecciones.</p>
+        <span class="tag">Carga · Frenos · Cables</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+        </div>
+        <h3>Accesorios de Izaje</h3>
+        <p>Eslingas de cadena, cable de acero y sintéticas, ganchos, grilletes, balancines y estrobos. Ensayo de carga y trazabilidad individual por número de serie.</p>
+        <span class="tag">Eslingas · Ganchos · Grilletes</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>
+        </div>
+        <h3>Grupos Electrógenos</h3>
+        <p>Verificación de aislación, puesta a tierra, protecciones termo-magnéticas y diferenciales, transferencia automática y autonomía bajo carga.</p>
+        <span class="tag">Aislación · Puesta a tierra · Tableros</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Trabajo en Altura</h3>
+        <p>Arneses de cuerpo completo, líneas de vida, anclajes estructurales, absorbedores de impacto, conectores y dispositivos retráctiles.</p>
+        <span class="tag">Arneses · Líneas de vida · Anclajes</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8-4 8-4 8-4-4-4-8 4-8 4-8z"/><path d="M5 22h14"/></svg>
+        </div>
+        <h3>Red Contra Incendio</h3>
+        <p>Gabinetes, mangueras, lanzas, válvulas, detectores de humo, centrales de alarma, rociadores, barreras cortafuego y luces de emergencia.</p>
+        <span class="tag">Detección · Alarma · Rociadores</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="sec sec-gray">
+  <div class="container">
+    <h2>Cómo trabajamos</h2>
+    <p class="lead">
+      Un proceso ordenado y trazable garantiza inspecciones confiables y resultados comparables.
+      Cada etapa queda documentada para respaldar auditorías internas, externas y presentaciones ante ART.
+    </p>
+
+    <div class="process">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h3>Relevamiento</h3>
+        <p>Visita técnica, inventario de equipos, identificación de riesgos y definición del alcance de la inspección.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h3>Inspección en sitio</h3>
+        <p>Mediciones, ensayos no destructivos, pruebas funcionales y relevamiento fotográfico de cada equipo y accesorio.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h3>Informe técnico</h3>
+        <p>Emisión de informe LCA / LCM con hallazgos, conformidad, recomendaciones y plan de acciones correctivas priorizado.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h3>Seguimiento</h3>
+        <p>Programación de próximas inspecciones, recordatorios automáticos y trazabilidad histórica por equipo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFORMES Y HOMOLOGACIONES -->
+<section class="sec sec-white">
+  <div class="container">
+    <h2>Informes técnicos y homologaciones</h2>
+    <p class="lead">
+      Además de las inspecciones de equipos, elaboramos la documentación técnica que su empresa necesita
+      para habilitaciones, presentaciones ante autoridades y operaciones de comercialización vehicular.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        </div>
+        <h3>Informes LCA y LCM</h3>
+        <p>Libres de Conformidad Anual y por Mantenimiento. Documentación exigida por ART y aseguradoras para validar el estado de equipos y accesorios.</p>
+        <span class="tag">ART · Aseguradoras</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M5 7l2-4h10l2 4"/><circle cx="8" cy="15" r="1.5"/><circle cx="16" cy="15" r="1.5"/></svg>
+        </div>
+        <h3>Nacionalización vehicular</h3>
+        <p>Técnica y documentación para nacionalización de vehículos y motovehículos importados. Verificación de origen y cumplimiento normativo.</p>
+        <span class="tag">Vehículos · Motos</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="11" rx="1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+        </div>
+        <h3>Homologación de trailers</h3>
+        <p>Homologación de trailers Categoría O1 y O2. Ensayo, planos, cálculos y presentación ante organismo certificador.</p>
+        <span class="tag">Cat. O1 · Cat. O2</span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l2-6h10l2 6h2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M9 11V6h6v5"/></svg>
+        </div>
+        <h3>Modificaciones vehiculares</h3>
+        <p>Homologación de modificaciones en camiones, casas rodantes motorizadas y de tiro. Cálculo estructural y validación de aptitud técnica.</p>
+        <span class="tag">Camiones · Casas rodantes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner-insp">
+  <div class="cta-banner-text">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f6b926" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    <div>
+      <h2>¿Necesita una inspección técnica?</h2>
+      <p>Solicite presupuesto sin compromiso.</p>
+    </div>
+  </div>
+  <a href="../contacto/" class="cta-white">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Solicitar Asesoramiento
+  </a>
+</div>
 
 <!-- FOOTER -->
 <footer style="margin-top:auto">
@@ -75,6 +686,17 @@
     <div class="footer-brand">
       <img src="../assets/images/logos/Segulap-Inspecciones-Logo-white.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
+      <div class="social-row social-row-mobile">
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/matafuegossegulap/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="footer-col">
       <h4>Teléfono</h4>
@@ -136,6 +758,30 @@ document.addEventListener('DOMContentLoaded', function() {
   if (closeBtn) closeBtn.addEventListener('click', closeNav);
   if (overlay) overlay.addEventListener('click', closeNav);
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
+
+  var heroImages = [
+    '../assets/images/ingenieria-grua-banner.png',
+    '../assets/images/forklift-banner.png',
+    '../assets/images/izajes.jpg',
+    '../assets/images/ingenieria-grua.png'
+  ];
+  var heroBg1 = document.getElementById('heroBg');
+  var heroBg2 = document.getElementById('heroBgAlt');
+  if (heroBg1 && heroBg2 && heroImages.length > 1) {
+    var idx = 0;
+    var active = heroBg1;
+    var inactive = heroBg2;
+    setInterval(function () {
+      idx = (idx + 1) % heroImages.length;
+      inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
+      inactive.style.backgroundSize = window.innerWidth < 768 ? 'cover' : 'auto 140%';
+      inactive.style.backgroundPosition = window.innerWidth < 768 ? 'center center' : '100% center';
+      inactive.style.backgroundRepeat = 'no-repeat';
+      inactive.style.opacity = '1';
+      active.style.opacity = '0';
+      var tmp = active; active = inactive; inactive = tmp;
+    }, 5000);
+  }
 });
 </script>
 </body>

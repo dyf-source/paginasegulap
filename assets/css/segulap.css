@@ -9,6 +9,7 @@
   --white: #ffffff;
   --border: #e0e0e0;
   --primary: #CC1010;
+  --nav-bg: #8a1a1a;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +28,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #b33030;
+  background: var(--nav-bg, #b33030);
   border-bottom: none;
   display: flex;
   align-items: center;
@@ -1878,7 +1879,7 @@ footer {
     max-width: 85vw;
     height: -webkit-fill-available;
     height: 100dvh;
-    background: #8a1a1a;
+    background: var(--nav-bg, #8a1a1a);
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
@@ -2084,8 +2085,11 @@ footer {
   --primary: #ff6700;
 }
 
+.seguridad {
+  --nav-bg: #d45500;
+}
 .seguridad nav {
-  background: #d45500;
+  background: var(--nav-bg);
 }
 
 .seguridad .nav-cta {
@@ -2120,4 +2124,14 @@ footer {
 .seguridad .social-btn:hover {
   background: var(--red);
   border-color: var(--red);
+}
+
+/* ── INSPECCIONES THEME (yellow accent) ── */
+.inspecciones {
+  --nav-bg: #f6b926;
+}
+
+/* ── CAPACITACIONES THEME (blue accent) ── */
+.capacitaciones {
+  --nav-bg: #75AADB;
 }

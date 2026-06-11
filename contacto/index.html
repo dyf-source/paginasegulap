@@ -1,195 +1,108 @@
 <!DOCTYPE html>
-<!-- Last Published: Fri May 15 2026 14:15:01 GMT+0000 (Coordinated Universal Time) -->
-<html data-wf-domain="segulap-1.webflow.io" data-wf-page="6a03389cc50dc31c59694b9c" data-wf-site="6a03389ac50dc31c59694b2f" data-wf-status="1" lang="es-AR">
-  <head>
-   <meta charset="utf-8"/>
-   <title>
-    Contacto | Segulap
-   </title>
-   <meta content="Contactate con Segulap por email o WhatsApp." name="description"/>
-   <meta content="Contacto | Segulap" property="og:title"/>
-   <meta content="Contactate con Segulap por email o WhatsApp." property="og:description"/>
-   <meta content="Contacto | Segulap" property="twitter:title"/>
-   <meta content="Contactate con Segulap por email o WhatsApp." property="twitter:description"/>
-   <meta content="website" property="og:type"/>
-   <meta content="summary_large_image" name="twitter:card"/>
-   <meta content="width=device-width, initial-scale=1" name="viewport"/>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto | Segulap</title>
+<meta name="description" content="Contactate con Segulap por email o WhatsApp.">
+<meta content="Contacto | Segulap" property="og:title"/>
+<meta content="Contactate con Segulap por email o WhatsApp." property="og:description"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
+<link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
+<style>
+@media (max-width: 768px) {
+  .contact-layout {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2rem !important;
+    padding: 0 2rem !important;
+  }
+  .contact-layout > div {
+    min-width: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+  .contact-layout button {
+    min-width: 0 !important;
+  }
+  .contact-layout p {
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+}
+</style>
+</head>
+<body id="contactBody" style="display:flex;flex-direction:column;min-height:100vh">
 
-   <link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
-    <link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
-    <style>
-      @media (max-width: 768px) {
-        .contact-layout {
-          flex-direction: column !important;
-          align-items: center !important;
-          gap: 2rem !important;
-          padding: 0 2rem !important;
-        }
-        .contact-layout > div {
-          min-width: 0 !important;
-          margin-right: 0 !important;
-          width: 100% !important;
-        }
-        .contact-layout button {
-          min-width: 0 !important;
-        }
-        .contact-layout p {
-          overflow-wrap: break-word !important;
-          word-break: break-word !important;
-        }
-      }
-    </style>
-  </head>
-  <body class="body" style="display:flex;flex-direction:column;min-height:100vh">
-  <!-- NAV -->
-  <nav>
-    <a class="logo" href="../">
-      <img src="../assets/images/logos/Segulap-Logo-white.png" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">
-    </a>
+<nav id="dynamicNav"></nav>
 
-    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <button class="nav-close" aria-label="Cerrar menú">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-
-    <div class="nav-sidebar" id="navSidebar">
-      <ul class="nav-links">
-        <li><a href="../servicios/">Servicios</a></li>
-        <li><a href="../seguridad-industrial/inspecciones/">Inspecciones</a></li>
-        <li><a href="../capacitaciones/">Capacitaciones</a></li>
-        <li><a href="../equipos-elevacion/">Equipos de Elevación</a></li>
-        <li><a href="../proteccion-incendios/extintores/">Extintores</a></li>
-        <li><a href="../proteccion-incendios/red-incendios/">Red contra incendios</a></li>
-        <li><a href="../productos/">Productos</a></li>
-      </ul>
-
-      <a href="./" class="nav-cta active">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Solicitar Asesoramiento
-      </a>
-    </div>
-
-    <div class="nav-overlay" id="navOverlay"></div>
-  </nav>
-  <section class="section" style="flex:1">
-   <div class="space-2rem">
+<section class="section" style="flex:1">
+ <div class="space-2rem"></div>
+ <div class="w-layout-blockcontainer container padding-4-5rem w-container">
+  <div class="space-2rem"></div>
+   <div class="contact-layout" style="display:flex; gap:4rem; align-items:flex-start">
+   <div style="flex:1; min-width:280px">
+    <h1 class="hero-title" style="text-align:left; margin:0; font-size:clamp(2.85rem, 5.7vw, 4.75rem)">
+     Contáctanos
+    </h1>
+    <p style="text-align:left; margin-top:1rem; font-size:1.1rem; line-height:1.6">
+     Completá el formulario y envianos tu consulta por el medio que prefieras.
+    </p>
    </div>
-   <div class="w-layout-blockcontainer container padding-4-5rem w-container">
-    <div class="space-2rem">
-    </div>
-     <div class="contact-layout" style="display:flex; gap:4rem; align-items:flex-start">
-     <div style="flex:1; min-width:280px">
-      <h1 class="hero-title" style="text-align:left; margin:0; font-size:clamp(2.85rem, 5.7vw, 4.75rem)">
-       Cont&aacute;ctanos
-      </h1>
-      <p style="text-align:left; margin-top:1rem; font-size:1.1rem; line-height:1.6">
-       Complet&aacute; el formulario y envianos tu consulta por el medio que prefieras.
-      </p>
+   <div style="flex:1; min-width:320px; margin-right:20px">
+    <form id="contact-form" style="display:flex; flex-direction:column; gap:1.2rem">
+     <div>
+      <label for="nombre" style="display:block; margin-bottom:0.3rem; font-weight:500">Nombre</label>
+      <input id="nombre" name="nombre" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="text"/>
      </div>
-     <div style="flex:1; min-width:320px; margin-right:20px">
-      <form id="contact-form" style="display:flex; flex-direction:column; gap:1.2rem">
-       <div>
-        <label for="nombre" style="display:block; margin-bottom:0.3rem; font-weight:500">
-         Nombre
-        </label>
-        <input id="nombre" name="nombre" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="text"/>
-       </div>
-        <div>
-         <label for="asunto" style="display:block; margin-bottom:0.3rem; font-weight:500">
-         Asunto
-        </label>
-        <input id="asunto" name="asunto" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="text"/>
-       </div>
-       <div>
-        <label for="mensaje" style="display:block; margin-bottom:0.3rem; font-weight:500">
-         Mensaje
-        </label>
-        <textarea id="mensaje" name="mensaje" required="" rows="5" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333; resize:vertical"></textarea>
-       </div>
-       <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem">
-        <button onclick="enviarEmail()" style="flex:1; min-width:200px; padding:1rem 2rem; border:none; border-radius:0.5rem; background:var(--primary); color:white; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; justify-content:center; gap:5px" type="button">
-         <svg fill="none" height="22" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-          <rect height="16" rx="2" width="20" x="2" y="4">
-          </rect>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7">
-          </path>
-         </svg>
-         <span style="font-size:1.056rem">
-          Enviar por Email
-         </span>
-        </button>
-        <button onclick="enviarWhatsApp()" style="flex:1; min-width:200px; padding:1rem 2rem; border:none; border-radius:0.5rem; background:#25D366; color:white; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; justify-content:center" type="button">
-         <img alt="WhatsApp" src="../assets/images/WhatsappWhite.png" style="width:31px; height:31px"/>
-         <span style="font-size:1.056rem">
-          Enviar por WhatsApp
-         </span>
-        </button>
-       </div>
-      </form>
+     <div>
+      <label for="asunto" style="display:block; margin-bottom:0.3rem; font-weight:500">Asunto</label>
+      <input id="asunto" name="asunto" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="text"/>
      </div>
-    </div>
-    <div class="space-2rem">
-    </div>
+     <div>
+      <label for="mensaje" style="display:block; margin-bottom:0.3rem; font-weight:500">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" required="" rows="5" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333; resize:vertical"></textarea>
+     </div>
+     <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem">
+      <button onclick="enviarEmail()" style="flex:1; min-width:200px; padding:1rem 2rem; border:none; border-radius:0.5rem; background:var(--primary); color:white; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; justify-content:center; gap:5px" type="button">
+       <svg fill="none" height="22" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+        <rect height="16" rx="2" width="20" x="2" y="4"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+       </svg>
+       <span style="font-size:1.056rem">Enviar por Email</span>
+      </button>
+      <button onclick="enviarWhatsApp()" style="flex:1; min-width:200px; padding:1rem 2rem; border:none; border-radius:0.5rem; background:#25D366; color:white; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; justify-content:center" type="button">
+       <img alt="WhatsApp" src="../assets/images/WhatsappWhite.png" style="width:31px; height:31px"/>
+       <span style="font-size:1.056rem">Enviar por WhatsApp</span>
+      </button>
+     </div>
+    </form>
    </div>
-    <script src="../assets/js/config.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var toggle = document.querySelector('.nav-toggle');
-      var sidebar = document.getElementById('navSidebar');
-      var overlay = document.getElementById('navOverlay');
-       var closeBtn = document.querySelector('.nav-close');
-       function openNav() { sidebar.classList.add('is-open'); overlay.classList.add('is-open'); closeBtn.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true'); document.documentElement.classList.add('nav-open'); document.body.classList.add('nav-open'); }
-       function closeNav() { sidebar.classList.remove('is-open'); overlay.classList.remove('is-open'); closeBtn.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('nav-open'); document.body.classList.remove('nav-open'); }
-      if (toggle && sidebar) { toggle.addEventListener('click', function() { var isOpen = sidebar.classList.contains('is-open'); if (isOpen) closeNav(); else openNav(); }); }
-      if (closeBtn) closeBtn.addEventListener('click', closeNav);
-      if (overlay) overlay.addEventListener('click', closeNav);
-      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
-    });
-    </script>
-    <script>
-     function getFormData() {
-      var nombre = document.getElementById('nombre').value.trim();
-      var asunto = document.getElementById('asunto').value.trim();
-      var mensaje = document.getElementById('mensaje').value.trim();
-      if (!nombre || !asunto || !mensaje) {
-       alert('Por favor completá todos los campos obligatorios.');
-       return null;
-      }
-      return { nombre: nombre, asunto: asunto, mensaje: mensaje };
-     }
-     function enviarEmail() {
-      var d = getFormData();
-      if (!d) return;
-      var cuerpo = 'Nombre: ' + d.nombre + '%0D%0A';
-      cuerpo += 'Asunto: ' + d.asunto + '%0D%0A%0D%0A';
-      cuerpo += d.mensaje;
-      window.location.href = 'mailto:segulap@example.com?subject=' + encodeURIComponent(d.asunto) + '&body=' + cuerpo;
-     }
-     function enviarWhatsApp() {
-      var d = getFormData();
-      if (!d) return;
-      var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
-      texto += d.mensaje;
-      window.open('https://wa.me/' + getWhatsAppNumber() + '?text=' + texto, '_blank');
-     }
-   </script>
-  </section>
-  <!-- FOOTER -->
+  </div>
+  <div class="space-2rem"></div>
+ </div>
+</section>
+
+<!-- FOOTER -->
 <footer style="margin-top:auto">
   <div class="footer-grid">
-
     <div class="footer-brand">
-      <img src="../assets/images/logos/Segulap-Logo-white.png" alt="Segulap" class="footer-logo">
+      <img id="footerLogo" src="../assets/images/logos/Segulap-Logo-white.png" alt="Segulap" class="footer-logo">
       <p>Comprometidos con la seguridad,<br>comprometidos con usted.</p>
+      <div class="social-row social-row-mobile">
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.instagram.com/matafuegossegulap/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a class="social-btn" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
     </div>
-
     <div class="footer-col">
       <h4>Teléfono</h4>
       <div class="contact-row phone-row">
@@ -199,7 +112,6 @@
         <div><a href="./" class="phone-link">+54 9 221 674-6874</a></div>
       </div>
     </div>
-
     <div class="footer-col">
       <h4>Email</h4>
       <div class="contact-row">
@@ -209,7 +121,6 @@
         <div>info@segulap.com.ar<br>ventas@segulap.com.ar</div>
       </div>
     </div>
-
     <div class="footer-col">
       <h4>Ubicación</h4>
       <div class="contact-row">
@@ -230,9 +141,7 @@
         </a>
       </div>
     </div>
-
   </div>
-
   <div class="footer-bottom">
     <span>&copy; 2024 SEGULAP. Todos los derechos reservados.</span>
     <div style="display:flex;gap:24px">
@@ -242,5 +151,139 @@
   </div>
 </footer>
 
- </body>
+<script>
+var navThemes = {
+  home: {
+    logoHref: '../',
+    bodyClass: '',
+    logo: '../assets/images/logos/Segulap-Logo-white.png',
+    footerLogo: '../assets/images/logos/Segulap-Logo-white.png',
+    links: [
+      { href: '../proteccion-incendios/', text: 'Protección Contra Incendios' },
+      { href: '../seguridad-industrial/', text: 'Seguridad Industrial' },
+      { href: '../inspecciones/', text: 'Inspecciones' },
+      { href: '../capacitaciones/', text: 'Capacitaciones' }
+    ]
+  },
+  incendios: {
+    logoHref: '../proteccion-incendios/',
+    bodyClass: '',
+    logo: '../assets/images/logos/Segulap-Incendios-Logo-white.png',
+    footerLogo: '../assets/images/logos/Segulap-Incendios-Logo-white.png',
+    links: [
+      { href: '../proteccion-incendios/extintores/', text: 'Extintores' },
+      { href: '../proteccion-incendios/red-incendios/', text: 'Red Contra Incendios' }
+    ]
+  },
+  seguridad: {
+    logoHref: '../seguridad-industrial/',
+    bodyClass: 'seguridad',
+    logo: '../assets/images/logos/Segulap-Seguridad-Logo-white.png',
+    footerLogo: '../assets/images/logos/Segulap-Seguridad-Logo-white.png',
+    links: [
+      { href: '../seguridad-industrial/epp/', text: 'EPP' },
+      { href: '../seguridad-industrial/indumentaria/', text: 'Indumentaria' },
+      { href: '../seguridad-industrial/calzado-seguridad/', text: 'Calzado' },
+      { href: '../seguridad-industrial/elementos-viales/', text: 'Viales' },
+      { href: '../seguridad-industrial/kits-antiderrame/', text: 'Antiderrame' }
+    ]
+  },
+  capacitaciones: {
+    logoHref: '../capacitaciones/',
+    bodyClass: 'capacitaciones',
+    logo: '../assets/images/logos/Segulap-Capacitaciones-Logo-white.png',
+    footerLogo: '../assets/images/logos/Segulap-Capacitaciones-Logo-white.png'
+  },
+  inspecciones: {
+    logoHref: '../inspecciones/',
+    bodyClass: 'inspecciones',
+    logo: '../assets/images/logos/Segulap-Inspecciones-Logo.png',
+    footerLogo: '../assets/images/logos/Segulap-Inspecciones-Logo-white.png'
+  }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  var ref = document.referrer;
+  var theme;
+  if (ref.indexOf('seguridad-industrial') > -1) theme = navThemes.seguridad;
+  else if (ref.indexOf('proteccion-incendios') > -1) theme = navThemes.incendios;
+  else if (ref.indexOf('capacitaciones') > -1) theme = navThemes.capacitaciones;
+  else if (ref.indexOf('inspecciones') > -1) theme = navThemes.inspecciones;
+  else theme = navThemes.home;
+
+  var body = document.getElementById('contactBody');
+  if (theme.bodyClass) body.className = theme.bodyClass;
+
+  var linksHtml = '';
+  if (theme.links) {
+    theme.links.forEach(function(l) {
+      linksHtml += '<li><a href="' + l.href + '">' + l.text + '</a></li>';
+    });
+    linksHtml += '<li><a href="./" class="active">Contacto</a></li>';
+  }
+
+  document.getElementById('dynamicNav').innerHTML =
+    '<a class="logo" href="' + theme.logoHref + '">' +
+      '<img src="' + theme.logo + '" alt="SEGULAP" style="filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">' +
+    '</a>' +
+    '<button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">' +
+      '<span></span><span></span><span></span>' +
+    '</button>' +
+    '<button class="nav-close" aria-label="Cerrar menú">' +
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+    '</button>' +
+    '<div class="nav-sidebar" id="navSidebar">' +
+      (linksHtml ? '<ul class="nav-links">' + linksHtml + '</ul>' : '') +
+      '<a href="./" class="nav-cta">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+        'Solicitar Asesoramiento' +
+      '</a>' +
+    '</div>' +
+    '<div class="nav-overlay" id="navOverlay"></div>';
+
+  var toggle = document.querySelector('.nav-toggle');
+  var sidebar = document.getElementById('navSidebar');
+  var overlay = document.getElementById('navOverlay');
+  var closeBtn = document.querySelector('.nav-close');
+
+  var footerLogo = document.getElementById('footerLogo');
+  if (footerLogo && theme.footerLogo) footerLogo.src = theme.footerLogo;
+  function openNav() { sidebar.classList.add('is-open'); overlay.classList.add('is-open'); closeBtn.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true'); document.documentElement.classList.add('nav-open'); document.body.classList.add('nav-open'); }
+  function closeNav() { sidebar.classList.remove('is-open'); overlay.classList.remove('is-open'); closeBtn.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('nav-open'); document.body.classList.remove('nav-open'); }
+  if (toggle && sidebar) { toggle.addEventListener('click', function() { var isOpen = sidebar.classList.contains('is-open'); if (isOpen) closeNav(); else openNav(); }); }
+  if (closeBtn) closeBtn.addEventListener('click', closeNav);
+  if (overlay) overlay.addEventListener('click', closeNav);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
+});
+
+function getFormData() {
+  var nombre = document.getElementById('nombre').value.trim();
+  var asunto = document.getElementById('asunto').value.trim();
+  var mensaje = document.getElementById('mensaje').value.trim();
+  if (!nombre || !asunto || !mensaje) {
+   alert('Por favor completá todos los campos obligatorios.');
+   return null;
+  }
+  return { nombre: nombre, asunto: asunto, mensaje: mensaje };
+}
+
+function enviarEmail() {
+  var d = getFormData();
+  if (!d) return;
+  var cuerpo = 'Nombre: ' + d.nombre + '%0D%0A';
+  cuerpo += 'Asunto: ' + d.asunto + '%0D%0A%0D%0A';
+  cuerpo += d.mensaje;
+  window.location.href = 'mailto:info@segulap.com.ar?subject=' + encodeURIComponent(d.asunto) + '&body=' + cuerpo;
+}
+
+function enviarWhatsApp() {
+  var d = getFormData();
+  if (!d) return;
+  var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
+  texto += d.mensaje;
+  window.open('https://wa.me/5492216746874?text=' + texto, '_blank');
+}
+</script>
+
+</body>
 </html>
