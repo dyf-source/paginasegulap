@@ -235,18 +235,22 @@
 var ADMIN_PASSWORD = 'segulap2024';
 var db = [];
 
-function initDB() {
-  var stored = localStorage.getItem('segulap_productos');
-  if (stored) {
-    try { db = JSON.parse(stored); } catch(e) { db = JSON.parse(JSON.stringify(productosData)); }
-  } else {
-    db = JSON.parse(JSON.stringify(productosData));
-    saveDB();
-  }
+function loadProducts() {
+  fetch('/api/products')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { if (d.ok) { db = d.data; renderAdminTable(); } })
+    .catch(function() { db = JSON.parse(JSON.stringify(productosData)); renderAdminTable(); });
 }
 
-function saveDB() {
-  localStorage.setItem('segulap_productos', JSON.stringify(db));
+function saveProducts(cb) {
+  fetch('/api/products', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ products: db })
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(d) { if (d.ok && cb) cb(); })
+    .catch(function() {});
 }
 
 function setSession() {
@@ -285,24 +289,33 @@ function switchTab(tab) {
   }
 }
 
-// ── Categories config persistence ──
+// ── Categories config (via API) ──
 
-function loadCatConfig() {
-  var stored = localStorage.getItem('segulap_categories_config');
-  if (stored) {
-    try { return JSON.parse(stored); } catch(e) {}
-  }
-  return {
-    categories: JSON.parse(JSON.stringify(categories)),
-    groups: JSON.parse(JSON.stringify(categoryGroups))
-  };
+var catConfig = { categories: [], groups: {}, colors: {} };
+
+function loadCategories() {
+  fetch('/api/categories')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { if (d.ok) { catConfig = d.data; renderCatTable(); } })
+    .catch(function() {
+      catConfig = {
+        categories: JSON.parse(JSON.stringify(categories)),
+        groups: JSON.parse(JSON.stringify(categoryGroups)),
+        colors: {},
+      };
+    });
 }
 
-function saveCatConfig(config) {
-  localStorage.setItem('segulap_categories_config', JSON.stringify(config));
+function saveCategories(cb) {
+  fetch('/api/categories', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(catConfig)
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(d) { if (d.ok && cb) cb(); })
+    .catch(function() {});
 }
-
-var catConfig = loadCatConfig();
 
 // ── Render category table ──
 
@@ -452,7 +465,6 @@ function saveCategory() {
 
     // Update products
     db.forEach(function(p) { if (p.cat === editingCategory) p.cat = name; });
-    saveDB();
   }
 
   // Add/update
@@ -471,9 +483,12 @@ function saveCategory() {
     if (catConfig.groups[parent].indexOf(name) === -1) catConfig.groups[parent].push(name);
   }
 
-  saveCatConfig(catConfig);
-  hideCategoryForm();
-  renderCatTable();
+  saveProducts(function() {
+    saveCategories(function() {
+      hideCategoryForm();
+      renderCatTable();
+    });
+  });
 }
 
 function deleteCategory(catName) {
@@ -505,9 +520,12 @@ function deleteCategory(catName) {
   // Remove from categories list
   var idx = catConfig.categories.indexOf(catName);
   if (idx > -1) catConfig.categories.splice(idx, 1);
-  saveDB();
-  saveCatConfig(catConfig);
-  renderCatTable();
+
+  saveProducts(function() {
+    saveCategories(function() {
+      renderCatTable();
+    });
+  });
 }
 
 // ── Group CRUD ──
@@ -594,14 +612,6 @@ function saveGroup() {
 
     // Reassign products
     db.forEach(function(p) { if (p.cat === editingGroup) p.cat = name; });
-    saveDB();
-  }
-
-  // Update children - remove old children from this group
-  if (editingGroup && catConfig.groups[editingGroup]) {
-    catConfig.groups[editingGroup].forEach(function(oldCh) {
-      // Remove from other groups if they were reassigned
-    });
   }
 
   // Remove children from other groups
@@ -612,17 +622,21 @@ function saveGroup() {
 
   catConfig.groups[name] = children;
 
-  saveCatConfig(catConfig);
-  hideGroupForm();
-  renderCatTable();
+  saveProducts(function() {
+    saveCategories(function() {
+      hideGroupForm();
+      renderCatTable();
+    });
+  });
 }
 
 function deleteGroup(groupName) {
   if (!confirm('¿Eliminar el grupo "' + groupName + '"?\n\nLas categorías hijas pasarán a ser categorías principales.')) return;
 
   delete catConfig.groups[groupName];
-  saveCatConfig(catConfig);
-  renderCatTable();
+  saveCategories(function() {
+    renderCatTable();
+  });
 }
 
 function renderGroupsList() {
@@ -769,9 +783,10 @@ function addProduct() {
     product.img = img;
   }
   db.push(product);
-  saveDB();
-  hideAddForm();
-  renderAdminTable();
+  saveProducts(function() {
+    hideAddForm();
+    renderAdminTable();
+  });
 }
 
 function showDetailModal(idx) {
@@ -821,16 +836,18 @@ function saveDetailModal() {
   if (prev.style.display !== 'none' && prev.src) {
     db[detailIdx].img = prev.src;
   }
-  saveDB();
-  hideDetailModal();
-  renderAdminTable();
+  saveProducts(function() {
+    hideDetailModal();
+    renderAdminTable();
+  });
 }
 
 function deleteProduct(idx) {
   if (!confirm('¿Eliminar "' + db[idx].name + '"?')) return;
   db.splice(idx, 1);
-  saveDB();
-  renderAdminTable();
+  saveProducts(function() {
+    renderAdminTable();
+  });
 }
 
 function exportJSON() {
@@ -851,9 +868,10 @@ function importJSON(event) {
       var data = JSON.parse(e.target.result);
       if (!Array.isArray(data)) throw new Error('Formato inválido');
       db = data;
-      saveDB();
-      renderAdminTable();
-      alert('Importados ' + db.length + ' productos.');
+      saveProducts(function() {
+        renderAdminTable();
+        alert('Importados ' + db.length + ' productos.');
+      });
     } catch(err) {
       alert('Error al importar: ' + err.message);
     }
@@ -872,7 +890,8 @@ function saveConfig() {
 }
 
 populateCatSelect('addCat', categories[0]);
-initDB();
+loadProducts();
+loadCategories();
 initSession();
 </script>
 </body>

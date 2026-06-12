@@ -1,5 +1,4 @@
 Red contra incendios:
-   - **Habilitaciones** ? Consultar colo
      
    - Planos Condiciones/Prevencion/Instalacion contra incendios. /Evacuacion/Escape
    - Diseño ? Consultar colo

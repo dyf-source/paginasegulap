@@ -236,45 +236,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/productos.js"></script>
 <script>
-var db;
-var stored = localStorage.getItem('segulap_productos');
-if (stored) {
-  try {
-    db = JSON.parse(stored);
-  } catch(e) { db = productosData; }
-} else {
-  db = productosData;
-}
-
-// ── Categories config (from localStorage or source) ──
-var catConfigStored = localStorage.getItem('segulap_categories_config');
-var activeCategories, activeGroups;
-if (catConfigStored) {
-  try {
-    var cc = JSON.parse(catConfigStored);
-    activeCategories = cc.categories || categories;
-    activeGroups = cc.groups || categoryGroups;
-  } catch(e) {
-    activeCategories = categories;
-    activeGroups = categoryGroups;
-  }
-} else {
-  activeCategories = categories;
-  activeGroups = categoryGroups;
-}
-
+var db = [];
+var activeCategories = [];
+var activeGroups = {};
 var checkedCategories = {};
 var expandedGroups = {};
-
-activeCategories.forEach(function(c) {
-  checkedCategories[c] = false;
-});
-
-var urlParams = new URLSearchParams(window.location.search);
-var preselectedCat = urlParams.get('cat');
-if (preselectedCat && activeCategories.indexOf(preselectedCat) > -1) {
-  checkedCategories[preselectedCat] = true;
-}
+var preselectedCat = new URLSearchParams(window.location.search).get('cat');
 
 function isGroupParent(cat) {
   return activeGroups && activeGroups.hasOwnProperty(cat);
@@ -296,8 +263,13 @@ function getParentOf(cat) {
   return null;
 }
 
-// Init expanded state
-if (typeof activeGroups !== 'undefined') {
+function initFilters() {
+  checkedCategories = {};
+  expandedGroups = {};
+  activeCategories.forEach(function(c) { checkedCategories[c] = false; });
+  if (preselectedCat && activeCategories.indexOf(preselectedCat) > -1) {
+    checkedCategories[preselectedCat] = true;
+  }
   for (var g in activeGroups) {
     expandedGroups[g] = false;
     if (preselectedCat && activeGroups[g].indexOf(preselectedCat) > -1) {
@@ -305,6 +277,36 @@ if (typeof activeGroups !== 'undefined') {
     }
   }
 }
+
+function setFallbackData() {
+  db = JSON.parse(JSON.stringify(productosData));
+  activeCategories = JSON.parse(JSON.stringify(categories));
+  activeGroups = JSON.parse(JSON.stringify(categoryGroups));
+  initFilters();
+  buildCategoryList();
+  filterProducts();
+  updateCategoryUI();
+}
+
+Promise.all([
+  fetch('/api/products').then(function(r) { return r.json(); }).catch(function() { return null; }),
+  fetch('/api/categories').then(function(r) { return r.json(); }).catch(function() { return null; })
+]).then(function(results) {
+  var prodRes = results[0];
+  var catRes = results[1];
+  if (prodRes && prodRes.ok) { db = prodRes.data; }
+  if (catRes && catRes.ok) {
+    activeCategories = catRes.data.categories;
+    activeGroups = catRes.data.groups;
+  }
+  if (!prodRes || !catRes) { setFallbackData(); return; }
+  initFilters();
+  buildCategoryList();
+  filterProducts();
+  updateCategoryUI();
+}).catch(function() {
+  setFallbackData();
+});
 
 function buildCategoryList() {
   var list = document.getElementById('categoryList');
@@ -572,9 +574,6 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') hideProductDetail();
 });
 
-buildCategoryList();
-filterProducts();
-updateCategoryUI();
 </script>
 
 </body>
