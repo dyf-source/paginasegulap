@@ -1,9 +1,12 @@
 Red contra incendios:
-   - Habilitaciones
+   - **Habilitaciones** ? Consultar colo
+     
+   - Planos Condiciones/Prevencion/Instalacion contra incendios. /Evacuacion/Escape
+   - Diseño ? Consultar colo
+
    - Mantenimiento
    - Inspecciones
-   - Planos Condiciones/Prevencion/Instalacion contra incendios. /Evacuacion/Escape
-   - Diseño ?
+   
    - Detectores & Alarmas / Sistemas de Deteccion.
    - Accesorios
 
@@ -49,7 +52,6 @@ Inspecciones:
    - Equipo Levantamiento
    - Equipo Grupo Electrogeno
    - Equipo de trabajo en altura
-   - Red contra incendio
    - Informes LCA y LCM
    - Nacionalizacion de vehiculos y motovehiculos importados
    - Homologacion trailer Cat O1 y O2

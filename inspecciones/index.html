@@ -187,20 +187,20 @@ html { scroll-behavior: smooth; }
 .sec-white { background: var(--white); }
 .sec-gray  { background: var(--light-gray); }
 
-/* ── Service card grid (6 cards → all in one row on desktop) ── */
-.services-grid-6 {
+/* ── Service card grid (5 cards → all in one row on desktop) ── */
+.services-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
 }
 @media (min-width: 570px) {
-  .services-grid-6 {
+  .services-grid {
     grid-template-columns: repeat(2, minmax(225px, 1fr));
   }
 }
-@media (min-width: 1446px) {
-  .services-grid-6 {
-    grid-template-columns: repeat(6, 1fr);
+@media (min-width: 1221px) {
+  .services-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -418,7 +418,7 @@ html { scroll-behavior: smooth; }
 <!-- SERVICE CARDS -->
 <section id="servicios" class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div class="services-grid-6">
+    <div class="services-grid">
 
       <a href="../contacto/" class="service-card-link">
         <div class="service-card">
@@ -494,22 +494,6 @@ html { scroll-behavior: smooth; }
           </div>
         </div>
       </a>
-
-      <a href="../contacto/" class="service-card-link">
-        <div class="service-card">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3a2a00,#1a1a1a)">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#f6b926" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8-4 8-4 8-4-4-4-8 4-8 4-8z"/><path d="M5 22h14"/><path d="M5 18h14"/></svg>
-          </div>
-          <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8-4 8-4 8-4-4-4-8 4-8 4-8z"/></svg>
-            </div>
-            <div class="service-title">Red Contra Incendio</div>
-            <div class="service-desc">Gabinetes, mangueras, válvulas, detectores, centrales de alarma, rociadores y luces de emergencia. Habilitación y mantenimiento.</div>
-          </div>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>

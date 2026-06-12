@@ -241,10 +241,6 @@ var stored = localStorage.getItem('segulap_productos');
 if (stored) {
   try {
     db = JSON.parse(stored);
-    if (db.length !== productosData.length) {
-      db = productosData;
-      localStorage.removeItem('segulap_productos');
-    }
   } catch(e) { db = productosData; }
 } else {
   db = productosData;
