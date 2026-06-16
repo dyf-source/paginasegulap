@@ -13,6 +13,9 @@
 .capacitaciones {
   --nav-bg: #75AADB;
 }
+html { scroll-behavior: smooth; }
+#cursos { scroll-margin-top: 90px; }
+@media (max-width: 1023px) { #cursos { scroll-margin-top: 70px; } }
 .capacitaciones nav {
   background: var(--nav-bg);
 }
@@ -23,6 +26,92 @@
 .capacitaciones .nav-cta:hover {
   background: rgba(255,255,255,0.85);
   color: #2C5F8A !important;
+}
+
+/* ── Hero ── */
+.hero-cap {
+  position: relative;
+  min-height: clamp(360px, 45vh, 520px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #0f2536;
+}
+.hero-cap .hero-video {
+  position: absolute;
+  top: 0; right: 0;
+  height: 160%;
+  width: auto;
+  z-index: 0;
+}
+.hero-cap::before {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  background: linear-gradient(to right, #0f2536 0%, #0f2536 40%, transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-cap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(15,37,54,0.92) 0%, rgba(15,37,54,0.2) 30%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-cap .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 60px 48px;
+  color: #fff;
+}
+.hero-cap h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(38px, 5vw, 60px);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+.hero-cap h1 .hero-accent { color: #75AADB; }
+.hero-cap p {
+  font-size: clamp(15px, 1.2vw, 18px);
+  opacity: .9;
+  margin: 0 0 28px;
+  max-width: 420px;
+}
+.hero-cap .cta-cap,
+.hero-cap .cta-cap:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #75AADB;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background .2s;
+}
+.hero-cap .cta-cap:hover { background: #5a8fbf; }
+
+/* ── Card overrides for capacitaciones blue ── */
+.capacitaciones .service-card-link:hover .service-card {
+  box-shadow: 0 10px 32px rgba(117,170,219,0.28);
+}
+
+@media (max-width: 400px) {
+  .hero-cap { min-height: auto; padding-bottom: 160px; background: #0f2536; }
+  .hero-cap .hero-video { height: 160px; top: auto; bottom: 0; right: 0; width: auto; }
+  .hero-cap::before { display: none; }
+  .hero-cap::after {
+    background: linear-gradient(to bottom, rgba(15,37,54,0.95) 0%, rgba(15,37,54,0.15) 30%, transparent 50%);
+  }
+  .hero-cap .hero-content { max-width: 100%; padding: 24px 24px 0; }
 }
 </style>
 </head>
@@ -54,10 +143,149 @@
   <div class="nav-overlay" id="navOverlay"></div>
 </nav>
 
-<section class="section" style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px;text-align:center">
-  <div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:48px;text-transform:uppercase;color:var(--black);margin-bottom:16px">Capacitaciones</h1>
-    <p style="font-size:18px;color:var(--gray);max-width:480px;margin:0 auto">Esta página está en construcción. Pronto estará disponible.</p>
+<!-- HERO -->
+<section class="hero-cap">
+  <video class="hero-video" autoplay muted loop playsinline poster="../assets/images/capacitaciones-poster.jpg">
+    <source src="../assets/videos/capacitaciones-banner.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>Capacitaciónes<br><span class="hero-accent">en seguridad</span></h1>
+    <p>Formación teórico-práctica en seguridad contra incendios, emergencias y normativa vigente.</p>
+    <a href="../contacto/" class="cta-cap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Solicitar información
+    </a>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos" class="services" style="padding-left:3rem;padding-right:3rem">
+  <div class="container" style="max-width:none;padding:0">
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(28px,3vw,36px);text-transform:uppercase;margin-bottom:8px;padding-left:8px">Nuestras Capacitaciones</h2>
+    <p class="lead" style="padding-left:8px;margin-bottom:32px;max-width:600px">Formación práctica y certificada para operadores y personal técnico.</p>
+    <div class="services-grid">
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Operadores de equipo de izaje</div>
+            <div class="service-desc">Formación teórico-práctica para operadores de autoelevadores, grúas y manipuladores. Normativa de seguridad, maniobras y señalización.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Operadores de equipo de levantamiento</div>
+            <div class="service-desc">Capacitación en puentes grúa, polipastos, malacates y gatos hidráulicos. Técnicas de izaje, límites de carga y protecciones.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/><path d="M18 10h-4l-2 4h-4"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Operadores de máquinas viales</div>
+            <div class="service-desc">Entrenamiento en motoniveladoras, retroexcavadoras, topadoras y compactadoras. Seguridad operativa y mantenimiento básico.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l3-6 3 6"/><path d="M17 8v10"/><path d="M3 17h18"/><rect x="3" y="4" width="18" height="13" rx="2"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Operadores de maquinaria agrícola</div>
+            <div class="service-desc">Capacitación en tractores, cosechadoras y pulverizadoras. Manejo seguro, protecciones y normativa para maquinaria rural.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10H2"/><path d="M14 14l4-4-4-4"/><path d="M10 10l-4 4 4 4"/><path d="M2 18V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Seguridad vial</div>
+            <div class="service-desc">Conducción segura, normativa de tránsito, señalización y prevención de siniestros viales para flotas y transporte.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Herramientas manuales, eléctricas y neumáticas</div>
+            <div class="service-desc">Uso seguro de herramientas portátiles, mantenimiento preventivo y selección adecuada según la tarea. Normativa IRAM.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Uso de EPP</div>
+            <div class="service-desc">Selección, uso correcto y mantenimiento de elementos de protección personal. Casco, arnés, protectores auditivos, respiradores y más.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="22" height="18" rx="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><path d="M9 12h6"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Operadores de maquinaria pesada</div>
+            <div class="service-desc">Formación en operación segura de maquinaria pesada para construcción e industria. Señalización, estabilidad y procedimientos de emergencia.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M17.66 17.66l2.83 2.83M1 12h4M19 12h4"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Manejo defensivo</div>
+            <div class="service-desc">Técnicas de conducción defensiva, prevención de colisiones, distancia de frenado y comportamiento en condiciones adversas.</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="../contacto/" class="service-card-link">
+        <div class="service-card">
+          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
+          </div>
+          <div class="service-body">
+            <div class="service-title">Uso de elementos de izaje</div>
+            <div class="service-desc">Selección e inspección de eslingas, ganchos, grilletes y accesorios. Factor de seguridad, ángulos de carga y trazabilidad.</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
   </div>
 </section>
 
