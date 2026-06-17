@@ -12,8 +12,8 @@
 <style>
 /* ── Inspecciones yellow theme ── */
 html { scroll-behavior: smooth; }
-#servicios, #informes, #proceso { scroll-margin-top: 90px; }
-@media (max-width: 1023px) { #servicios, #informes, #proceso { scroll-margin-top: 70px; } }
+#servicios, #proceso { scroll-margin-top: 90px; }
+@media (max-width: 1023px) { #servicios, #proceso { scroll-margin-top: 70px; } }
 .inspecciones {
   --red: #f6b926;
   --red-dark: #c8961b;
@@ -198,9 +198,9 @@ html { scroll-behavior: smooth; }
     grid-template-columns: repeat(2, minmax(225px, 1fr));
   }
 }
-@media (min-width: 1221px) {
+@media (min-width: 900px) {
   .services-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -366,6 +366,186 @@ html { scroll-behavior: smooth; }
   .sec { padding: 40px 20px; }
   .cta-banner-insp { padding: 32px 20px; }
 }
+
+/* ── Service Modal ── */
+.service-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  padding: 20px;
+}
+.service-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.service-modal {
+  background: #fff;
+  border-radius: 14px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.92) translateY(20px);
+  transition: transform .35s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+}
+.service-modal-overlay.is-open .service-modal {
+  transform: scale(1) translateY(0);
+}
+.service-modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background .2s;
+}
+.service-modal-close:hover { background: rgba(0,0,0,0.7); }
+.service-modal-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px 14px 0 0;
+}
+.service-modal-body {
+  padding: 32px 32px 28px;
+}
+.service-modal-body h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  color: #1a1a1a;
+}
+.service-modal-body .modal-sub {
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 18px;
+}
+.service-modal-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+.service-modal-body ul li {
+  position: relative;
+  padding: 5px 0 5px 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #333;
+}
+.service-modal-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--red);
+  opacity: 0.7;
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+.modal-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.modal-form label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+.modal-form input,
+.modal-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  font-size: 14px;
+  font-family: 'Barlow', sans-serif;
+  background: #fafafa;
+  color: #333;
+  transition: border-color .2s, background .2s;
+  box-sizing: border-box;
+}
+.modal-form input:focus,
+.modal-form textarea:focus {
+  outline: none;
+  border-color: var(--red);
+  background: #fff;
+}
+.modal-form .form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.modal-form .form-actions button {
+  flex: 1;
+  min-width: 160px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'Barlow', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background .2s, transform .15s;
+}
+.modal-form .form-actions button:active {
+  transform: scale(0.97);
+}
+.btn-email {
+  background: var(--red);
+  color: #1a1a1a;
+}
+.btn-email:hover { background: var(--red-light); }
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.btn-whatsapp:hover { background: #1da851; }
+.modal-form .form-note {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .service-modal-body { padding: 24px 20px 20px; }
+  .service-modal-img { height: 160px; }
+}
 </style>
 </head>
 <body class="inspecciones" style="display:flex;flex-direction:column;min-height:100vh">
@@ -389,7 +569,6 @@ html { scroll-behavior: smooth; }
   <div class="nav-sidebar" id="navSidebar">
     <ul class="nav-links">
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#informes">Informes</a></li>
       <li><a href="#proceso">Proceso</a></li>
     </ul>
     <a href="../contacto/" class="nav-cta">
@@ -406,8 +585,8 @@ html { scroll-behavior: smooth; }
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-bg hero-bg--alt" id="heroBgAlt"></div>
   <div class="hero-content">
-    <h1>Inspección<br><span class="hero-accent">técnica</span> y certificaciones</h1>
-    <p>Inspeccionamos equipos de izaje, levantamiento, grupos electrógenos, trabajo en altura y redes contra incendio. Emisión de informes LCA / LCM y certificaciones IRAM.</p>
+    <h1>Inspección<br><span class="hero-accent">técnica</span> y homologaciones</h1>
+    <p>Inspeccionamos equipos de izaje, levantamiento, grupos electrógenos, trabajo en altura y redes contra incendio. Emisión de informes LCA / LCM y certificaciones.</p>
     <a href="../contacto/" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Solicitar inspección
@@ -420,14 +599,14 @@ html { scroll-behavior: smooth; }
   <div class="container" style="max-width:none;padding:0">
     <div class="services-grid">
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link" data-service="izaje">
         <div class="service-card">
           <div class="service-img">
             <img src="../assets/images/izajes.jpg" alt="Equipos de Izaje" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21h6m-3 0V3L3 9h18M9 3l10 6"/><path d="M17 9v4a2 2 0 1 1-2 2"/></svg>
             </div>
             <div class="service-title">Equipos de Izaje</div>
             <div class="service-desc">Autoelevadores, manipuladores telescópicos, grúas móviles y de brazo articulado. Verificación estructural, mecánica y de sistemas de seguridad.</div>
@@ -435,14 +614,14 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link" data-service="levantamiento">
         <div class="service-card">
           <div class="service-img">
             <img src="../assets/images/forklift-banner.png" alt="Equipos de Levantamiento" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12H5a2 2 0 0 0-2 2v5"/><path d="M15 19h7"/><path d="M16 19V2"/><path d="M6 12V7a2 2 0 0 1 2-2h2.172a2 2 0 0 1 1.414.586l3.828 3.828A2 2 0 0 1 16 10.828"/><path d="M7 19h4"/><circle cx="13" cy="19" r="2"/><circle cx="5" cy="19" r="2"/></svg>
             </div>
             <div class="service-title">Equipos de Levantamiento</div>
             <div class="service-desc">Puentes grúa, polipastos, gatos hidráulicos y malacates. Control de carga, frenos, cables, cadenas y dispositivos de seguridad.</div>
@@ -450,7 +629,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link" data-service="accesorios">
         <div class="service-card">
           <div class="service-img">
             <img src="../assets/images/accesorios-izaje.png" alt="Accesorios de Izaje" style="width:100%;height:100%;object-fit:cover">
@@ -465,14 +644,14 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link" data-service="electrogenos">
         <div class="service-card">
           <div class="service-img">
             <img src="../assets/images/grupos-electrogenos.png" alt="Grupos Electrógenos" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
             </div>
             <div class="service-title">Grupos Electrógenos</div>
             <div class="service-desc">Verificación de puesta a tierra, aislación, protecciones, tableros de transferencia y autonomía. Protocolo de medición según IRAM.</div>
@@ -480,7 +659,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link" data-service="altura">
         <div class="service-card">
           <div class="service-img">
             <img src="../assets/images/trabajo-altura.png" alt="Trabajo en Altura" style="width:100%;height:100%;object-fit:cover">
@@ -494,46 +673,51 @@ html { scroll-behavior: smooth; }
           </div>
         </div>
       </a>
-    </div>
-  </div>
-</section>
 
-<!-- INFORMES Y HOMOLOGACIONES -->
-<section id="informes" class="sec sec-white">
-  <div class="container">
-    <h2>Informes técnicos y homologaciones</h2>
-    <p class="lead">
-      Además de las inspecciones de equipos, elaboramos la documentación técnica que su empresa necesita
-      para habilitaciones, presentaciones ante autoridades y operaciones de comercialización vehicular.
-    </p>
-
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M5 7l2-4h10l2 4"/><circle cx="8" cy="15" r="1.5"/><circle cx="16" cy="15" r="1.5"/></svg>
+      <a href="javascript:void(0)" class="service-card-link" data-service="nacionalizacion">
+        <div class="service-card">
+          <div class="service-img">
+            <img src="../assets/images/auto-importado.png" alt="Nacionalización de vehículos" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+            </div>
+            <div class="service-title">Nacionalización de vehículos y motovehículos extranjeros</div>
+            <div class="service-desc">Informe técnico para nacionalización de vehículos y motovehículos importados. Verificación dimensional, frenos, LCM, LCA y CSV.</div>
+          </div>
         </div>
-        <h3>Nacionalización de vehículos extranjeros</h3>
-        <p>Informe técnico y ensayos para nacionalización de vehículos y motovehículos importados, incluyendo la verificación dimensional, de frenos y demás parámetros técnicos para la certificación de LCM (Licencia de Configuración de Modelo), y ensayos de emisiones para la certificación de LCA (Licencia de Configuración Ambiental). Verificación de origen y cumplimiento normativo.</p>
-        <span class="tag">Vehículos · Motos · LCA · LCM</span>
-      </div>
+      </a>
 
-      <div class="info-card">
-        <div class="info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="22" height="11" rx="1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+      <a href="javascript:void(0)" class="service-card-link" data-service="trailers">
+        <div class="service-card">
+          <div class="service-img">
+            <img src="../assets/images/trailer-homologado.png" alt="Homologación de trailers" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M22,15V17H10A3,3 0 0,1 7,20A3,3 0 0,1 4,17H2V6A2,2 0 0,1 4,4H17A2,2 0 0,1 19,6V15H22M7,16A1,1 0 0,0 6,17A1,1 0 0,0 7,18A1,1 0 0,0 8,17A1,1 0 0,0 7,16Z"/></svg>
+            </div>
+            <div class="service-title">Homologación de trailers</div>
+            <div class="service-desc">Homologación de trailers Categoría O1 y O2. Ensayo, planos, CSV, cálculos y presentación ante organismo certificador.</div>
+          </div>
         </div>
-        <h3>Homologación de trailers</h3>
-        <p>Homologación de trailers Categoría O1 y O2. Ensayo, planos, cálculos y presentación ante organismo certificador.</p>
-        <span class="tag">Cat. O1 · Cat. O2</span>
-      </div>
+      </a>
 
-      <div class="info-card">
-        <div class="info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h2l2-6h10l2 6h2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M9 11V6h6v5"/></svg>
+      <a href="javascript:void(0)" class="service-card-link" data-service="modificaciones">
+        <div class="service-card">
+          <div class="service-img">
+            <img src="../assets/images/hidrogrua-inspeccion.png" alt="Modificaciones vehiculares" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="service-body">
+            <div class="service-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg>
+            </div>
+            <div class="service-title">Modificaciones vehiculares</div>
+            <div class="service-desc">Homologación de modificaciones en camiones y casas rodantes. Cálculo estructural y validación de aptitud técnica.</div>
+          </div>
         </div>
-        <h3>Modificaciones vehiculares</h3>
-        <p>Homologación de modificaciones en camiones, casas rodantes motorizadas y de tiro. Cálculo estructural y validación de aptitud técnica.</p>
-        <span class="tag">Camiones · Casas rodantes</span>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -585,6 +769,43 @@ html { scroll-behavior: smooth; }
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     Solicitar Asesoramiento
   </a>
+</div>
+
+<!-- SERVICE MODAL -->
+<div class="service-modal-overlay" id="serviceModalOverlay">
+  <div class="service-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="service-modal-close" id="serviceModalClose" aria-label="Cerrar">&times;</button>
+    <img class="service-modal-img" id="serviceModalImg" src="" alt="">
+    <div class="service-modal-body">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-sub"></div>
+      <ul id="serviceModalList"></ul>
+      <form class="modal-form" id="modalForm" onsubmit="return false">
+        <div class="form-row">
+          <label for="modalNombre">Nombre</label>
+          <input id="modalNombre" name="nombre" type="text" required placeholder="Tu nombre">
+        </div>
+        <div class="form-row" style="display:none">
+          <input id="modalAsunto" name="asunto" type="text">
+        </div>
+        <div class="form-row">
+          <label for="modalMensaje">Mensaje</label>
+          <textarea id="modalMensaje" name="mensaje" required rows="3" placeholder="Contanos qué necesitas…"></textarea>
+        </div>
+        <p class="form-note">Te respondemos por este medio</p>
+        <div class="form-actions">
+          <button type="button" class="btn-email" onclick="enviarModalEmail()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Enviar por Email
+          </button>
+          <button type="button" class="btn-whatsapp" onclick="enviarModalWhatsApp()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Enviar por WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -666,6 +887,162 @@ document.addEventListener('DOMContentLoaded', function() {
   if (overlay) overlay.addEventListener('click', closeNav);
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 
+  /* ── Service Modal ── */
+  var modalData = {
+    izaje: {
+      title: 'Equipos de Izaje',
+      sub: 'Inspección técnica de equipos de izaje motorizados',
+      img: '../assets/images/izajes.jpg',
+      items: [
+        'Autoelevadores y manipuladores telescópicos',
+        'Grúas móviles, sobre camión y de brazo articulado',
+        'Verificación estructural integral',
+        'Control de sistemas mecánicos, hidráulicos y de seguridad',
+        'Ensayos de carga y pruebas funcionales',
+        'Emisión de informe técnico con registro fotográfico'
+      ]
+    },
+    levantamiento: {
+      title: 'Equipos de Levantamiento',
+      sub: 'Verificación de equipos fijos y móviles de elevación',
+      img: '../assets/images/forklift-banner.png',
+      items: [
+        'Puentes grúa y polipastos eléctricos / manuales',
+        'Gatos hidráulicos y malacates',
+        'Control de capacidad de carga nominal y admisible',
+        'Verificación de frenos, cables, cadenas y tambores',
+        'Dispositivos de seguridad y limitadores de recorrido',
+        'Certificación conforme a normativa vigente'
+      ]
+    },
+    accesorios: {
+      title: 'Accesorios de Izaje',
+      sub: 'Ensayo y trazabilidad de accesorios de izaje',
+      img: '../assets/images/accesorios-izaje.png',
+      items: [
+        'Ganchos de seguridad con pestillo',
+        'Eslingas de cadena, cable de acero y sintéticas',
+        'Grilletes, balancines y estrobos',
+        'Ensayo de carga con trazabilidad individual',
+        'Identificación por número de serie y rotulado',
+        'Registro en planilla de vida histórica'
+      ]
+    },
+    electrogenos: {
+      title: 'Grupos Electrógenos',
+      sub: 'Mediciones y protocolos según norma',
+      img: '../assets/images/grupos-electrogenos.png',
+      items: [
+        'Verificación de puesta a tierra y jabalinas',
+        'Medición de resistencia de aislación',
+        'Protecciones eléctricas y tableros de comando',
+        'Tableros de transferencia automática (TTA)',
+        'Control de autonomía y sistema de combustible',
+        'Protocolo de medición y entrega de informe'
+      ]
+    },
+    altura: {
+      title: 'Trabajo en Altura',
+      sub: 'Revisión periódica anual obligatoria de EPP contra caídas',
+      img: '../assets/images/trabajo-altura.png',
+      items: [
+        'Arneses de seguridad y cinturones portaherramientas',
+        'Líneas de vida horizontales y verticales',
+        'Anclajes y conectores',
+        'Absorbedores de energía y eslingas de posicionamiento',
+        'Revisión periódica anual obligatoria',
+        'Planilla de control y registro fotográfico individual'
+      ]
+    },
+    nacionalizacion: {
+      title: 'Nacionalización de vehículos extranjeros',
+      sub: 'Informe técnico y ensayos para importación de vehículos',
+      img: '../assets/images/auto-importado.png',
+      items: [
+        'Informe técnico para nacionalización de vehículos y motovehículos',
+        'Verificación dimensional y de frenos',
+        'Ensayos de emisiones para certificación ambiental',
+        'Certificación LCM (Licencia de Configuración de Modelo)',
+        'Certificación LCA (Licencia de Configuración Ambiental)',
+        'Verificación de origen y cumplimiento normativo'
+      ]
+    },
+    trailers: {
+      title: 'Homologación de trailers',
+      sub: 'Ensayo y certificación de trailers categoría O1 y O2',
+      img: '../assets/images/trailer-homologado.png',
+      items: [
+        'Homologación de trailers Categoría O1 y O2',
+        'Ensayos de resistencia y estabilidad',
+        'Elaboración de planos técnicos',
+        'Cálculos estructurales y de capacidad',
+        'Presentación ante organismo certificador',
+        'Gestión integral del trámite de homologación'
+      ]
+    },
+    modificaciones: {
+      title: 'Modificaciones vehiculares',
+      sub: 'Homologación de modificaciones estructurales en vehículos',
+      img: '../assets/images/hidrogrua-inspeccion.png',
+      items: [
+        'Homologación de modificaciones en camiones',
+        'Casas rodantes motorizadas y de tiro',
+        'Cálculo estructural y validación de aptitud técnica',
+        'Verificación de seguridad y normativa vigente',
+        'Presentación ante autoridades competentes',
+        'Informe técnico completo con respaldo documental'
+      ]
+    }
+  };
+
+  var modalOverlay = document.getElementById('serviceModalOverlay');
+  var modalClose = document.getElementById('serviceModalClose');
+  var modalImg = document.getElementById('serviceModalImg');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalSub = document.querySelector('#serviceModalOverlay .modal-sub');
+  var modalList = document.getElementById('serviceModalList');
+  var serviceLinks = document.querySelectorAll('.service-card-link[data-service]');
+
+  var modalNombre = document.getElementById('modalNombre');
+  var modalAsunto = document.getElementById('modalAsunto');
+
+  function openServiceModal(key) {
+    var data = modalData[key];
+    if (!data) return;
+    modalImg.src = data.img;
+    modalImg.alt = data.title;
+    modalTitle.textContent = data.title;
+    modalSub.textContent = data.sub;
+    modalList.innerHTML = data.items.map(function (i) { return '<li>' + i + '</li>'; }).join('');
+    if (modalAsunto) modalAsunto.value = 'Consulta sobre ' + data.title;
+    if (modalNombre) modalNombre.value = '';
+    var msgField = document.getElementById('modalMensaje');
+    if (msgField) msgField.value = '';
+    modalOverlay.classList.add('is-open');
+    document.documentElement.classList.add('nav-open');
+    document.body.classList.add('nav-open');
+    if (modalNombre) setTimeout(function () { modalNombre.focus(); }, 100);
+  }
+
+  function closeServiceModal() {
+    modalOverlay.classList.remove('is-open');
+    document.documentElement.classList.remove('nav-open');
+    document.body.classList.remove('nav-open');
+  }
+
+  for (var i = 0; i < serviceLinks.length; i++) {
+    (function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openServiceModal(link.getAttribute('data-service'));
+      });
+    })(serviceLinks[i]);
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closeServiceModal);
+  if (modalOverlay) modalOverlay.addEventListener('click', function (e) { if (e.target === modalOverlay) closeServiceModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('is-open')) closeServiceModal(); });
+
   var heroImages = [
     '../assets/images/izajes-banner.png',
     '../assets/images/forklift-banner.png',
@@ -691,6 +1068,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
   }
 });
+
+function getModalFormData() {
+  var nombre = document.getElementById('modalNombre').value.trim();
+  var asunto = document.getElementById('modalAsunto').value.trim();
+  var mensaje = document.getElementById('modalMensaje').value.trim();
+  if (!nombre || !mensaje) {
+    alert('Por favor completá nombre y mensaje.');
+    return null;
+  }
+  return { nombre: nombre, asunto: asunto, mensaje: mensaje };
+}
+
+function enviarModalEmail() {
+  var d = getModalFormData();
+  if (!d) return;
+  var cuerpo = 'Nombre: ' + d.nombre + '%0D%0A';
+  cuerpo += 'Asunto: ' + d.asunto + '%0D%0A%0D%0A';
+  cuerpo += d.mensaje;
+  window.location.href = 'mailto:info@segulap.com.ar?subject=' + encodeURIComponent(d.asunto) + '&body=' + cuerpo;
+}
+
+function enviarModalWhatsApp() {
+  var d = getModalFormData();
+  if (!d) return;
+  var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
+  texto += 'Consulta: ' + d.asunto + '.%0A%0A';
+  texto += d.mensaje;
+  window.open('https://wa.me/5492216746874?text=' + texto, '_blank');
+}
 </script>
 </body>
 </html>
