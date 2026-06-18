@@ -188,16 +188,22 @@
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 16px;
 }
 
-@media (min-width: 570px) {
+@media (min-width: 769px) {
   .card-grid {
-    grid-template-columns: repeat(2, minmax(225px, 1fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
   }
 }
 
-@media (min-width: 1221px) {
+@media (min-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1300px) {
   .card-grid {
     grid-template-columns: repeat(5, 1fr);
   }

@@ -97,9 +97,21 @@
   }
 }
 
-@media (max-width: 768px) {
-  .services .container > div {
-    grid-template-columns: 1fr !important;
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 769px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -155,7 +167,7 @@
 <!-- SERVICE CARDS -->
 <section class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div class="card-grid">
 
       <a href="extintores/" class="service-card-link">
         <div class="service-card">

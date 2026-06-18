@@ -193,12 +193,17 @@ html { scroll-behavior: smooth; }
   grid-template-columns: 1fr;
   gap: 16px;
 }
-@media (min-width: 570px) {
+@media (min-width: 769px) {
   .services-grid {
-    grid-template-columns: repeat(2, minmax(225px, 1fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
   }
 }
 @media (min-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1300px) {
   .services-grid {
     grid-template-columns: repeat(4, 1fr);
   }

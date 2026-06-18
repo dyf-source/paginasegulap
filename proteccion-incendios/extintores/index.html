@@ -326,6 +326,26 @@
           scroll-snap-align: start;
         }
       }
+      .card-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 769px) {
+        .card-grid {
+          grid-template-columns: repeat(2, minmax(200px, 1fr));
+        }
+      }
+      @media (min-width: 900px) {
+        .card-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (min-width: 1300px) {
+        .card-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
     </style>
   </head>
   <body style="display: flex; flex-direction: column; min-height: 100vh">
@@ -408,7 +428,7 @@
     <!-- CARDS -->
     <section class="services">
       <div class="container">
-        <div class="services-grid" style="grid-template-columns:repeat(4,1fr);gap:16px">
+        <div class="card-grid">
             <a href="../../productos/?cat=Extintores" class="service-card-link">
               <div class="service-card">
                 <img class="service-img" src="../../assets/images/extintores-trabajo.jpg" alt="Venta de extintores">
