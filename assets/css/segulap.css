@@ -596,7 +596,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 /* ── CTA BANNER ── */
 .cta-banner {
   position: relative;
-  background: #000 url('../Banner-1.png') 100% center / auto 140% no-repeat;
+  background: #000 url('../images/Banner-1.png') 100% center / auto 140% no-repeat;
   padding: 36px 48px;
   display: flex;
   align-items: center;
@@ -2023,12 +2023,25 @@ footer {
   }
 
   .services-grid {
-    flex-direction: column;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .service-card-link {
     flex: 1 1 100%;
+  }
+
+  .why {
+    padding: 40px 20px;
+  }
+
+  .cta-banner {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 460px) {
+  .services-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2131,7 +2144,23 @@ footer {
   --nav-bg: #f6b926;
 }
 
+.inspecciones .nav-toggle span {
+  background: #1a1a1a;
+}
+
+.inspecciones .nav-close {
+  color: rgba(26,26,26,0.85);
+}
+
 /* ── CAPACITACIONES THEME (blue accent) ── */
 .capacitaciones {
   --nav-bg: #75AADB;
+}
+
+.capacitaciones .nav-toggle span {
+  background: #1a1a1a;
+}
+
+.capacitaciones .nav-close {
+  color: rgba(26,26,26,0.85);
 }
