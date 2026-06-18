@@ -1835,7 +1835,7 @@ footer {
 }
 
 /* ── MOBILE NAV & FOOTER ── */
-@media (max-width: 1023px) {
+@media (max-width: 1129px) {
   nav {
     position: fixed;
     width: 100%;
@@ -2137,6 +2137,13 @@ footer {
 .seguridad .social-btn:hover {
   background: var(--red);
   border-color: var(--red);
+}
+
+/* Seguridad-industrial has 7 nav items — compress at intermediate desktop widths */
+@media (min-width: 1100px) and (max-width: 1349px) {
+  .seguridad .nav-links { gap: 16px; }
+  .seguridad .nav-links a { font-size: 11px; letter-spacing: 0.5px; }
+  .seguridad .nav-cta { padding: 9px 14px; font-size: 12px; }
 }
 
 /* ── INSPECCIONES THEME (yellow accent) ── */

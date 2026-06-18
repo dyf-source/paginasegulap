@@ -189,6 +189,20 @@
   padding: 3px 10px;
   border-radius: 4px;
 }
+.seg-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 769px) {
+  .seg-card-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+}
+@media (min-width: 900px) {
+  .seg-card-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1300px) {
+  .seg-card-grid { grid-template-columns: repeat(6, 1fr); }
+}
 </style>
 </head>
 <body class="seguridad" style="display:flex;flex-direction:column;min-height:100vh">
@@ -245,7 +259,7 @@
 <!-- CATEGORY CARDS -->
 <section class="services" style="padding-left:3rem;padding-right:3rem">
   <div class="container" style="max-width:none;padding:0">
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+    <div class="seg-card-grid">
 
       <a href="epp/" class="service-card-link">
         <div class="service-card">
@@ -253,9 +267,7 @@
             <img src="../assets/images/seguridad-trabajador.png" alt="EPP" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/></svg>
-            </div>
+
             <div class="service-title">EPP</div>
             <div class="service-desc">Equipos de Protección Personal: cascos, protectores auditivos y oculares, respiradores, arneses, y guantes.</div>
           </div>
@@ -268,9 +280,7 @@
             <img src="../assets/images/seguridad-chalecos.png" alt="Indumentaria" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4a2 2 0 0 0 4 0V3H6v3c0 1.7-1.3 3-3 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9c-1.7 0-3-1.3-3-3V3h-6"/><path d="M12 4v15"/><path d="M6 11h12"/><path d="M6 14h12"/></svg>
-            </div>
+
             <div class="service-title">Indumentaria</div>
             <div class="service-desc">Chalecos reflectivos, y ropa laboral.</div>
           </div>
@@ -283,9 +293,7 @@
             <img src="../assets/images/seguridad-calzado.png" alt="Calzado de Seguridad" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 15.75v3a.75.75 0 0 1-.75.75H3.75a.75.75 0 0 1-.75-.75V15.75c.86-3 1.13-8.31 0-11.25H13.5a.75.75 0 0 1 .75.75v6h3.75A4.5 4.5 0 0 1 22.5 15.75Z"/><line x1="14.25" y1="11.25" x2="10.5" y2="11.25"/><line x1="14.25" y1="8.25" x2="10.5" y2="8.25"/><line x1="3" y1="15.75" x2="22.5" y2="15.75"/></svg>
-            </div>
+
             <div class="service-title">Calzado de Seguridad</div>
             <div class="service-desc">Zapatos y botas punta de acero, calzado dieléctrico, botas de goma con puntera y calzado ESD.</div>
           </div>
@@ -298,9 +306,7 @@
             <img src="../assets/images/seguirdad-vial-banner.png" alt="Elementos Viales" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20.25L10.3 3.5a.75.75 0 0 1 .7-.5h1.93a.75.75 0 0 1 .7.5L19.5 20.25"/><line x1="21.75" y1="20.25" x2="2.25" y2="20.25"/><line x1="15.6" y1="9" x2="8.4" y2="9"/><line x1="17.7" y1="15" x2="6.3" y2="15"/></svg>
-            </div>
+
             <div class="service-title">Elementos Viales</div>
             <div class="service-desc">Conos, balizas, cintas de señalización, y cartelería reflectiva.</div>
           </div>
@@ -313,9 +319,7 @@
             <img src="../assets/images/seguridad-antiderrame.png" alt="Kits Antiderrame" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4.5" y1="3.75" x2="19.5" y2="20.25"/><path d="M19.23 15.5A7.53 7.53 0 0 0 19.5 13.5c0-6.75-7.5-12-7.5-12A22.72 22.72 0 0 0 8.96 4.19"/><path d="M7.02 6.52C5.64 8.48 4.5 10.88 4.5 13.5a7.5 7.5 0 0 0 13.25 4.82"/></svg>
-            </div>
+
             <div class="service-title">Kits Antiderrame</div>
             <div class="service-desc">Kits universales, hidrofóbicos y químicos. Absorbentes en rollo, almohadas, barreras, tapones para desagües y diques de contención.</div>
           </div>
@@ -328,9 +332,7 @@
             <img src="../assets/images/seguridad-arnes.png" alt="Seguridad en Altura" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
-            <div class="service-icon-wrap">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><svg x="0" y="0" width="24" height="24" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" fill="none" stroke="white" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><path d="M379.811,144.855h4.4V95.19h-39.29v49.665ZM296.8,287.968v3.816h44.5l-85.3-85.3-85.3,85.3H215.23v-3.817A7.969,7.969,0,0,1,223.2,280h65.6a7.969,7.969,0,0,1,7.969,7.969Zm0,19.816v15.657H416.018V307.784Zm0,31.657v3.817a8,8,0,0,1-8,8H223.2c-4.6,0-8.187-3.674-7.969-8.7v-3.113H135.412l8.985,33.534,3.7-.992a7.991,7.991,0,0,1,9.782,5.656l16.979,63.368a7.99,7.99,0,0,1-5.656,9.781l-3.692.989,6.424,23.971a7.991,7.991,0,0,1-5.657,9.782L135.7,493.723a7.99,7.99,0,0,1-9.781-5.656L119.5,464.106l-3.7.992a7.99,7.99,0,0,1-9.781-5.656L89.037,396.075a7.989,7.989,0,0,1,5.656-9.781l3.692-.989L86.031,339.2a8,8,0,0,1-6.049-7.76V299.784a8,8,0,0,1,6.049-7.76L121.2,160.792l-1.41.031a8,8,0,0,1-8-8l.031-65.6a7.969,7.969,0,0,1,7.969-7.969H123.6V26a8,8,0,0,1,8-8h31.657a8,8,0,0,1,8,8V54.349L213.1,96.193h2.127V92.377a7.969,7.969,0,0,1,7.969-7.969v-.031h65.6a8,8,0,0,1,8,8v3.816h2.1l41.845-41.844V26a8,8,0,0,1,8-8H380.4a8,8,0,0,1,8,8V79.252h3.816a7.969,7.969,0,0,1,7.969,7.969l.031,65.6c0,4.6-3.674,8.187-8.7,7.969h-.706l35.164,131.232a8,8,0,0,1,6.049,7.76v31.657a8,8,0,0,1-6.049,7.76l-12.354,46.1,3.692.989a7.99,7.99,0,0,1,5.656,9.781l-16.979,63.367A7.99,7.99,0,0,1,396.2,465.1l-3.7-.992-6.42,23.961a7.991,7.991,0,0,1-9.782,5.656l-30.578-8.193a7.99,7.99,0,0,1-5.656-9.782l6.423-23.971-3.692-.989a7.99,7.99,0,0,1-5.656-9.781l16.979-63.368a7.991,7.991,0,0,1,9.782-5.656l3.7.992,8.986-33.534Zm-81.571-16V307.784H95.982v15.657ZM280.8,335.258V295.936H231.168v39.322Zm83.122-43.474L261.656,189.517a8,8,0,0,0-11.312,0L148.077,291.784H135.412l3.47-12.951L239.271,178.444a8,8,0,0,0,0-11.312l-11.465-11.465h22.145c3.685,3.685,8.412,3.685,12.1,0h22.146l-11.465,11.465a8,8,0,0,0,0,11.312L373.118,278.833l3.47,12.951Zm29.208,0h16.231l-35.1-130.992H358.032l35.1,130.992Zm16.231,47.657H393.131l-10.094,37.67,15.144,4.058,11.181-41.728Zm-290.493,0H102.638l11.181,41.728,15.144-4.058-10.094-37.67Zm-16.231-47.657h16.231l35.1-130.992H137.737l-35.1,130.992ZM377.066,459.97l-15.144-4.058-4.353,16.25,15.143,4.057,4.354-16.249Zm28.393-60.308-37.971-10.175L354.644,437.42l37.972,10.174,12.843-47.932ZM144.512,389.487l-37.971,10.175,12.843,47.932,37.972-10.174-12.844-47.933Zm5.566,66.425-15.144,4.058,4.354,16.249,15.144-4.057-4.354-16.25ZM167.106,95.189H127.785v49.665h39.321V95.189ZM139.6,79.252h15.657V34H139.6V79.252Zm31.657,0h2.278l-2.278-2.278v2.278Zm11.785,9.507v7.434h7.435l-7.435-7.434Zm0,23.434v15.658H215.23V112.193Zm0,31.658h10.321L222.3,172.788l-75.138,75.139,23.347-87.135h4.564a7.969,7.969,0,0,0,7.969-7.969v-8.972Zm155.42-64.6h2.278V76.974l-2.278,2.278Zm18.278,0H372.4V34H356.742V79.252Zm-15.253,81.54,23.347,87.135L289.7,172.788l28.937-28.937h10.29v8.972h.031a7.969,7.969,0,0,0,7.969,7.969Zm-12.564-32.941V112.193H296.8v15.658Zm0-31.658v-7.4l-7.4,7.4ZM280.8,139.667v-39.29H231.168v39.29Z"/></svg></svg>
-            </div>
+
             <div class="service-title">Seguridad en Altura</div>
             <div class="service-desc">Arneses, líneas de vida, eslingas, bloqueadores, ganchos y todos los equipos para trabajo seguro en altura.</div>
           </div>
@@ -349,37 +351,31 @@
 
     <div class="info-grid">
       <div class="info-card">
-        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>Protección Personal</h3>
         <p>Cascos, protectores auditivos, oculares, respiradores, arneses y guantes para protección integral del trabajador frente a riesgos laborales.</p>
         <span class="tag">EPP · Cabeza · Oído · Ojos · Manos</span>
       </div>
       <div class="info-card">
-        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12l2 4-8 12-8-12 2-4z"/></svg></div>
         <h3>Indumentaria Laboral</h3>
         <p>Camperas, pantalones, chalecos reflectivos, delantales y ropa de trabajo diseñada para brindar seguridad y comodidad en cada tarea.</p>
         <span class="tag">Reflectivo · Algodón · Cuero · PVC</span>
       </div>
       <div class="info-card">
-        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 15.75v3a.75.75 0 0 1-.75.75H3.75a.75.75 0 0 1-.75-.75V15.75c.86-3 1.13-8.31 0-11.25H13.5a.75.75 0 0 1 .75.75v6h3.75A4.5 4.5 0 0 1 22.5 15.75Z"/><line x1="14.25" y1="11.25" x2="10.5" y2="11.25"/><line x1="14.25" y1="8.25" x2="10.5" y2="8.25"/><line x1="3" y1="15.75" x2="22.5" y2="15.75"/></svg></div>
         <h3>Calzado de Seguridad</h3>
         <p>Zapatos y botas con punta de acero, calzado dieléctrico, botas de goma y calzado ESD para protección de los pies en entornos laborales exigentes.</p>
         <span class="tag">Punta de acero · Dieléctrico · ESD</span>
       </div>
       <div class="info-card">
-        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20.25L10.3 3.5a.75.75 0 0 1 .7-.5h1.93a.75.75 0 0 1 .7.5L19.5 20.25"/><line x1="21.75" y1="20.25" x2="2.25" y2="20.25"/><line x1="15.6" y1="9" x2="8.4" y2="9"/><line x1="17.7" y1="15" x2="6.3" y2="15"/></svg></div>
         <h3>Elementos Viales</h3>
         <p>Conos, balizas, cintas de señalización, cartelería reflectiva y reductores de velocidad para seguridad vehicular y peatonal.</p>
         <span class="tag">Señalización · Balizas · Conos</span>
       </div>
       <div class="info-card">
-        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4.5" y1="3.75" x2="19.5" y2="20.25"/><path d="M19.23 15.5A7.53 7.53 0 0 0 19.5 13.5c0-6.75-7.5-12-7.5-12A22.72 22.72 0 0 0 8.96 4.19"/><path d="M7.02 6.52C5.64 8.48 4.5 10.88 4.5 13.5a7.5 7.5 0 0 0 13.25 4.82"/></svg></div>
         <h3>Control de Derrames</h3>
         <p>Kits antiderrame universales, hidrofóbicos y químicos. Absorbentes, barreras y diques de contención para respuesta rápida ante derrames.</p>
         <span class="tag">Universal · Químico · Hidrofóbico</span>
       </div>
       <div class="info-card">
-        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><svg x="0" y="0" width="24" height="24" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"><path d="M379.811,144.855h4.4V95.19h-39.29v49.665ZM296.8,287.968v3.816h44.5l-85.3-85.3-85.3,85.3H215.23v-3.817A7.969,7.969,0,0,1,223.2,280h65.6a7.969,7.969,0,0,1,7.969,7.969Zm0,19.816v15.657H416.018V307.784Zm0,31.657v3.817a8,8,0,0,1-8,8H223.2c-4.6,0-8.187-3.674-7.969-8.7v-3.113H135.412l8.985,33.534,3.7-.992a7.991,7.991,0,0,1,9.782,5.656l16.979,63.368a7.99,7.99,0,0,1-5.656,9.781l-3.692.989,6.424,23.971a7.991,7.991,0,0,1-5.657,9.782L135.7,493.723a7.99,7.99,0,0,1-9.781-5.656L119.5,464.106l-3.7.992a7.99,7.99,0,0,1-9.781-5.656L89.037,396.075a7.989,7.989,0,0,1,5.656-9.781l3.692-.989L86.031,339.2a8,8,0,0,1-6.049-7.76V299.784a8,8,0,0,1,6.049-7.76L121.2,160.792l-1.41.031a8,8,0,0,1-8-8l.031-65.6a7.969,7.969,0,0,1,7.969-7.969H123.6V26a8,8,0,0,1,8-8h31.657a8,8,0,0,1,8,8V54.349L213.1,96.193h2.127V92.377a7.969,7.969,0,0,1,7.969-7.969v-.031h65.6a8,8,0,0,1,8,8v3.816h2.1l41.845-41.844V26a8,8,0,0,1,8-8H380.4a8,8,0,0,1,8,8V79.252h3.816a7.969,7.969,0,0,1,7.969,7.969l.031,65.6c0,4.6-3.674,8.187-8.7,7.969h-.706l35.164,131.232a8,8,0,0,1,6.049,7.76v31.657a8,8,0,0,1-6.049,7.76l-12.354,46.1,3.692.989a7.99,7.99,0,0,1,5.656,9.781l-16.979,63.367A7.99,7.99,0,0,1,396.2,465.1l-3.7-.992-6.42,23.961a7.991,7.991,0,0,1-9.782,5.656l-30.578-8.193a7.99,7.99,0,0,1-5.656-9.782l6.423-23.971-3.692-.989a7.99,7.99,0,0,1-5.656-9.781l16.979-63.368a7.991,7.991,0,0,1,9.782-5.656l3.7.992,8.986-33.534Zm-81.571-16V307.784H95.982v15.657ZM280.8,335.258V295.936H231.168v39.322Zm83.122-43.474L261.656,189.517a8,8,0,0,0-11.312,0L148.077,291.784H135.412l3.47-12.951L239.271,178.444a8,8,0,0,0,0-11.312l-11.465-11.465h22.145c3.685,3.685,8.412,3.685,12.1,0h22.146l-11.465,11.465a8,8,0,0,0,0,11.312L373.118,278.833l3.47,12.951Zm29.208,0h16.231l-35.1-130.992H358.032l35.1,130.992Zm16.231,47.657H393.131l-10.094,37.67,15.144,4.058,11.181-41.728Zm-290.493,0H102.638l11.181,41.728,15.144-4.058-10.094-37.67Zm-16.231-47.657h16.231l35.1-130.992H137.737l-35.1,130.992ZM377.066,459.97l-15.144-4.058-4.353,16.25,15.143,4.057,4.354-16.249Zm28.393-60.308-37.971-10.175L354.644,437.42l37.972,10.174,12.843-47.932ZM144.512,389.487l-37.971,10.175,12.843,47.932,37.972-10.174-12.844-47.933Zm5.566,66.425-15.144,4.058,4.354,16.249,15.144-4.057-4.354-16.25ZM167.106,95.189H127.785v49.665h39.321V95.189ZM139.6,79.252h15.657V34H139.6V79.252Zm31.657,0h2.278l-2.278-2.278v2.278Zm11.785,9.507v7.434h7.435l-7.435-7.434Zm0,23.434v15.658H215.23V112.193Zm0,31.658h10.321L222.3,172.788l-75.138,75.139,23.347-87.135h4.564a7.969,7.969,0,0,0,7.969-7.969v-8.972Zm155.42-64.6h2.278V76.974l-2.278,2.278Zm18.278,0H372.4V34H356.742V79.252Zm-15.253,81.54,23.347,87.135L289.7,172.788l28.937-28.937h10.29v8.972h.031a7.969,7.969,0,0,0,7.969,7.969Zm-12.564-32.941V112.193H296.8v15.658Zm0-31.658v-7.4l-7.4,7.4ZM280.8,139.667v-39.29H231.168v39.29Z"/></svg></svg></div>
         <h3>Trabajo en Altura</h3>
         <p>Arneses, líneas de vida, eslingas, bloqueadores, ganchos y todos los equipos certificados para trabajo seguro en altura.</p>
         <span class="tag">Arneses · Líneas de vida · Eslingas</span>

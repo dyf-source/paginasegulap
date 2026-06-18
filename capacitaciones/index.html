@@ -117,6 +117,26 @@ html { scroll-behavior: smooth; }
   }
   .hero-cap .hero-content { max-width: 100%; padding: 24px 24px 0; }
 }
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 769px) {
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1300px) {
+  .services-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
 </style>
 </head>
 <body class="capacitaciones" style="display:flex;flex-direction:column;min-height:100vh">
