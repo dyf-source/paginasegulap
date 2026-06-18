@@ -1,7 +1,7 @@
 # Project
 
 **Root:** `C:\TechnicalReport\Segulap`
-**Structure:** `index.html`, `contact.html`, etc. in root · `assets/` · `assets/css/`
+**Structure:** `index.html` at root · subdirs: `contacto/`, `capacitaciones/`, `inspecciones/`, `servicios/`, `productos/`, `seguridad-industrial/`, `proteccion-incendios/` · `assets/` · `assets/css/`
 **Ignore:** `./template/` unless told otherwise.
 
 ---
