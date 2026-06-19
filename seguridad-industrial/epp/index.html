@@ -308,9 +308,7 @@
 
       <a href="../../productos/?cat=Guantes%20de%20Seguridad" class="service-card-link">
         <div class="service-card">
-          <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e86000,#b84700)">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="4" y="6" width="16" height="16" rx="2"/><path d="M8 2v4M16 2v4"/><path d="M9 14h6M12 11v6"/></svg>
-          </div>
+          <img class="service-img" src="../../assets/images/guantes-seguridad.png" alt="Guantes de Seguridad">
           <div class="service-body">
             <div class="service-title">Guantes de Seguridad</div>
             <div class="service-desc">Guantes de uso general, alta resistencia al corte, químicos, dieléctricos y para soldador.</div>
@@ -477,8 +475,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 
   var heroImages = [
-    '../../assets/images/PPE.jpg',
-    '../../assets/images/forklift-banner.png'
+    '../../assets/images/cascos.jpg',
+    '../../assets/images/protectores_auditivos.jpg',
+    '../../assets/images/protectores_oculares.png',
+    '../../assets/images/proteccion_respiratoria.png',
+    '../../assets/images/guantes-seguridad.png'
   ];
   var heroBg1 = document.getElementById('heroBg');
   var heroBg2 = document.getElementById('heroBgAlt');
@@ -486,6 +487,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var idx = 0;
     var active = heroBg1;
     var inactive = heroBg2;
+    active.style.backgroundImage = 'url(' + heroImages[0] + ')';
+    active.style.backgroundSize = window.innerWidth < 768 ? 'cover' : '66% auto';
+    active.style.backgroundPosition = window.innerWidth < 768 ? 'center center' : '100% center';
+    active.style.backgroundRepeat = 'no-repeat';
     setInterval(function () {
       idx = (idx + 1) % heroImages.length;
       inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
@@ -495,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function() {
       inactive.style.opacity = '1';
       active.style.opacity = '0';
       var tmp = active; active = inactive; inactive = tmp;
-    }, 5000);
+    }, 8000);
   }
 });
 </script>
