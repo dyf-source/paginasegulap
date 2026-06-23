@@ -1,7 +1,0 @@
-name = "segulap"
-pages_build_output_dir = "."
-compatibility_date = "2025-06-12"
-
-[[kv_namespaces]]
-binding = "segulap_kv"
-id = "2377f8ac19ba4bd4a46ea08c40795313"
