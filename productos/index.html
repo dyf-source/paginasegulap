@@ -269,10 +269,14 @@ function initFilters() {
   activeCategories.forEach(function(c) { checkedCategories[c] = false; });
   if (preselectedCat && activeCategories.indexOf(preselectedCat) > -1) {
     checkedCategories[preselectedCat] = true;
+    // Preselecting a group parent also selects all its children
+    if (isGroupParent(preselectedCat)) {
+      activeGroups[preselectedCat].forEach(function(ch) { checkedCategories[ch] = true; });
+    }
   }
   for (var g in activeGroups) {
     expandedGroups[g] = false;
-    if (preselectedCat && activeGroups[g].indexOf(preselectedCat) > -1) {
+    if (preselectedCat && (g === preselectedCat || activeGroups[g].indexOf(preselectedCat) > -1)) {
       expandedGroups[g] = true;
     }
   }
