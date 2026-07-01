@@ -790,6 +790,14 @@ html { scroll-behavior: smooth; }
           <label for="modalNombre">Nombre</label>
           <input id="modalNombre" name="nombre" type="text" required placeholder="Tu nombre">
         </div>
+        <div class="form-row">
+          <label for="modalEmail">Email</label>
+          <input id="modalEmail" name="email" type="email" required placeholder="tu@correo.com">
+        </div>
+        <div class="form-row">
+          <label for="modalCuit">CUIT / CUIL</label>
+          <input id="modalCuit" name="cuit" type="text" required placeholder="20-12345678-9">
+        </div>
         <div class="form-row" style="display:none">
           <input id="modalAsunto" name="asunto" type="text">
         </div>
@@ -797,7 +805,8 @@ html { scroll-behavior: smooth; }
           <label for="modalMensaje">Mensaje</label>
           <textarea id="modalMensaje" name="mensaje" required rows="3" placeholder="Contanos qué necesitas…"></textarea>
         </div>
-        <p class="form-note">Te respondemos por este medio</p>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <p class="form-note" id="modalNote">Te respondemos por este medio</p>
         <div class="form-actions">
           <button type="button" class="btn-email" onclick="enviarModalEmail()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -1074,31 +1083,65 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-function getModalFormData() {
+var CONTACT_ENDPOINT = 'https://segulap-contact.technicalreportnetadmin.workers.dev';
+
+function getModalFormData(requireEmail) {
   var nombre = document.getElementById('modalNombre').value.trim();
+  var email = document.getElementById('modalEmail').value.trim();
+  var cuit = document.getElementById('modalCuit').value.trim();
   var asunto = document.getElementById('modalAsunto').value.trim();
   var mensaje = document.getElementById('modalMensaje').value.trim();
-  if (!nombre || !mensaje) {
-    alert('Por favor completá nombre y mensaje.');
+  if (!nombre || !cuit || !mensaje || (requireEmail && !email)) {
+    alert('Por favor completá nombre, email, CUIT / CUIL y mensaje.');
     return null;
   }
-  return { nombre: nombre, asunto: asunto, mensaje: mensaje };
+  if (requireEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Ingresá un email válido.');
+    return null;
+  }
+  return { nombre: nombre, email: email, cuit: cuit, asunto: asunto, mensaje: mensaje };
 }
 
 function enviarModalEmail() {
-  var d = getModalFormData();
+  var d = getModalFormData(true);
   if (!d) return;
-  var cuerpo = 'Nombre: ' + d.nombre + '%0D%0A';
-  cuerpo += 'Asunto: ' + d.asunto + '%0D%0A%0D%0A';
-  cuerpo += d.mensaje;
-  window.location.href = 'mailto:info@segulap.com.ar?subject=' + encodeURIComponent(d.asunto) + '&body=' + cuerpo;
+
+  var note = document.getElementById('modalNote');
+  var btn = document.querySelector('#modalForm .btn-email');
+  var gotcha = document.querySelector('#modalForm [name="_gotcha"]');
+  if (btn) btn.disabled = true;
+  if (note) note.textContent = 'Enviando…';
+
+  fetch(CONTACT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre: d.nombre,
+      email: d.email,
+      cuit: d.cuit,
+      asunto: d.asunto,
+      mensaje: d.mensaje,
+      _gotcha: gotcha ? gotcha.value : ''
+    })
+  })
+  .then(function(res) { return res.json().catch(function() { return {}; }).then(function(body) { return { ok: res.ok, body: body }; }); })
+  .then(function(r) {
+    if (!r.ok || !r.body.ok) throw new Error();
+    if (note) note.textContent = '¡Gracias! Recibimos tu consulta y te contactaremos pronto.';
+    document.getElementById('modalForm').reset();
+  })
+  .catch(function() {
+    if (note) note.textContent = 'No se pudo enviar. Probá de nuevo o escribinos a info@segulap.com.ar.';
+  })
+  .finally(function() { if (btn) btn.disabled = false; });
 }
 
 function enviarModalWhatsApp() {
-  var d = getModalFormData();
+  var d = getModalFormData(false);
   if (!d) return;
   var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
   texto += 'Consulta: ' + d.asunto + '.%0A%0A';
+  texto += 'CUIT / CUIL: ' + d.cuit + '.%0A%0A';
   texto += d.mensaje;
   window.open('https://wa.me/5492216746874?text=' + texto, '_blank');
 }

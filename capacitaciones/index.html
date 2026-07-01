@@ -137,6 +137,189 @@ html { scroll-behavior: smooth; }
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
+/* ── Service Modal ── */
+.service-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+  padding: 20px;
+}
+.service-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.service-modal {
+  background: #fff;
+  border-radius: 14px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.92) translateY(20px);
+  transition: transform .35s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+}
+.service-modal-overlay.is-open .service-modal {
+  transform: scale(1) translateY(0);
+}
+.service-modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background .2s;
+}
+.service-modal-close:hover { background: rgba(0,0,0,0.7); }
+.service-modal-icon {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#0f2536,#1a4a6e);
+  border-radius: 14px 14px 0 0;
+}
+.service-modal-icon svg { width: 72px; height: 72px; }
+.service-modal-body {
+  padding: 32px 32px 28px;
+}
+.service-modal-body h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  color: #1a1a1a;
+}
+.service-modal-body .modal-sub {
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 18px;
+}
+.service-modal-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+.service-modal-body ul li {
+  position: relative;
+  padding: 5px 0 5px 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #333;
+}
+.service-modal-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #75AADB;
+  opacity: 0.85;
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+.modal-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.modal-form label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+.modal-form input,
+.modal-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  font-size: 14px;
+  font-family: 'Barlow', sans-serif;
+  background: #fafafa;
+  color: #333;
+  transition: border-color .2s, background .2s;
+  box-sizing: border-box;
+}
+.modal-form input:focus,
+.modal-form textarea:focus {
+  outline: none;
+  border-color: #75AADB;
+  background: #fff;
+}
+.modal-form .form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.modal-form .form-actions button {
+  flex: 1;
+  min-width: 160px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'Barlow', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background .2s, transform .15s;
+}
+.modal-form .form-actions button:active {
+  transform: scale(0.97);
+}
+.btn-email {
+  background: #75AADB;
+  color: #fff;
+}
+.btn-email:hover { background: #5a8fbf; }
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.btn-whatsapp:hover { background: #1da851; }
+.modal-form .form-note {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .service-modal-body { padding: 24px 20px 20px; }
+  .service-modal-icon { height: 120px; }
+  .service-modal-icon svg { width: 56px; height: 56px; }
+}
 </style>
 </head>
 <body class="capacitaciones" style="display:flex;flex-direction:column;min-height:100vh">
@@ -189,7 +372,7 @@ html { scroll-behavior: smooth; }
     <p class="lead" style="padding-left:8px;margin-bottom:32px;max-width:600px">Formación práctica y certificada para operadores y personal técnico.</p>
     <div class="services-grid">
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 8v6"/><path d="M9 11l3 3 3-3"/><path d="M6 20l3-6h6l3 6"/></svg>
@@ -201,7 +384,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M6 12V5h12v7"/><path d="M4 18h16a2 2 0 0 0 2-2v-4H2v4a2 2 0 0 0 2 2z"/></svg>
@@ -213,7 +396,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/><path d="M18 10h-4l-2 4h-4"/></svg>
@@ -225,7 +408,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l3-6 3 6"/><path d="M17 8v10"/><path d="M3 17h18"/><rect x="3" y="4" width="18" height="13" rx="2"/></svg>
@@ -237,7 +420,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10H2"/><path d="M14 14l4-4-4-4"/><path d="M10 10l-4 4 4 4"/><path d="M2 18V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>
@@ -249,7 +432,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
@@ -261,7 +444,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
@@ -273,7 +456,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="22" height="18" rx="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><path d="M9 12h6"/></svg>
@@ -285,7 +468,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M17.66 17.66l2.83 2.83M1 12h4M19 12h4"/></svg>
@@ -297,7 +480,7 @@ html { scroll-behavior: smooth; }
         </div>
       </a>
 
-      <a href="../contacto/" class="service-card-link">
+      <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f2536,#1a4a6e)">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#75AADB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/></svg>
@@ -312,6 +495,48 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 </section>
+
+<!-- SERVICE MODAL -->
+<div class="service-modal-overlay" id="serviceModalOverlay">
+  <div class="service-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="service-modal-close" id="serviceModalClose" aria-label="Cerrar">&times;</button>
+    <div class="service-modal-icon" id="serviceModalIcon"></div>
+    <div class="service-modal-body">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-sub"></div>
+      <ul id="serviceModalList"></ul>
+      <form class="modal-form" id="modalForm" onsubmit="return false">
+        <div class="form-row">
+          <label for="modalNombre">Nombre</label>
+          <input id="modalNombre" name="nombre" type="text" required placeholder="Tu nombre">
+        </div>
+        <div class="form-row">
+          <label for="modalEmail">Email</label>
+          <input id="modalEmail" name="email" type="email" required placeholder="tu@correo.com">
+        </div>
+        <div class="form-row" style="display:none">
+          <input id="modalAsunto" name="asunto" type="text">
+        </div>
+        <div class="form-row">
+          <label for="modalMensaje">Mensaje</label>
+          <textarea id="modalMensaje" name="mensaje" required rows="3" placeholder="Contanos qué necesitas…"></textarea>
+        </div>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <p class="form-note" id="modalNote">Te respondemos por este medio</p>
+        <div class="form-actions">
+          <button type="button" class="btn-email" onclick="enviarModalEmail()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Enviar por Email
+          </button>
+          <button type="button" class="btn-whatsapp" onclick="enviarModalWhatsApp()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Enviar por WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer style="margin-top:auto">
@@ -380,7 +605,232 @@ document.addEventListener('DOMContentLoaded', function() {
   if (closeBtn) closeBtn.addEventListener('click', closeNav);
   if (overlay) overlay.addEventListener('click', closeNav);
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
+
+  /* ── Course Modal ── */
+  var modalData = {
+    'Operadores de equipo de izaje': {
+      sub: 'Formación teórico-práctica para operadores',
+      items: [
+        'Autoelevadores, grúas móviles y manipuladores telescópicos',
+        'Normativa de seguridad y responsabilidades del operador',
+        'Maniobras de carga, estabilidad y centro de gravedad',
+        'Señalización y comunicación durante el izaje',
+        'Inspección previa al uso y detección de fallas',
+        'Evaluación teórica y práctica con certificado'
+      ]
+    },
+    'Operadores de equipo de levantamiento': {
+      sub: 'Capacitación en equipos de elevación fijos y móviles',
+      items: [
+        'Puentes grúa, polipastos y malacates',
+        'Gatos hidráulicos y aparejos',
+        'Técnicas de izaje y límites de carga',
+        'Uso correcto de mandos y dispositivos de seguridad',
+        'Inspección de cables, cadenas y frenos',
+        'Procedimientos ante emergencias'
+      ]
+    },
+    'Operadores de máquinas viales': {
+      sub: 'Manejo seguro de maquinaria vial',
+      items: [
+        'Motoniveladoras, retroexcavadoras y topadoras',
+        'Compactadoras y equipos de movimiento de suelo',
+        'Seguridad operativa y control de la zona de trabajo',
+        'Mantenimiento básico y chequeo diario',
+        'Estabilidad en pendientes y terrenos irregulares',
+        'Buenas prácticas y prevención de accidentes'
+      ]
+    },
+    'Operadores de maquinaria agrícola': {
+      sub: 'Manejo seguro de maquinaria rural',
+      items: [
+        'Tractores, cosechadoras y pulverizadoras',
+        'Enganche y uso seguro de implementos',
+        'Protecciones (ROPS / FOPS) y toma de fuerza',
+        'Circulación en vía pública y transporte',
+        'Normativa aplicable a maquinaria agrícola',
+        'Mantenimiento preventivo y chequeos'
+      ]
+    },
+    'Seguridad vial': {
+      sub: 'Prevención de siniestros para flotas y transporte',
+      items: [
+        'Normativa de tránsito vigente',
+        'Conducción segura y responsable',
+        'Señalización vial y demarcación',
+        'Factores de riesgo y fatiga al volante',
+        'Prevención de siniestros viales',
+        'Documentación y responsabilidades'
+      ]
+    },
+    'Herramientas manuales, eléctricas y neumáticas': {
+      sub: 'Uso seguro de herramientas portátiles',
+      items: [
+        'Selección adecuada según la tarea',
+        'Uso correcto de herramientas manuales',
+        'Seguridad en herramientas eléctricas',
+        'Herramientas neumáticas y compresores',
+        'Mantenimiento preventivo e inspección',
+        'EPP asociado a cada herramienta'
+      ]
+    },
+    'Uso de EPP': {
+      sub: 'Selección, uso correcto y mantenimiento de EPP',
+      items: [
+        'Casco, protección ocular y facial',
+        'Protección auditiva y respiratoria',
+        'Arneses y protección contra caídas',
+        'Guantes y calzado de seguridad',
+        'Colocación, ajuste y verificación',
+        'Conservación y vida útil'
+      ]
+    },
+    'Operadores de maquinaria pesada': {
+      sub: 'Operación segura de maquinaria pesada',
+      items: [
+        'Maquinaria pesada para construcción e industria',
+        'Señalización y control de la zona de trabajo',
+        'Estabilidad y capacidad de carga',
+        'Procedimientos de emergencia',
+        'Inspección previa al uso',
+        'Mantenimiento básico y reporte de fallas'
+      ]
+    },
+    'Manejo defensivo': {
+      sub: 'Técnicas de conducción defensiva',
+      items: [
+        'Prevención y anticipación de riesgos',
+        'Distancia de seguridad y frenado',
+        'Prevención de colisiones',
+        'Conducción en condiciones adversas',
+        'Control del vehículo y del estrés al volante',
+        'Buenas prácticas de manejo'
+      ]
+    },
+    'Uso de elementos de izaje': {
+      sub: 'Selección e inspección de accesorios de izaje',
+      items: [
+        'Eslingas de cadena, cable y sintéticas',
+        'Ganchos, grilletes y accesorios',
+        'Factor de seguridad y ángulos de carga',
+        'Inspección y criterios de descarte',
+        'Trazabilidad e identificación',
+        'Registro y documentación'
+      ]
+    }
+  };
+
+  var modalOverlay = document.getElementById('serviceModalOverlay');
+  var modalClose = document.getElementById('serviceModalClose');
+  var modalIcon = document.getElementById('serviceModalIcon');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalSub = document.querySelector('#serviceModalOverlay .modal-sub');
+  var modalList = document.getElementById('serviceModalList');
+  var modalNombre = document.getElementById('modalNombre');
+  var modalAsunto = document.getElementById('modalAsunto');
+  var courseLinks = document.querySelectorAll('.services-grid .service-card-link');
+
+  function openCourseModal(link) {
+    var title = (link.querySelector('.service-title') || {}).textContent || '';
+    var data = modalData[title];
+    if (!data) return;
+
+    var cardSvg = link.querySelector('.service-img svg');
+    modalIcon.innerHTML = cardSvg ? cardSvg.outerHTML : '';
+
+    modalTitle.textContent = title;
+    modalSub.textContent = data.sub;
+    modalList.innerHTML = data.items.map(function (i) { return '<li>' + i + '</li>'; }).join('');
+    if (modalAsunto) modalAsunto.value = 'Capacitación: ' + title;
+    if (modalNombre) modalNombre.value = '';
+    var msgField = document.getElementById('modalMensaje');
+    if (msgField) msgField.value = '';
+
+    modalOverlay.classList.add('is-open');
+    document.documentElement.classList.add('nav-open');
+    document.body.classList.add('nav-open');
+    if (modalNombre) setTimeout(function () { modalNombre.focus(); }, 100);
+  }
+
+  function closeCourseModal() {
+    modalOverlay.classList.remove('is-open');
+    document.documentElement.classList.remove('nav-open');
+    document.body.classList.remove('nav-open');
+  }
+
+  for (var i = 0; i < courseLinks.length; i++) {
+    (function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openCourseModal(link);
+      });
+    })(courseLinks[i]);
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closeCourseModal);
+  if (modalOverlay) modalOverlay.addEventListener('click', function (e) { if (e.target === modalOverlay) closeCourseModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('is-open')) closeCourseModal(); });
 });
+
+var CONTACT_ENDPOINT = 'https://segulap-contact.technicalreportnetadmin.workers.dev';
+
+function getModalFormData(requireEmail) {
+  var nombre = document.getElementById('modalNombre').value.trim();
+  var email = document.getElementById('modalEmail').value.trim();
+  var asunto = document.getElementById('modalAsunto').value.trim();
+  var mensaje = document.getElementById('modalMensaje').value.trim();
+  if (!nombre || !mensaje || (requireEmail && !email)) {
+    alert('Por favor completá nombre, email y mensaje.');
+    return null;
+  }
+  if (requireEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Ingresá un email válido.');
+    return null;
+  }
+  return { nombre: nombre, email: email, asunto: asunto, mensaje: mensaje };
+}
+
+function enviarModalEmail() {
+  var d = getModalFormData(true);
+  if (!d) return;
+
+  var note = document.getElementById('modalNote');
+  var btn = document.querySelector('#modalForm .btn-email');
+  var gotcha = document.querySelector('#modalForm [name="_gotcha"]');
+  if (btn) btn.disabled = true;
+  if (note) note.textContent = 'Enviando…';
+
+  fetch(CONTACT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre: d.nombre,
+      email: d.email,
+      asunto: d.asunto,
+      mensaje: d.mensaje,
+      _gotcha: gotcha ? gotcha.value : ''
+    })
+  })
+  .then(function(res) { return res.json().catch(function() { return {}; }).then(function(body) { return { ok: res.ok, body: body }; }); })
+  .then(function(r) {
+    if (!r.ok || !r.body.ok) throw new Error();
+    if (note) note.textContent = '¡Gracias! Recibimos tu consulta y te contactaremos pronto.';
+    document.getElementById('modalForm').reset();
+  })
+  .catch(function() {
+    if (note) note.textContent = 'No se pudo enviar. Probá de nuevo o escribinos a info@segulap.com.ar.';
+  })
+  .finally(function() { if (btn) btn.disabled = false; });
+}
+
+function enviarModalWhatsApp() {
+  var d = getModalFormData(false);
+  if (!d) return;
+  var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
+  texto += 'Consulta: ' + d.asunto + '.%0A%0A';
+  texto += d.mensaje;
+  window.open('https://wa.me/5492216746874?text=' + texto, '_blank');
+}
 </script>
 </body>
 </html>

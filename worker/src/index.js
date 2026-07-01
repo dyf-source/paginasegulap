@@ -39,6 +39,7 @@ export default {
 
     const nombre = (data.nombre || '').trim();
     const email = (data.email || '').trim();
+    const cuit = (data.cuit || '').trim();
     const asunto = (data.asunto || '').trim();
     const mensaje = (data.mensaje || '').trim();
 
@@ -53,6 +54,7 @@ export default {
     const text = [
       'Nombre:', nombre, '',
       'Email de contacto:', email, '',
+      ...(cuit ? ['CUIT / CUIL:', cuit, ''] : []),
       'Asunto:', asunto, '',
       'Mensaje:', mensaje,
     ].join('\n');
