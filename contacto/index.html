@@ -58,6 +58,10 @@
       <input id="nombre" name="nombre" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="text"/>
      </div>
      <div>
+      <label for="email" style="display:block; margin-bottom:0.3rem; font-weight:500">Email</label>
+      <input id="email" name="email" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="email"/>
+     </div>
+     <div>
       <label for="asunto" style="display:block; margin-bottom:0.3rem; font-weight:500">Asunto</label>
       <input id="asunto" name="asunto" required="" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333" type="text"/>
      </div>
@@ -65,8 +69,9 @@
       <label for="mensaje" style="display:block; margin-bottom:0.3rem; font-weight:500">Mensaje</label>
       <textarea id="mensaje" name="mensaje" required="" rows="5" style="width:100%; padding:0.8rem 1rem; border-radius:0.5rem; border:1px solid #ccc; font-size:1rem; background:white; color:#333; resize:vertical"></textarea>
      </div>
+     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px" aria-hidden="true"/>
      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem">
-      <button onclick="enviarEmail()" style="flex:1; min-width:200px; padding:1rem 2rem; border:none; border-radius:0.5rem; background:var(--primary); color:white; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; justify-content:center; gap:5px" type="button">
+      <button id="emailBtn" onclick="enviarEmail()" style="flex:1; min-width:200px; padding:1rem 2rem; border:none; border-radius:0.5rem; background:var(--primary); color:white; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; justify-content:center; gap:5px" type="button">
        <svg fill="none" height="22" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
         <rect height="16" rx="2" width="20" x="2" y="4"></rect>
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
@@ -78,6 +83,7 @@
        <span style="font-size:1.056rem">Enviar por WhatsApp</span>
       </button>
      </div>
+     <p id="formNote" role="status" aria-live="polite" style="margin:0; min-height:1.2rem; font-size:0.95rem"></p>
     </form>
    </div>
   </div>
@@ -256,28 +262,66 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 });
 
-function getFormData() {
+var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+var CONTACT_ENDPOINT = 'https://segulap-contact.technicalreportnetadmin.workers.dev';
+
+function setNote(msg, type) {
+  var note = document.getElementById('formNote');
+  if (!note) return;
+  note.textContent = msg || '';
+  note.style.color = type === 'err' ? 'var(--red, #cc1010)' : type === 'ok' ? '#1a7f37' : '';
+}
+
+function getFormData(requireEmail) {
   var nombre = document.getElementById('nombre').value.trim();
+  var email = document.getElementById('email').value.trim();
   var asunto = document.getElementById('asunto').value.trim();
   var mensaje = document.getElementById('mensaje').value.trim();
-  if (!nombre || !asunto || !mensaje) {
-   alert('Por favor completá todos los campos obligatorios.');
+  if (!nombre || !asunto || !mensaje || (requireEmail && !email)) {
+   setNote('Por favor completá todos los campos obligatorios.', 'err');
    return null;
   }
-  return { nombre: nombre, asunto: asunto, mensaje: mensaje };
+  if (requireEmail && !EMAIL_RE.test(email)) {
+   setNote('Ingresá un email válido.', 'err');
+   return null;
+  }
+  return { nombre: nombre, email: email, asunto: asunto, mensaje: mensaje };
 }
 
 function enviarEmail() {
-  var d = getFormData();
+  var d = getFormData(true);
   if (!d) return;
-  var cuerpo = 'Nombre: ' + d.nombre + '%0D%0A';
-  cuerpo += 'Asunto: ' + d.asunto + '%0D%0A%0D%0A';
-  cuerpo += d.mensaje;
-  window.location.href = 'mailto:info@segulap.com.ar?subject=' + encodeURIComponent(d.asunto) + '&body=' + cuerpo;
+
+  var btn = document.getElementById('emailBtn');
+  var gotcha = document.querySelector('#contact-form [name="_gotcha"]');
+  btn.disabled = true;
+  setNote('Enviando…');
+
+  fetch(CONTACT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nombre: d.nombre,
+      email: d.email,
+      asunto: d.asunto,
+      mensaje: d.mensaje,
+      _gotcha: gotcha ? gotcha.value : ''
+    })
+  })
+  .then(function(res) { return res.json().catch(function() { return {}; }).then(function(body) { return { ok: res.ok, body: body }; }); })
+  .then(function(r) {
+    if (!r.ok || !r.body.ok) throw new Error();
+    setNote('¡Gracias! Recibimos tu consulta y te contactaremos pronto.', 'ok');
+    document.getElementById('contact-form').reset();
+  })
+  .catch(function() {
+    setNote('No se pudo enviar. Probá de nuevo o escribinos a info@segulap.com.ar.', 'err');
+  })
+  .finally(function() { btn.disabled = false; });
 }
 
 function enviarWhatsApp() {
-  var d = getFormData();
+  var d = getFormData(false);
   if (!d) return;
   var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
   texto += d.mensaje;
