@@ -2171,3 +2171,13 @@ footer {
 .capacitaciones .nav-close {
   color: rgba(26,26,26,0.85);
 }
+
+.capacitaciones .nav-cta {
+  color: #2C5F8A !important;
+  border-color: #2C5F8A !important;
+}
+
+.capacitaciones .nav-cta:hover {
+  background: rgba(255,255,255,0.85);
+  color: #2C5F8A !important;
+}
