@@ -1,3 +1,5 @@
+// Public, read-only categories/groups config. Served at /api/categories.
+// Writes live at /admin/api/categories behind the Cloudflare Access gate.
 const KV_KEY = "categories_config";
 
 function json(data, status = 200) {
@@ -13,20 +15,4 @@ export async function onRequestGet({ env }) {
     return json({ categories: [], groups: {}, colors: {} });
   }
   return json(JSON.parse(raw));
-}
-
-export async function onRequestPost({ request, env }) {
-  const body = await request.json();
-  if (!body || !body.categories) {
-    return json({ error: "categories array is required" }, 400);
-  }
-
-  const config = {
-    categories: body.categories,
-    groups: body.groups || {},
-    colors: body.colors || {},
-  };
-
-  await env.segulap_kv.put(KV_KEY, JSON.stringify(config));
-  return json(config);
 }

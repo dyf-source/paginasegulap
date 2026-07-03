@@ -1,4 +1,6 @@
-import { productosData, defaultConfig } from "../shared/data.js";
+// Admin-only one-time seed. Served at /admin/api/seed, gated by the Cloudflare
+// Access policy on /admin/*. Populates KV from the bundled data in shared/data.js.
+import { productosData, defaultConfig } from "../../shared/data.js";
 
 const PRODUCTS_KEY = "products";
 const CATEGORIES_KEY = "categories_config";

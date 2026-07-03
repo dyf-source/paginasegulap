@@ -921,6 +921,30 @@ footer {
   margin: 0;
 }
 
+/* Search bar + heading stay put; only the category list scrolls, fitting the
+   remaining viewport height below them. */
+#categoryList {
+  max-height: calc(100vh - 230px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+#categoryList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#categoryList::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+#categoryList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .category-item {
   display: flex;
   align-items: center;

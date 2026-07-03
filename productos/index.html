@@ -406,7 +406,21 @@ function buildCategoryList() {
       menu.appendChild(label);
     }
   });
+  adjustCategoryListHeight();
 }
+
+// Fit the category list from its current on-screen top to the bottom of the
+// viewport, so at the very top of the page (list sitting below the header) it
+// stays shorter and the page can still scroll down, and once the sidebar pins
+// it grows to full height. overscroll-behavior keeps it from moving the list.
+function adjustCategoryListHeight() {
+  var list = document.getElementById('categoryList');
+  if (!list || getComputedStyle(list).display === 'none') return;
+  var top = list.getBoundingClientRect().top;
+  list.style.maxHeight = Math.max(window.innerHeight - top - 24, 160) + 'px';
+}
+window.addEventListener('scroll', adjustCategoryListHeight, { passive: true });
+window.addEventListener('resize', adjustCategoryListHeight);
 
 function toggleGroup(parent) {
   expandedGroups[parent] = !expandedGroups[parent];

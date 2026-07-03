@@ -2,7 +2,15 @@
 
 ## Overview
 
-This adds an authentication gate at Cloudflare's edge for `/admin/*`. Unauthenticated users never see a byte of the admin page. No code changes needed — the site stays fully static.
+This adds an authentication gate at Cloudflare's edge for `/admin/*`. Unauthenticated users never see a byte of the admin page.
+
+Crucially, the data-mutation API lives under the same path: all writes are served
+at `/admin/api/*` (`/admin/api/products`, `/admin/api/categories`,
+`/admin/api/seed`), so a single Access policy on `/admin/*` protects **both** the
+admin UI and the endpoints that modify the database. Public read-only endpoints
+stay at `/api/*` (`GET /api/products`, `GET /api/categories`) and remain open for
+the storefront. Make sure the Access application's path is `/admin/*` (with the
+wildcard) so it covers `/admin/api/*` too.
 
 ## Prerequisites
 
@@ -66,10 +74,25 @@ This adds an authentication gate at Cloudflare's edge for `/admin/*`. Unauthenti
 - You should be redirected to a Cloudflare login page
 - After authenticating, you reach the admin panel
 
+### First-time seed (after deploy)
+
+Because `/admin/api/seed` is behind Access, you cannot `curl` it in production
+without a service token. After the first deploy, open `https://yourdomain.com/admin/`,
+authenticate, and click **Inicializar BD** in the Productos toolbar to populate KV
+from the bundled catalog. (Locally, without Access, `curl -X POST
+http://localhost:8788/admin/api/seed` still works.)
+
 ## Local Development
 
-Cloudflare Access only applies to the production domain. Local dev (`localhost`, `file://`) is unaffected — you continue working as normal.
+Cloudflare Access only applies to the production domain. Local dev (`localhost`,
+`file://`) is unaffected. Note that with the password removed (below), the admin
+panel is **open** on localhost — that is expected, since Access is the only gate
+and it doesn't run locally.
 
 ## Removing the Old Password Code
 
-The hardcoded password (`ADMIN_PASSWORD`) in `admin/index.html` is no longer needed and has been removed. Authentication is now handled by Cloudflare at the edge.
+The hardcoded password (`ADMIN_PASSWORD = 'segulap2024'`) and the client-side
+login screen in `admin/index.html` have been removed. The panel now loads directly
+and relies entirely on Cloudflare Access at the edge; **Cerrar sesión** redirects
+to `/cdn-cgi/access/logout`. Do not re-introduce a client-side password — it was
+trivially bypassable via view-source.

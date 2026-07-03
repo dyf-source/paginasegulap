@@ -51,15 +51,6 @@
 </head>
 <body class="admin-body">
 
-<div id="loginScreen" class="admin-login">
-  <div class="admin-login-box">
-    <h1>Acceso Administrador</h1>
-    <input type="password" id="loginPass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')adminLogin()">
-    <button onclick="adminLogin()">Ingresar</button>
-    <p id="loginError" class="admin-login-error"></p>
-  </div>
-</div>
-
 <div id="adminPanel" class="admin-panel" style="display:none">
   <div class="admin-topbar">
     <h2>Panel de Administración</h2>
@@ -77,6 +68,7 @@
       <button class="admin-btn admin-btn-primary" onclick="showAddForm()">+ Agregar producto</button>
       <button class="admin-btn admin-btn-outline" onclick="exportJSON()">Exportar JSON</button>
       <button class="admin-btn admin-btn-outline" onclick="document.getElementById('importInput').click()">Importar JSON</button>
+      <button class="admin-btn admin-btn-outline" onclick="seedDatabase()">Inicializar BD</button>
       <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
       <input type="text" id="adminSearch" class="admin-search-input" placeholder="Buscar producto..." oninput="renderAdminTable()">
     </div>
@@ -232,7 +224,6 @@
 <script src="../assets/js/productos.js"></script>
 <script src="../assets/js/config.js"></script>
 <script>
-var ADMIN_PASSWORD = 'segulap2024';
 var db = [];
 
 function loadProducts() {
@@ -242,8 +233,22 @@ function loadProducts() {
     .catch(function() { db = JSON.parse(JSON.stringify(productosData)); renderAdminTable(); });
 }
 
+// One-time populate of an empty KV from the bundled catalog. Refuses if the DB
+// already has data. Hits the Access-gated /admin/api/seed endpoint.
+function seedDatabase() {
+  if (!confirm('Inicializar la base de datos con el catálogo por defecto?\nSolo funciona si la base está vacía.')) return;
+  fetch('/admin/api/seed', { method: 'POST' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      alert(d && d.data && d.data.message ? d.data.message : 'Listo');
+      loadProducts();
+      loadCategories();
+    })
+    .catch(function() { alert('Error al inicializar la base de datos.'); });
+}
+
 function saveProducts(cb) {
-  fetch('/api/products', {
+  fetch('/admin/api/products', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ products: db })
@@ -251,22 +256,6 @@ function saveProducts(cb) {
     .then(function(r) { return r.json(); })
     .then(function(d) { if (d.ok && cb) cb(); })
     .catch(function() {});
-}
-
-function setSession() {
-  var expiry = new Date();
-  expiry.setHours(23, 59, 59, 999);
-  localStorage.setItem('segulap_admin_session', expiry.getTime());
-}
-
-function clearSession() {
-  localStorage.removeItem('segulap_admin_session');
-}
-
-function sessionValid() {
-  var stored = localStorage.getItem('segulap_admin_session');
-  if (!stored) return false;
-  return Date.now() < parseInt(stored, 10);
 }
 
 function switchTab(tab) {
@@ -307,7 +296,7 @@ function loadCategories() {
 }
 
 function saveCategories(cb) {
-  fetch('/api/categories', {
+  fetch('/admin/api/categories', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(catConfig)
@@ -675,33 +664,14 @@ function exportCatConfig() {
 }
 
 function showAdminPanel() {
-  document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('adminPanel').style.display = 'block';
   switchTab('productos');
 }
 
-function initSession() {
-  if (sessionValid()) {
-    showAdminPanel();
-  }
-}
-
-function adminLogin() {
-  var pass = document.getElementById('loginPass').value;
-  if (pass === ADMIN_PASSWORD) {
-    setSession();
-    showAdminPanel();
-    document.getElementById('loginError').textContent = '';
-  } else {
-    document.getElementById('loginError').textContent = 'Contraseña incorrecta';
-  }
-}
-
+// Auth is handled at the edge by Cloudflare Access on /admin/*. Logging out
+// means clearing the Access session, not a local password.
 function adminLogout() {
-  clearSession();
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('adminPanel').style.display = 'none';
-  document.getElementById('loginPass').value = '';
+  window.location.href = '/cdn-cgi/access/logout';
 }
 
 function imgCell(p) {
@@ -890,9 +860,9 @@ function saveConfig() {
 }
 
 populateCatSelect('addCat', categories[0]);
+showAdminPanel();
 loadProducts();
 loadCategories();
-initSession();
 </script>
 </body>
 </html>

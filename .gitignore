@@ -1,4 +1,5 @@
 .opencode
 .wrangler
 wrangler.toml
+!/wrangler.toml
 .claude
