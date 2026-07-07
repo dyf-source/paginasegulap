@@ -752,6 +752,10 @@ footer {
 
 .social-btn:hover { background: var(--red); border-color: var(--red); }
 
+/* Temporarily show only Instagram: hide the placeholder-link social icons
+   (LinkedIn and Facebook still point at "#"). */
+.social-btn[href="#"] { display: none; }
+
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 20px 0;
@@ -794,6 +798,14 @@ footer {
   align-items: center;
 }
 .footer-col .phone-row .icon-circle {
+  margin-top: 0;
+}
+/* Email row is now a single line (ventas@ removed); center it with its icon.
+   Targets the contact-row that is neither the phone row nor the address row. */
+.footer-col .contact-row:not(.phone-row):not(:has(.address-link)) {
+  align-items: center;
+}
+.footer-col .contact-row:not(.phone-row):not(:has(.address-link)) .icon-circle {
   margin-top: 0;
 }
 .phone-link {
