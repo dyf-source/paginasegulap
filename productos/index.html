@@ -246,6 +246,20 @@ var checkedCategories = {};
 var expandedGroups = {};
 var preselectedCat = new URLSearchParams(window.location.search).get('cat');
 
+// When developing off the production domain (Live Server, file://, another
+// localhost), read from the deployed Cloudflare API so the page shows live KV
+// data automatically. In production this stays empty, so fetches remain
+// same-origin relative. A localStorage 'segulap_api_base' overrides the default
+// (e.g. to point at a local `wrangler pages dev`, set it to '' or a localhost URL).
+var API_BASE = (function() {
+  var h = location.hostname;
+  var isLocal = h === 'localhost' || h === '127.0.0.1' || h === '' || h.endsWith('.local');
+  if (!isLocal) return '';
+  var override = localStorage.getItem('segulap_api_base');
+  if (override !== null) return override.replace(/\/+$/, '');
+  return 'https://paginasegulap.pages.dev';
+})();
+
 function isGroupParent(cat) {
   return activeGroups && activeGroups.hasOwnProperty(cat);
 }
@@ -296,8 +310,8 @@ function setFallbackData() {
 }
 
 Promise.all([
-  fetch('/api/products').then(function(r) { return r.json(); }).catch(function() { return null; }),
-  fetch('/api/categories').then(function(r) { return r.json(); }).catch(function() { return null; })
+  fetch(API_BASE + '/api/products').then(function(r) { return r.json(); }).catch(function() { return null; }),
+  fetch(API_BASE + '/api/categories').then(function(r) { return r.json(); }).catch(function() { return null; })
 ]).then(function(results) {
   var prodRes = results[0];
   var catRes = results[1];

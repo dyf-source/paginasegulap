@@ -1425,8 +1425,8 @@ footer {
 
   .product-detail.is-visible {
     visibility: visible;
-    width: 360px;
-    max-height: calc(100vh - 132px);
+    width: 460px;
+    max-height: calc(100vh - 108px);
     overflow-y: auto;
     position: sticky;
     top: 106px;
