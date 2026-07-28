@@ -260,6 +260,15 @@ var API_BASE = (function() {
   return 'https://paginasegulap.pages.dev';
 })();
 
+// Resolve a product image to a loadable URL. Root-relative /img paths are served
+// by the same origin in production, but locally must point at API_BASE. Absolute
+// http(s) and legacy data: URIs pass through unchanged.
+function resolveImg(u) {
+  if (!u) return u;
+  if (/^https?:/.test(u) || u.indexOf('data:') === 0) return u;
+  return API_BASE + u;
+}
+
 function isGroupParent(cat) {
   return activeGroups && activeGroups.hasOwnProperty(cat);
 }
@@ -559,7 +568,7 @@ function renderProducts(items) {
   items.forEach(function(p, idx) {
     var imgHtml;
     if (p.img) {
-      imgHtml = '<img src="' + p.img + '" class="product-img" alt="">';
+      imgHtml = '<img src="' + resolveImg(p.img) + '" class="product-img" alt="">';
     } else {
       imgHtml = '<div class="product-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
     }
@@ -579,7 +588,7 @@ function showProductDetail(idx) {
   var img = document.getElementById('detailImg');
   var wrap = document.querySelector('.detail-img-wrap');
   if (p.img) {
-    img.src = p.img;
+    img.src = resolveImg(p.img);
     img.style.display = 'block';
     wrap.classList.remove('no-image');
   } else {

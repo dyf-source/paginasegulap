@@ -258,6 +258,24 @@ function saveProducts(cb) {
     .catch(function() {});
 }
 
+// Files chosen in the add/edit forms, uploaded to R2 on save (not stored inline).
+var pendingAddFile = null;
+var pendingDetailFile = null;
+
+// Upload one image to R2 via the Access-gated endpoint; resolves to its /img path.
+function uploadImage(file) {
+  return fetch('/admin/api/upload', {
+    method: 'POST',
+    headers: { 'Content-Type': file.type || 'application/octet-stream' },
+    body: file
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d && d.ok && d.data && d.data.path) return d.data.path;
+      throw new Error((d && d.data && d.data.error) || 'upload failed');
+    });
+}
+
 function switchTab(tab) {
   document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('active'); });
   document.getElementById('sectionProductos').style.display = 'none';
@@ -719,13 +737,10 @@ function populateCatSelect(selId, selected) {
 function previewAddImg(e) {
   var file = e.target.files[0];
   if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    var prev = document.getElementById('addImgPreview');
-    prev.src = ev.target.result;
-    prev.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+  pendingAddFile = file;
+  var prev = document.getElementById('addImgPreview');
+  prev.src = URL.createObjectURL(file);
+  prev.style.display = 'block';
 }
 
 function showAddForm() {
@@ -734,6 +749,7 @@ function showAddForm() {
   document.getElementById('addDesc').value = '';
   document.getElementById('addImg').value = '';
   document.getElementById('addImgPreview').style.display = 'none';
+  pendingAddFile = null;
   populateCatSelect('addCat', categories[0]);
   document.getElementById('addName').focus();
 }
@@ -747,16 +763,21 @@ function addProduct() {
   if (!name) return;
   var cat = document.getElementById('addCat').value;
   var desc = document.getElementById('addDesc').value.trim();
-  var img = document.getElementById('addImgPreview').src;
   var product = { name: name, cat: cat, desc: desc };
-  if (img && img.startsWith('data:')) {
-    product.img = img;
+  var finish = function() {
+    db.push(product);
+    saveProducts(function() {
+      hideAddForm();
+      renderAdminTable();
+    });
+  };
+  if (pendingAddFile) {
+    uploadImage(pendingAddFile)
+      .then(function(path) { product.img = path; finish(); })
+      .catch(function() { alert('No se pudo subir la imagen.'); });
+  } else {
+    finish();
   }
-  db.push(product);
-  saveProducts(function() {
-    hideAddForm();
-    renderAdminTable();
-  });
 }
 
 function showDetailModal(idx) {
@@ -773,6 +794,7 @@ function showDetailModal(idx) {
     prev.style.display = 'none';
   }
   document.getElementById('detailImg').value = '';
+  pendingDetailFile = null;
   var saveBtn = document.getElementById('detailSaveBtn');
   saveBtn.onclick = function() { saveDetailModal(); };
   document.getElementById('detailOverlay').style.display = 'flex';
@@ -785,13 +807,10 @@ function hideDetailModal() {
 function previewDetailImg(e) {
   var file = e.target.files[0];
   if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    var prev = document.getElementById('detailImgPreview');
-    prev.src = ev.target.result;
-    prev.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+  pendingDetailFile = file;
+  var prev = document.getElementById('detailImgPreview');
+  prev.src = URL.createObjectURL(file);
+  prev.style.display = 'block';
 }
 
 function saveDetailModal() {
@@ -799,17 +818,22 @@ function saveDetailModal() {
   if (!name) return;
   var cat = document.getElementById('detailCat').value;
   var desc = document.getElementById('detailDesc').value.trim();
-  var prev = document.getElementById('detailImgPreview');
   db[detailIdx].name = name;
   db[detailIdx].cat = cat;
   db[detailIdx].desc = desc;
-  if (prev.style.display !== 'none' && prev.src) {
-    db[detailIdx].img = prev.src;
+  var finish = function() {
+    saveProducts(function() {
+      hideDetailModal();
+      renderAdminTable();
+    });
+  };
+  if (pendingDetailFile) {
+    uploadImage(pendingDetailFile)
+      .then(function(path) { db[detailIdx].img = path; finish(); })
+      .catch(function() { alert('No se pudo subir la imagen.'); });
+  } else {
+    finish();
   }
-  saveProducts(function() {
-    hideDetailModal();
-    renderAdminTable();
-  });
 }
 
 function deleteProduct(idx) {

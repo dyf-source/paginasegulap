@@ -5,3 +5,7 @@ compatibility_date = "2025-06-12"
 [[kv_namespaces]]
 binding = "segulap_kv"
 id = "2377f8ac19ba4bd4a46ea08c40795313"
+
+[[r2_buckets]]
+binding = "segulap_images"
+bucket_name = "segulap-images"

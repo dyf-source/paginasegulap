@@ -1264,7 +1264,7 @@ footer {
   justify-content: center;
   color: #bbb;
   flex-shrink: 0;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .product-body {
@@ -1371,10 +1371,10 @@ footer {
 }
 
 .product-detail-img {
+  width: 100%;
   height: 100%;
-  width: auto;
+  object-fit: contain;
   display: block;
-  margin: 0 auto;
 }
 
 .product-detail-body {
