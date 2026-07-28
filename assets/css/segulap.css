@@ -1267,6 +1267,12 @@ footer {
   object-fit: contain;
 }
 
+/* Real image: white letterbox behind it. The no-image placeholder (a div)
+   keeps the gray background above. */
+img.product-img {
+  background: #fff;
+}
+
 .product-body {
   display: flex;
   flex-direction: column;
