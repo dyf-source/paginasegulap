@@ -1,4 +1,4 @@
-var SEGULAP_DEFAULT_WHATSAPP = '5492216746874';
+var SEGULAP_DEFAULT_WHATSAPP = '5492216515377';
 
 function getWhatsAppNumber() {
   var stored = localStorage.getItem('segulap_whatsapp');
