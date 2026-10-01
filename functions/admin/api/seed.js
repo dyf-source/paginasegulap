@@ -21,7 +21,7 @@ export async function onRequestPost({ env }) {
 
   await env.segulap_kv.put(PRODUCTS_KEY, JSON.stringify(productosData));
   await env.segulap_kv.put(CATEGORIES_KEY, JSON.stringify(defaultConfig));
-  await env.segulap_kv.put(WHATSAPP_KEY, "5492216746874");
+  await env.segulap_kv.put(WHATSAPP_KEY, "5492216515377");
 
   return json({
     message: "Seeded successfully",
