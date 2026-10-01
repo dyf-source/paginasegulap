@@ -26,6 +26,7 @@ export async function onRequestPost({ request, env }) {
     cat: body.cat || "Otros",
     desc: body.desc || "",
     img: body.img || "",
+    thumb: body.thumb || "",
   });
   await env.segulap_kv.put(KV_KEY, JSON.stringify(list));
 
@@ -56,6 +57,8 @@ export async function onRequestPut({ request, env }) {
     cat: body.cat || list[idx].cat,
     desc: body.desc !== undefined ? body.desc : list[idx].desc,
     img: body.img !== undefined ? body.img : list[idx].img,
+    // A new img without a thumb invalidates the old thumbnail
+    thumb: body.thumb !== undefined ? body.thumb : (body.img !== undefined ? "" : list[idx].thumb || ""),
   };
   await env.segulap_kv.put(KV_KEY, JSON.stringify(list));
 

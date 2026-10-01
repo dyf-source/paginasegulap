@@ -187,8 +187,11 @@ var navThemes = {
 
 document.addEventListener('DOMContentLoaded', function() {
   var ref = document.referrer;
+  // Explicit ?from=<theme> (e.g. from /links/) takes precedence over the referrer
+  var from = new URLSearchParams(window.location.search).get('from');
   var theme;
-  if (ref.indexOf('seguridad-industrial') > -1) theme = navThemes.seguridad;
+  if (from && Object.prototype.hasOwnProperty.call(navThemes, from)) theme = navThemes[from];
+  else if (ref.indexOf('seguridad-industrial') > -1) theme = navThemes.seguridad;
   else if (ref.indexOf('proteccion-incendios') > -1) theme = navThemes.incendios;
   else if (ref.indexOf('capacitaciones') > -1) theme = navThemes.capacitaciones;
   else if (ref.indexOf('inspecciones') > -1) theme = navThemes.inspecciones;
@@ -248,7 +251,8 @@ var preselectedCat = new URLSearchParams(window.location.search).get('cat');
 
 // When developing off the production domain (Live Server, file://, another
 // localhost), read from the deployed Cloudflare API so the page shows live KV
-// data automatically. In production this stays empty, so fetches remain
+// data automatically. Uses the custom domain because pages.dev bypasses the
+// edge cache for Function responses like /img/*. In production this stays empty, so fetches remain
 // same-origin relative. A localStorage 'segulap_api_base' overrides the default
 // (e.g. to point at a local `wrangler pages dev`, set it to '' or a localhost URL).
 var API_BASE = (function() {
@@ -257,7 +261,7 @@ var API_BASE = (function() {
   if (!isLocal) return '';
   var override = localStorage.getItem('segulap_api_base');
   if (override !== null) return override.replace(/\/+$/, '');
-  return 'https://paginasegulap.pages.dev';
+  return 'https://www.segulap.com.ar';
 })();
 
 // Resolve a product image to a loadable URL. Root-relative /img paths are served
@@ -568,7 +572,7 @@ function renderProducts(items) {
   items.forEach(function(p, idx) {
     var imgHtml;
     if (p.img) {
-      imgHtml = '<img src="' + resolveImg(p.img) + '" class="product-img" alt="">';
+      imgHtml = '<img src="' + resolveImg(p.thumb || p.img) + '" class="product-img" alt="" width="72" height="72" loading="lazy" decoding="async">';
     } else {
       imgHtml = '<div class="product-img"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
     }

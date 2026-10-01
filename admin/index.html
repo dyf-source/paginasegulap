@@ -69,6 +69,7 @@
       <button class="admin-btn admin-btn-outline" onclick="exportJSON()">Exportar JSON</button>
       <button class="admin-btn admin-btn-outline" onclick="document.getElementById('importInput').click()">Importar JSON</button>
       <button class="admin-btn admin-btn-outline" onclick="seedDatabase()">Inicializar BD</button>
+      <button class="admin-btn admin-btn-outline" id="optimizeBtn" onclick="optimizeAllImages()">Optimizar imágenes</button>
       <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
       <input type="text" id="adminSearch" class="admin-search-input" placeholder="Buscar producto..." oninput="renderAdminTable()">
     </div>
@@ -274,6 +275,88 @@ function uploadImage(file) {
       if (d && d.ok && d.data && d.data.path) return d.data.path;
       throw new Error((d && d.data && d.data.error) || 'upload failed');
     });
+}
+
+var IMG_FULL_MAX = 1200;  // detail view
+var IMG_THUMB_MAX = 160;  // list thumbnails render at 72px, 2x for high-DPI
+
+function loadImageEl(blob) {
+  return new Promise(function(resolve, reject) {
+    var url = URL.createObjectURL(blob);
+    var img = new Image();
+    img.onload = function() { URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = function() { URL.revokeObjectURL(url); reject(new Error('decode failed')); };
+    img.src = url;
+  });
+}
+
+// Downscale to fit maxSide and re-encode as WebP. Browsers without WebP encoding
+// (older Safari) return PNG from toBlob, so fall back to JPEG on a white canvas.
+function encodeImage(img, maxSide, quality) {
+  var scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+  var w = Math.max(1, Math.round(img.naturalWidth * scale));
+  var h = Math.max(1, Math.round(img.naturalHeight * scale));
+  var canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  var ctx = canvas.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, w, h);
+  return new Promise(function(resolve) {
+    canvas.toBlob(function(blob) {
+      if (blob && blob.type === 'image/webp') return resolve({ blob: blob, scaled: scale < 1 });
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, w, h);
+      canvas.toBlob(function(jpg) { resolve({ blob: jpg, scaled: scale < 1 }); }, 'image/jpeg', quality);
+    }, 'image/webp', quality);
+  });
+}
+
+// Resize + upload a full image and a thumbnail; resolves to { img, thumb } paths.
+function uploadProductImage(file) {
+  return loadImageEl(file).then(function(img) {
+    return Promise.all([encodeImage(img, IMG_FULL_MAX, 0.82), encodeImage(img, IMG_THUMB_MAX, 0.8)]);
+  }).then(function(out) {
+    // Keep the original when it's already small and re-encoding wouldn't shrink it
+    var full = (!out[0].scaled && file.size <= out[0].blob.size && file.type) ? file : out[0].blob;
+    return Promise.all([uploadImage(full), uploadImage(out[1].blob)]);
+  }).then(function(paths) {
+    return { img: paths[0], thumb: paths[1] };
+  });
+}
+
+// One-time pass: re-encode every product image that has no thumbnail yet.
+// Original R2 objects are left in place; only the product records change.
+function optimizeAllImages() {
+  var targets = db.filter(function(p) { return p.img && !p.thumb && p.img.indexOf('data:') !== 0; });
+  if (!targets.length) { alert('Todas las imágenes ya están optimizadas.'); return; }
+  if (!confirm('Optimizar ' + targets.length + ' imágenes?\nSe generan versiones reducidas y miniaturas. Puede tardar unos minutos.')) return;
+  var btn = document.getElementById('optimizeBtn');
+  btn.disabled = true;
+  var done = 0, failed = 0;
+  function progress() { btn.textContent = 'Optimizando ' + (done + failed) + '/' + targets.length + '...'; }
+  progress();
+  // Sequential to stay gentle on the upload endpoint
+  var chain = Promise.resolve();
+  targets.forEach(function(p) {
+    chain = chain.then(function() {
+      return fetch(p.img)
+        .then(function(r) { if (!r.ok) throw new Error('fetch ' + r.status); return r.blob(); })
+        .then(function(blob) { return uploadProductImage(new File([blob], 'img', { type: blob.type })); })
+        .then(function(res) { p.img = res.img; p.thumb = res.thumb; done++; })
+        .catch(function() { failed++; })
+        .then(progress);
+    });
+  });
+  chain.then(function() {
+    saveProducts(function() {
+      renderAdminTable();
+      btn.disabled = false;
+      btn.textContent = 'Optimizar imágenes';
+      alert('Optimizadas: ' + done + (failed ? '\nFallidas: ' + failed : ''));
+    });
+  });
 }
 
 function switchTab(tab) {
@@ -694,7 +777,7 @@ function adminLogout() {
 
 function imgCell(p) {
   if (p.img) {
-    return '<img src="' + p.img + '" class="admin-table-img">';
+    return '<img src="' + (p.thumb || p.img) + '" class="admin-table-img" loading="lazy" decoding="async">';
   }
   return '<div class="admin-table-img-placeholder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>';
 }
@@ -772,8 +855,8 @@ function addProduct() {
     });
   };
   if (pendingAddFile) {
-    uploadImage(pendingAddFile)
-      .then(function(path) { product.img = path; finish(); })
+    uploadProductImage(pendingAddFile)
+      .then(function(res) { product.img = res.img; product.thumb = res.thumb; finish(); })
       .catch(function() { alert('No se pudo subir la imagen.'); });
   } else {
     finish();
@@ -828,8 +911,8 @@ function saveDetailModal() {
     });
   };
   if (pendingDetailFile) {
-    uploadImage(pendingDetailFile)
-      .then(function(path) { db[detailIdx].img = path; finish(); })
+    uploadProductImage(pendingDetailFile)
+      .then(function(res) { db[detailIdx].img = res.img; db[detailIdx].thumb = res.thumb; finish(); })
       .catch(function() { alert('No se pudo subir la imagen.'); });
   } else {
     finish();
