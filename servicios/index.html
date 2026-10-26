@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Servicios</title>
 <meta name="description" content="Servicios profesionales de seguridad contra incendios e industrial. Extintores, redes, EPP, capacitaciones, equipos de elevación y más.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="../assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/servicios.css" rel="stylesheet" type="text/css">
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
@@ -153,49 +155,49 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       title: 'Mantenimiento de Matafuegos',
       desc: 'Servicio técnico, recarga y control periódico de matafuegos.',
-      img: '../assets/images/extintor-revision.png',
+      img: '../assets/images/extintor-revision.webp',
       icon: '../assets/images/clock.svg',
       href: '../proteccion-incendios/extintores/mantenimiento/'
     },
 {
       title: 'Capacitaciones',
       desc: 'Formación teórica y práctica.',
-      img: '../assets/images/capacitaciones-placeholder.png',
+      img: '../assets/images/capacitaciones-placeholder.webp',
       icon: '../assets/images/casco-icon.svg',
       href: '../capacitaciones/'
     },
     {
       title: 'Inspecciones',
       desc: 'Inspección técnica.',
-      img: '../assets/images/forklift-placeholder.png',
+      img: '../assets/images/forklift-placeholder.webp',
       icon: '../assets/images/clipboard.svg',
       href: '../seguridad-industrial/inspecciones/'
     },
     {
       title: 'Informes Técnicos',
       desc: 'Elaboración de informes y documentación técnica profesional.',
-      img: '../assets/images/clipboard-writing.png',
+      img: '../assets/images/clipboard-writing.webp',
       icon: '../assets/images/clipboard.svg',
       href: '../seguridad-industrial/informes/'
     },
     {
       title: 'Ingeniería',
       desc: 'Proyectos de ingeniería.',
-      img: '../assets/images/ingenieria-grua.png',
+      img: '../assets/images/ingenieria-grua.webp',
       icon: '../assets/images/crane.svg',
       href: '../seguridad-industrial/ingenieria/'
     },
     {
       title: 'Equipos de Elevación',
       desc: 'Inspección de equipos y accesorios de izaje.',
-      img: '../assets/images/izajes.jpg',
+      img: '../assets/images/izajes.webp',
       icon: '../assets/images/crane.svg',
       href: '../equipos-elevacion/'
     },
     {
       title: 'Red Contra Incendios',
       desc: 'Diseño, instalación y mantenimiento de redes contra incendios.',
-      img: '../assets/images/accesorios-red-incendios.png',
+      img: '../assets/images/accesorios-red-incendios.webp',
       icon: '../assets/images/extintor-icon.svg',
       href: '../proteccion-incendios/red-incendios/'
     }
@@ -235,10 +237,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var hovering = false;
   var xfadeTimer = null;
 
-  /* ── Preload images ── */
-  servicios.forEach(function (s) {
-    var img = new Image();
-    img.src = s.img;
+  /* ── Preload images once the page has finished loading so they don't compete with first paint ── */
+  window.addEventListener('load', function () {
+    servicios.forEach(function (s) {
+      var img = new Image();
+      img.src = s.img;
+    });
   });
 
   /* ── Show card ── */

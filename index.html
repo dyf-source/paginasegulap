@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Seguridad Contra Incendios e Industrial</title>
 <meta name="description" content="Segulap - Servicios profesionales de seguridad contra incendios. Extintores, redes de incendio, capacitaciones y más.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
-<link rel="preload" href="assets/images/Banner-1.png" as="image">
-<link rel="preload" href="assets/images/capacitaciones-banner.png" as="image">
-<link rel="preload" href="assets/images/forklift-banner.png" as="image">
-<link rel="preload" href="assets/images/ingenieria-grua-banner.png" as="image">
+<link rel="preload" href="assets/images/Banner-1.webp" as="image" fetchpriority="high">
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh">
 
@@ -64,7 +63,7 @@
   <div class="container">
     <div class="category-grid">
       <a href="proteccion-incendios/" class="category-card">
-        <div class="category-img" style="background-image:url(assets/images/accesorios-red-incendios.png)"></div>
+        <div class="category-img" style="background-image:url(assets/images/accesorios-red-incendios.webp)"></div>
         <div class="category-overlay">
           <h2 class="category-title">Protección<br>Contra Incendios</h2>
           <p class="category-desc">Mantenimiento de extintores, redes de incendio, alarmas y detectores.</p>
@@ -74,7 +73,7 @@
         </div>
       </a>
       <a href="seguridad-industrial/" class="category-card">
-        <div class="category-img" style="background-image:url(assets/images/PPE.jpg)"></div>
+        <div class="category-img" style="background-image:url(assets/images/PPE.webp)"></div>
         <div class="category-overlay">
           <h2 class="category-title">Seguridad<br>Industrial</h2>
           <p class="category-desc">EPP, indumentaria, calzado de seguridad, elementos viales y kits antiderrame.</p>
@@ -84,7 +83,7 @@
         </div>
       </a>
       <a href="inspecciones/" class="category-card">
-        <div class="category-img" style="background-image:url(assets/images/forklift-banner.png)"></div>
+        <div class="category-img" style="background-image:url(assets/images/forklift-banner.webp)"></div>
         <div class="category-overlay">
           <h2 class="category-title">Inspecciones</h2>
           <p class="category-desc">Inspección de autoelevadores, grúas, accesorios de izaje e informes técnicos.</p>
@@ -94,7 +93,7 @@
         </div>
       </a>
       <a href="capacitaciones/" class="category-card">
-        <div class="category-img" style="background-image:url(assets/images/capacitaciones-banner.png)"></div>
+        <div class="category-img" style="background-image:url(assets/images/capacitaciones-banner.webp)"></div>
         <div class="category-overlay">
           <h2 class="category-title">Capacitaciones</h2>
           <p class="category-desc">Operación de equipos de izaje y maquinaria pesada, seguridad vial, uso de EPP y herramientas.</p>
@@ -250,8 +249,6 @@
   </div>
 </footer>
 
-<script src="assets/js/animation-engine.js" type="text/javascript"></script>
-<script src="assets/js/runtime.js" type="text/javascript"></script>
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
     var toggle = document.querySelector('.nav-toggle');
@@ -289,14 +286,12 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav();
     });
-    var badge = document.querySelector('.w-webflow-badge, a[href="https://webflow.com"]');
-    if (badge) badge.remove();
     /* ── Hero background crossfade ── */
     var heroImages = [
-      'assets/images/Banner-1.png',
-      'assets/images/capacitaciones-banner.png',
-      'assets/images/forklift-banner.png',
-      'assets/images/ingenieria-grua-banner.png'
+      'assets/images/Banner-1.webp',
+      'assets/images/capacitaciones-banner.webp',
+      'assets/images/forklift-banner.webp',
+      'assets/images/ingenieria-grua-banner.webp'
     ];
     var heroBg1 = document.getElementById('heroBg');
     var heroBg2 = document.getElementById('heroBgAlt');
@@ -304,6 +299,8 @@
       var idx = 1;
       var active = heroBg1;
       var inactive = heroBg2;
+      function warm(i) { new Image().src = heroImages[i % heroImages.length]; }
+      window.addEventListener('load', function () { warm(idx + 1); });
       inactive.style.backgroundImage = 'url(' + heroImages[0] + ')';
       inactive.style.backgroundSize = window.innerWidth < 768 ? 'cover' : 'auto 140%';
       inactive.style.backgroundPosition = window.innerWidth < 768 ? 'center center' : '100% center';
@@ -317,21 +314,9 @@
         inactive.style.opacity = '1';
         active.style.opacity = '0';
         var tmp = active; active = inactive; inactive = tmp;
+        warm(idx + 1);
       }, 5000);
     }
-
-    new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        mutation.addedNodes.forEach(function(node) {
-          if (node.nodeType === 1) {
-            if (node.matches && node.matches('.w-webflow-badge, a[href="https://webflow.com"]')) node.remove();
-            if (node.querySelectorAll) node.querySelectorAll('.w-webflow-badge, a[href="https://webflow.com"]').forEach(function(el) { el.remove(); });
-          }
-        });
-      });
-    }).observe(document.body, { childList: true, subtree: true });
-
-
   });
 </script>
 </body>

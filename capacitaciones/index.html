@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Capacitaciones</title>
 <meta name="description" content="Capacitaciones en seguridad contra incendios e industrial.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="../assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
@@ -48,8 +50,7 @@ html { scroll-behavior: smooth; }
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #0f2536 0%, #0f2536 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #0f2536 0%, #0f2536 calc(40% - 40px), rgba(15,37,54,0.92) 40%, rgba(15,37,54,0.5) 50%, rgba(15,37,54,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
   z-index: 1;
 }
@@ -352,9 +353,18 @@ html { scroll-behavior: smooth; }
 
 <!-- HERO -->
 <section class="hero-cap">
-  <video class="hero-video" autoplay muted loop playsinline poster="../assets/images/capacitaciones-poster.jpg">
-    <source src="../assets/videos/capacitaciones-banner.mp4" type="video/mp4">
-  </video>
+  <video class="hero-video" muted loop playsinline preload="none" poster="../assets/images/capacitaciones-poster.webp" data-src="../assets/videos/capacitaciones-banner.mp4"></video>
+  <script>
+    // Small screens and data-saver connections keep the poster only; everyone else gets the looping video
+    (function () {
+      var v = document.currentScript.previousElementSibling;
+      var c = navigator.connection;
+      if (window.matchMedia('(max-width: 767px)').matches || (c && c.saveData)) return;
+      v.muted = true;
+      v.autoplay = true;
+      v.src = v.dataset.src;
+    })();
+  </script>
   <div class="hero-content">
     <h1>Capacitaciones<br><span class="hero-accent">en seguridad</span></h1>
     <p>Formación teórico-práctica en seguridad contra incendios, emergencias y normativa vigente.</p>
@@ -375,7 +385,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-operador-izaje.png" alt="Operadores de equipo de izaje" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-operador-izaje.webp" srcset="../assets/images/capacitacion-operador-izaje-800.webp 800w, ../assets/images/capacitacion-operador-izaje.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Operadores de equipo de izaje" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Operadores de equipo de izaje</div>
@@ -387,7 +397,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-levantamiento.jpg" alt="Operadores de equipo de levantamiento" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-levantamiento.webp" srcset="../assets/images/capacitacion-levantamiento-800.webp 800w, ../assets/images/capacitacion-levantamiento.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Operadores de equipo de levantamiento" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Operadores de equipo de levantamiento</div>
@@ -399,7 +409,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-maquinas-viales.jpg" alt="Operadores de máquinas viales" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-maquinas-viales.webp" srcset="../assets/images/capacitacion-maquinas-viales-800.webp 800w, ../assets/images/capacitacion-maquinas-viales.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Operadores de máquinas viales" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Operadores de máquinas viales</div>
@@ -411,7 +421,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-maquinaria-agricola.jpg" alt="Operadores de maquinaria agrícola" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-maquinaria-agricola.webp" srcset="../assets/images/capacitacion-maquinaria-agricola-800.webp 800w, ../assets/images/capacitacion-maquinaria-agricola.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Operadores de maquinaria agrícola" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Operadores de maquinaria agrícola</div>
@@ -423,7 +433,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-seguridad-vial.jpg" alt="Seguridad vial" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-seguridad-vial.webp" srcset="../assets/images/capacitacion-seguridad-vial-800.webp 800w, ../assets/images/capacitacion-seguridad-vial.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Seguridad vial" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Seguridad vial</div>
@@ -435,7 +445,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-herramientas.jpg" alt="Herramientas manuales, eléctricas y neumáticas" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-herramientas.webp" srcset="../assets/images/capacitacion-herramientas-800.webp 800w, ../assets/images/capacitacion-herramientas.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Herramientas manuales, eléctricas y neumáticas" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Herramientas manuales, eléctricas y neumáticas</div>
@@ -447,7 +457,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguridad-trabajador.png" alt="Uso de EPP" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguridad-trabajador.webp" srcset="../assets/images/seguridad-trabajador-800.webp 800w, ../assets/images/seguridad-trabajador.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Uso de EPP" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Uso de EPP</div>
@@ -459,7 +469,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-maquinaria-pesada.jpg" alt="Operadores de maquinaria pesada" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-maquinaria-pesada.webp" srcset="../assets/images/capacitacion-maquinaria-pesada-800.webp 800w, ../assets/images/capacitacion-maquinaria-pesada.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Operadores de maquinaria pesada" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Operadores de maquinaria pesada</div>
@@ -471,7 +481,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-manejo-defensivo.jpg" alt="Manejo defensivo" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-manejo-defensivo.webp" srcset="../assets/images/capacitacion-manejo-defensivo-800.webp 800w, ../assets/images/capacitacion-manejo-defensivo.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Manejo defensivo" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Manejo defensivo</div>
@@ -483,7 +493,7 @@ html { scroll-behavior: smooth; }
       <a href="javascript:void(0)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/capacitacion-elementos-izaje.jpg" alt="Uso de elementos de izaje" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/capacitacion-elementos-izaje.webp" srcset="../assets/images/capacitacion-elementos-izaje-800.webp 800w, ../assets/images/capacitacion-elementos-izaje.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Uso de elementos de izaje" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
             <div class="service-title">Uso de elementos de izaje</div>

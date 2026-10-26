@@ -80,7 +80,7 @@ Copy the `database_id` from the output.
 
 ```toml
 name = "segulap"
-pages_build_output_dir = "."
+pages_build_output_dir = "dist"
 compatibility_date = "2025-01-01"
 
 [[d1_databases]]
@@ -173,11 +173,14 @@ Same pattern for categories: replace `saveCatConfig()` with `fetch('/api/categor
 
 ### 8. Deploy
 
+`scripts/build.mjs` copies only the public site into `dist/` (keeps `template/`, `assets-src/`, docs and `worker/` out of the deploy).
+
 ```bash
-npx wrangler pages deploy .
+node scripts/build.mjs
+npx wrangler pages deploy dist
 ```
 
-Or connect the repo to Cloudflare Pages dashboard (it auto-detects `wrangler.toml`).
+Or connect the repo to Cloudflare Pages dashboard (it auto-detects `wrangler.toml`). Set **Build command** to `node scripts/build.mjs`; the output directory comes from `wrangler.toml`.
 
 ## Migration: Existing localStorage Data
 
@@ -186,7 +189,8 @@ After deploying, run the seed function once to populate D1 with the current data
 ## Local Development
 
 ```bash
-npx wrangler pages dev . --d1 DB
+node scripts/build.mjs
+npx wrangler pages dev dist --d1 DB
 ```
 
 This runs a local dev server with a local D1 instance.

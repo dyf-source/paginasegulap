@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – EPP</title>
 <meta name="description" content="Equipos de Protección Personal. Cascos, protectores auditivos, oculares, respiradores, arneses y guantes de seguridad industrial.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="../../assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="../../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
@@ -19,14 +21,13 @@
   overflow: hidden;
 }
 .hero-industrial .hero-bg {
-  background: #000 url('../../assets/images/forklift-banner.png') 100% center / 66% auto no-repeat;
+  background: #000 url('../../assets/images/forklift-banner.webp') 100% center / 66% auto no-repeat;
 }
 .hero-industrial .hero-bg::before {
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #000 0%, #000 calc(40% - 40px), rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
   z-index: 1;
 }
@@ -70,7 +71,7 @@
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../../assets/images/forklift-banner.png') center center / cover no-repeat;
+    background: #000 url('../../assets/images/forklift-banner.webp') center center / cover no-repeat;
   }
   .hero-industrial .hero-bg::before {
     display: none;
@@ -268,7 +269,7 @@
 
       <a href="../../productos/?cat=Cascos%20de%20Seguridad" class="service-card-link">
         <div class="service-card">
-          <img class="service-img" src="../../assets/images/cascos.jpg" alt="Cascos de Seguridad">
+          <img class="service-img" src="../../assets/images/cascos.webp" srcset="../../assets/images/cascos-800.webp 800w, ../../assets/images/cascos.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Cascos de Seguridad">
           <div class="service-body">
             <div class="service-title">Cascos de Seguridad</div>
             <div class="service-desc">Cascos de protección industrial con y sin visera, ajuste ratchet y suspensión dieléctrica.</div>
@@ -278,7 +279,7 @@
 
       <a href="../../productos/?cat=Protectores%20Auditivos" class="service-card-link">
         <div class="service-card">
-          <img class="service-img" src="../../assets/images/protectores_auditivos.jpg" alt="Protectores Auditivos">
+          <img class="service-img" src="../../assets/images/protectores_auditivos.webp" srcset="../../assets/images/protectores_auditivos-800.webp 800w, ../../assets/images/protectores_auditivos.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Protectores Auditivos">
           <div class="service-body">
             <div class="service-title">Protectores Auditivos</div>
             <div class="service-desc">Tapones desechables y reutilizables, orejeras acústicas y protectores tipo copa con arnés.</div>
@@ -288,7 +289,7 @@
 
       <a href="../../productos/?cat=Protecci%C3%B3n%20Ocular%20y%20Facial" class="service-card-link">
         <div class="service-card">
-          <img class="service-img" src="../../assets/images/protectores_oculares.png" alt="Protección Ocular y Facial">
+          <img class="service-img" src="../../assets/images/protectores_oculares.webp" srcset="../../assets/images/protectores_oculares-800.webp 800w, ../../assets/images/protectores_oculares.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Protección Ocular y Facial">
           <div class="service-body">
             <div class="service-title">Protección Ocular y Facial</div>
             <div class="service-desc">Antiparras, lentes de seguridad, protectores faciales y pantallas para soldador.</div>
@@ -298,7 +299,7 @@
 
       <a href="../../productos/?cat=Protecci%C3%B3n%20Respiratoria" class="service-card-link">
         <div class="service-card">
-          <img class="service-img" src="../../assets/images/proteccion_respiratoria.png" alt="Protección Respiratoria">
+          <img class="service-img" src="../../assets/images/proteccion_respiratoria.webp" srcset="../../assets/images/proteccion_respiratoria-800.webp 800w, ../../assets/images/proteccion_respiratoria.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Protección Respiratoria">
           <div class="service-body">
             <div class="service-title">Protección Respiratoria</div>
             <div class="service-desc">Respiradores descartables y reutilizables, máscaras completas, cartuchos y filtros multipropósito.</div>
@@ -308,7 +309,7 @@
 
       <a href="../../productos/?cat=Guantes%20de%20Seguridad" class="service-card-link">
         <div class="service-card">
-          <img class="service-img" src="../../assets/images/guantes-seguridad.png" alt="Guantes de Seguridad">
+          <img class="service-img" src="../../assets/images/guantes-seguridad.webp" srcset="../../assets/images/guantes-seguridad-800.webp 800w, ../../assets/images/guantes-seguridad.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Guantes de Seguridad">
           <div class="service-body">
             <div class="service-title">Guantes de Seguridad</div>
             <div class="service-desc">Guantes de uso general, alta resistencia al corte, químicos, dieléctricos y para soldador.</div>
@@ -481,11 +482,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 
   var heroImages = [
-    '../../assets/images/cascos.jpg',
-    '../../assets/images/protectores_auditivos.jpg',
-    '../../assets/images/protectores_oculares.png',
-    '../../assets/images/proteccion_respiratoria.png',
-    '../../assets/images/guantes-seguridad.png'
+    '../../assets/images/cascos.webp',
+    '../../assets/images/protectores_auditivos.webp',
+    '../../assets/images/protectores_oculares.webp',
+    '../../assets/images/proteccion_respiratoria.webp',
+    '../../assets/images/guantes-seguridad.webp'
   ];
   var heroBg1 = document.getElementById('heroBg');
   var heroBg2 = document.getElementById('heroBgAlt');
@@ -493,6 +494,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var idx = 0;
     var active = heroBg1;
     var inactive = heroBg2;
+    function warm(i) { new Image().src = heroImages[i % heroImages.length]; }
+    window.addEventListener('load', function () { warm(idx + 1); });
     active.style.backgroundImage = 'url(' + heroImages[0] + ')';
     active.style.backgroundSize = window.innerWidth < 768 ? 'cover' : '66% auto';
     active.style.backgroundPosition = window.innerWidth < 768 ? 'center center' : '100% center';
@@ -506,6 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
       inactive.style.opacity = '1';
       active.style.opacity = '0';
       var tmp = active; active = inactive; inactive = tmp;
+      warm(idx + 1);
     }, 8000);
   }
 });

@@ -1,5 +1,5 @@
 name = "segulap"
-pages_build_output_dir = "."
+pages_build_output_dir = "dist"
 compatibility_date = "2025-06-12"
 
 [[kv_namespaces]]

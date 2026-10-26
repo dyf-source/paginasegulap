@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Seguridad Industrial</title>
 <meta name="description" content="Soluciones en seguridad industrial. EPP, indumentaria, calzado de seguridad, elementos viales y kits antiderrame.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="../assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
@@ -19,14 +21,13 @@
   overflow: hidden;
 }
 .hero-industrial .hero-bg {
-  background: #000 url('../assets/images/forklift-banner.png') 100% center / 66% auto no-repeat;
+  background: #000 url('../assets/images/forklift-banner.webp') 100% center / 66% auto no-repeat;
 }
 .hero-industrial .hero-bg::before {
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #000 0%, #000 calc(40% - 40px), rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
   z-index: 1;
 }
@@ -70,7 +71,7 @@
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../assets/images/forklift-banner.png') center center / cover no-repeat;
+    background: #000 url('../assets/images/forklift-banner.webp') center center / cover no-repeat;
   }
   .hero-industrial .hero-bg::before {
     display: none;
@@ -264,7 +265,7 @@
       <a href="../productos/?cat=Elementos%20de%20Protecci%C3%B3n%20Personal%20(EPP)" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguridad-trabajador.png" alt="EPP" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguridad-trabajador.webp" srcset="../assets/images/seguridad-trabajador-800.webp 800w, ../assets/images/seguridad-trabajador.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="EPP" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
 
@@ -277,7 +278,7 @@
       <a href="../productos/?cat=Indumentaria" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguridad-chalecos.png" alt="Indumentaria" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguridad-chalecos.webp" srcset="../assets/images/seguridad-chalecos-800.webp 800w, ../assets/images/seguridad-chalecos.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Indumentaria" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
 
@@ -290,7 +291,7 @@
       <a href="../productos/?cat=Calzado%20de%20Seguridad" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguridad-calzado.png" alt="Calzado de Seguridad" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguridad-calzado.webp" srcset="../assets/images/seguridad-calzado-800.webp 800w, ../assets/images/seguridad-calzado.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Calzado de Seguridad" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
 
@@ -303,7 +304,7 @@
       <a href="../productos/?cat=Vial%20y%20Tr%C3%A1nsito" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguirdad-vial-banner.png" alt="Elementos Viales" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguirdad-vial-banner.webp" srcset="../assets/images/seguirdad-vial-banner-800.webp 800w, ../assets/images/seguirdad-vial-banner.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Elementos Viales" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
 
@@ -316,7 +317,7 @@
       <a href="../productos/?cat=Kits%20Antiderrame" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguridad-antiderrame.png" alt="Kits Antiderrame" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguridad-antiderrame.webp" srcset="../assets/images/seguridad-antiderrame-800.webp 800w, ../assets/images/seguridad-antiderrame.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Kits Antiderrame" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
 
@@ -329,7 +330,7 @@
       <a href="../productos/?cat=Seguridad%20en%20Altura" class="service-card-link">
         <div class="service-card">
           <div class="service-img">
-            <img src="../assets/images/seguridad-arnes.png" alt="Seguridad en Altura" style="width:100%;height:100%;object-fit:cover">
+            <img src="../assets/images/seguridad-arnes.webp" srcset="../assets/images/seguridad-arnes-800.webp 800w, ../assets/images/seguridad-arnes.webp 1600w" sizes="(min-width: 1221px) 25vw, (min-width: 570px) 50vw, 100vw" loading="lazy" decoding="async" alt="Seguridad en Altura" style="width:100%;height:100%;object-fit:cover">
           </div>
           <div class="service-body">
 
@@ -485,12 +486,12 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav(); });
 
   var heroImages = [
-    '../assets/images/seguridad-arnes.png',
-    '../assets/images/seguridad-chalecos.png',
-    '../assets/images/seguridad-calzado.png',
-    '../assets/images/seguridad-trabajador.png',
-    '../assets/images/seguirdad-vial-banner.png',
-    '../assets/images/seguridad-antiderrame.png'
+    '../assets/images/seguridad-arnes.webp',
+    '../assets/images/seguridad-chalecos.webp',
+    '../assets/images/seguridad-calzado.webp',
+    '../assets/images/seguridad-trabajador.webp',
+    '../assets/images/seguirdad-vial-banner.webp',
+    '../assets/images/seguridad-antiderrame.webp'
   ];
   var heroBg1 = document.getElementById('heroBg');
   var heroBg2 = document.getElementById('heroBgAlt');
@@ -498,6 +499,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var idx = 0;
     var active = heroBg1;
     var inactive = heroBg2;
+    function warm(i) { new Image().src = heroImages[i % heroImages.length]; }
+    window.addEventListener('load', function () { warm(idx + 1); });
     setInterval(function () {
       idx = (idx + 1) % heroImages.length;
       inactive.style.backgroundImage = 'url(' + heroImages[idx] + ')';
@@ -507,6 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
       inactive.style.opacity = '1';
       active.style.opacity = '0';
       var tmp = active; active = inactive; inactive = tmp;
+      warm(idx + 1);
     }, 5000);
   }
 });

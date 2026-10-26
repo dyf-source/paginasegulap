@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Mantenimiento de extintores</title>
 <meta name="description" content="Servicio técnico de mantenimiento, recarga y prueba hidráulica de extintores. Control periódico según normativa vigente.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../../../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="../../../assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="../../../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../../../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../../../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
@@ -21,14 +23,13 @@
 .hero-mant .hero-bg {
   position: absolute;
   inset: 0;
-  background: #000 url('../../../assets/images/extintor-revision.png') right center / auto 140% no-repeat;
+  background: #000 url('../../../assets/images/extintor-revision.webp') right center / auto 140% no-repeat;
 }
 .hero-mant .hero-bg::before {
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #000 0%, #000 calc(40% - 40px), rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
 }
 .hero-mant .hero-bg::after {
@@ -202,7 +203,7 @@
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../../../assets/images/extintor-revision.png') center center / cover no-repeat;
+    background: #000 url('../../../assets/images/extintor-revision.webp') center center / cover no-repeat;
   }
   .hero-mant .hero-bg::before {
     display: none;
@@ -270,7 +271,7 @@
     <h1>Mantenimiento <span class="hero-accent">de extintores</span></h1>
     <p>Servicio técnico profesional para la recarga, reparación y control periódico de todo tipo de extintores. Cumplimos con las exigencias legales.</p>
     <a href="https://wa.me/5492216515377?text=Hola%2C%20quisiera%20consultar%20sobre%20el%20servicio%20de%20mantenimiento%20de%20extintores." target="_blank" rel="noopener" class="btn-contacto">
-      <img src="../../../assets/images/WhatsappWhite.png" alt="WhatsApp" style="width:22px;height:22px">
+      <img src="../../../assets/images/WhatsappWhite.webp" alt="WhatsApp" style="width:22px;height:22px">
       Consultar por WhatsApp
     </a>
   </div>

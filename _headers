@@ -1,0 +1,18 @@
+# Cloudflare Pages static asset caching
+# Fonts never change under the same name
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Media: rename the file (or add ?v=) when replacing an image or video
+/assets/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/assets/videos/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+# CSS/JS change with deploys and keep their names, so cache briefly
+/assets/css/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=3600
+
+/assets/js/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=3600

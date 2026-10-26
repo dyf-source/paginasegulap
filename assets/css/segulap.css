@@ -209,7 +209,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: #000 url('../images/Banner-1.png') 100% center / auto 140% no-repeat;
+  background: #000 url('../images/Banner-1.webp') 100% center / auto 140% no-repeat;
   transition: opacity 1s ease;
 }
 .hero-bg--alt {
@@ -221,8 +221,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #000 0%, #000 calc(40% - 40px), rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
 }
 
@@ -595,7 +594,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 /* ── CTA BANNER ── */
 .cta-banner {
   position: relative;
-  background: #000 url('../images/Banner-1.png') 100% center / auto 140% no-repeat;
+  background: #000 url('../images/Banner-1.webp') 100% center / auto 140% no-repeat;
   padding: 36px 48px;
   display: flex;
   align-items: center;
@@ -609,8 +608,7 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #000 0%, #000 calc(40% - 40px), rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
 }
 
@@ -2099,7 +2097,7 @@ img.product-img {
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../images/Banner-1.png') center center / cover no-repeat;
+    background: #000 url('../images/Banner-1.webp') center center / cover no-repeat;
   }
 
   .hero-bg::before {

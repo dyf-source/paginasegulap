@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEGULAP – Red contra incendios</title>
 <meta name="description" content="Diseño, instalación y mantenimiento de redes contra incendios. Gabinetes, detectores, mangueras, válvulas y más. Seguridad integral para su empresa.">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="../../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link href="../../assets/css/fonts.css" rel="stylesheet" type="text/css">
 <link href="../../assets/css/segulap.css" rel="stylesheet" type="text/css">
 <link href="../../assets/images/Segulap_S_sin_fondo.png" rel="shortcut icon" type="image/x-icon"/>
 <link href="../../assets/images/Segulap_S_sin_fondo.png" rel="apple-touch-icon"/>
@@ -21,14 +23,13 @@
 .hero-red .hero-bg {
   position: absolute;
   inset: 0;
-  background: #000 url('../../assets/images/accesorios-red-incendios.png') 100% center / auto 120% no-repeat;
+  background: #000 url('../../assets/images/accesorios-red-incendios.webp') 100% center / auto 120% no-repeat;
 }
 .hero-red .hero-bg::before {
   content: '';
   position: absolute;
   inset: -80px;
-  background: linear-gradient(to right, #000 0%, #000 40%, transparent 60%);
-  filter: blur(50px);
+  background: linear-gradient(to right, #000 0%, #000 calc(40% - 40px), rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.08) 60%, transparent calc(60% + 40px));
   pointer-events: none;
 }
 .hero-red .hero-bg::after {
@@ -203,7 +204,7 @@
     top: auto;
     bottom: 0;
     height: 160px;
-    background: #000 url('../../assets/images/accesorios-red-incendios.png') center center / cover no-repeat;
+    background: #000 url('../../assets/images/accesorios-red-incendios.webp') center center / cover no-repeat;
   }
   .hero-red .hero-bg::before {
     display: none;
