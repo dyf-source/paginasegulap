@@ -330,13 +330,24 @@ nav .nav-links a { font-family: inherit; text-transform: uppercase; }
 /* ── CATEGORY CARDS (home page) ── */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* 5 across: tighter type so long titles ("Automatización") fit the narrower cards */
+@media (min-width: 1351px) {
+  .category-grid .category-overlay { padding: 28px 22px; }
+  .category-grid .category-title { font-size: clamp(24px, 1.6vw, 32px); }
+  .category-grid .category-desc { font-size: clamp(13px, 0.85vw, 15px); }
 }
 
 @media (max-width: 1350px) {
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  /* Odd card count: the last card becomes a full-width banner instead of leaving a gap */
+  .category-grid > .category-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 

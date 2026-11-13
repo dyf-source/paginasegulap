@@ -12,6 +12,7 @@ const entries = [
   '_headers',
   'assets',
   'admin',
+  'automatizacion',
   'capacitaciones',
   'contacto',
   'inspecciones',
