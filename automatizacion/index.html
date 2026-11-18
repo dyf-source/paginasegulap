@@ -55,9 +55,11 @@ html { scroll-behavior: smooth; }
 }
 .automatizacion .phone-link:hover,
 .automatizacion .address-link:hover,
+.automatizacion .contact-row:has(.address-link):hover .address-link {
+  color: var(--red) !important;
+}
 .automatizacion .contact-row:has(.phone-link):hover .icon-circle,
 .automatizacion .contact-row:has(.address-link):hover .icon-circle {
-  color: var(--red) !important;
   border-color: var(--red);
   background: var(--red);
 }
