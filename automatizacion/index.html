@@ -777,10 +777,6 @@ html { scroll-behavior: smooth; }
           <label for="modalNombre">Nombre</label>
           <input id="modalNombre" name="nombre" type="text" required placeholder="Tu nombre">
         </div>
-        <div class="form-row">
-          <label for="modalCuit">CUIT / CUIL</label>
-          <input id="modalCuit" name="cuit" type="text" required placeholder="20-12345678-9">
-        </div>
         <div class="form-row" style="display:none">
           <input id="modalAsunto" name="asunto" type="text">
         </div>
@@ -1127,14 +1123,13 @@ fetch('/api/settings')
 
 function getModalFormData() {
   var nombre = document.getElementById('modalNombre').value.trim();
-  var cuit = document.getElementById('modalCuit').value.trim();
   var asunto = document.getElementById('modalAsunto').value.trim();
   var mensaje = document.getElementById('modalMensaje').value.trim();
-  if (!nombre || !cuit || !mensaje) {
-    alert('Por favor completá nombre, CUIT / CUIL y mensaje.');
+  if (!nombre || !mensaje) {
+    alert('Por favor completá nombre y mensaje.');
     return null;
   }
-  return { nombre: nombre, cuit: cuit, asunto: asunto, mensaje: mensaje };
+  return { nombre: nombre, asunto: asunto, mensaje: mensaje };
 }
 
 function enviarModalWhatsApp() {
@@ -1142,7 +1137,6 @@ function enviarModalWhatsApp() {
   if (!d) return;
   var texto = 'Hola, soy ' + d.nombre + '.\n\n';
   texto += 'Consulta: ' + d.asunto + '.\n\n';
-  texto += 'CUIT / CUIL: ' + d.cuit + '.\n\n';
   texto += d.mensaje;
   window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(texto), '_blank');
 }
