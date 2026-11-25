@@ -457,11 +457,10 @@ html { scroll-behavior: smooth; }
 .modal-form .form-actions button:active {
   transform: scale(0.97);
 }
-.btn-email {
-  background: var(--red);
-  color: #1a1a1a;
+/* Footer has no Email column on this page: 3 columns instead of 4 */
+@media (min-width: 1130px) {
+  .automatizacion .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
 }
-.btn-email:hover { background: var(--red-light); }
 .btn-whatsapp {
   background: #25D366;
   color: #fff;
@@ -503,7 +502,7 @@ html { scroll-behavior: smooth; }
       <li><a href="#obras">Obras</a></li>
       <li><a href="#proceso">Proceso</a></li>
     </ul>
-    <a href="../contacto/" class="nav-cta">
+    <a href="https://wa.me/5492216515377" class="nav-cta" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Solicitar Asesoramiento
     </a>
@@ -519,7 +518,7 @@ html { scroll-behavior: smooth; }
   <div class="hero-content">
     <h1>Automatización<br>y <span class="hero-accent">control</span></h1>
     <p>Ingeniería, fabricación y puesta en marcha de tableros eléctricos, centros de control de motores y sistemas PLC, HMI y SCADA.</p>
-    <a href="../contacto/" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
+    <a href="https://wa.me/5492216515377" target="_blank" rel="noopener" class="cta-white" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:15px">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       Consultar proyecto
     </a>
@@ -758,7 +757,7 @@ html { scroll-behavior: smooth; }
       <p>Solicite presupuesto sin compromiso.</p>
     </div>
   </div>
-  <a href="../contacto/" class="cta-white">
+  <a href="https://wa.me/5492216515377" target="_blank" rel="noopener" class="cta-white">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     Solicitar Asesoramiento
   </a>
@@ -779,10 +778,6 @@ html { scroll-behavior: smooth; }
           <input id="modalNombre" name="nombre" type="text" required placeholder="Tu nombre">
         </div>
         <div class="form-row">
-          <label for="modalEmail">Email</label>
-          <input id="modalEmail" name="email" type="email" required placeholder="tu@correo.com">
-        </div>
-        <div class="form-row">
           <label for="modalCuit">CUIT / CUIL</label>
           <input id="modalCuit" name="cuit" type="text" required placeholder="20-12345678-9">
         </div>
@@ -793,13 +788,8 @@ html { scroll-behavior: smooth; }
           <label for="modalMensaje">Mensaje</label>
           <textarea id="modalMensaje" name="mensaje" required rows="3" placeholder="Contanos qué necesitas…"></textarea>
         </div>
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
         <p class="form-note" id="modalNote">Te respondemos por este medio</p>
         <div class="form-actions">
-          <button type="button" class="btn-email" onclick="enviarModalEmail()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Enviar por Email
-          </button>
           <button type="button" class="btn-whatsapp" onclick="enviarModalWhatsApp()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Enviar por WhatsApp
@@ -834,19 +824,10 @@ html { scroll-behavior: smooth; }
     <div class="footer-col">
       <h4>Teléfono</h4>
       <div class="contact-row phone-row">
-        <a class="icon-circle" href="../contacto/">
+        <a class="icon-circle" href="https://wa.me/5492216515377" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
         </a>
-        <div><a href="../contacto/" class="phone-link">+54 9 221 651-5377</a></div>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Email</h4>
-      <div class="contact-row">
-        <div class="icon-circle">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>info@segulap.com.ar</div>
+        <div><a href="https://wa.me/5492216515377" target="_blank" rel="noopener" class="phone-link">+54 9 221 651-5377</a></div>
       </div>
     </div>
     <div class="footer-col">
@@ -1123,67 +1104,47 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-var CONTACT_ENDPOINT = 'https://segulap-contact.technicalreportnetadmin.workers.dev';
+// Default until /api/settings answers; the admin panel overrides it per page.
+var WA_NUMBER = '5492216515377';
 
-function getModalFormData(requireEmail) {
+function applyWhatsAppNumber(num) {
+  WA_NUMBER = num;
+  document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function(a) {
+    a.href = 'https://wa.me/' + num;
+  });
+}
+
+fetch('/api/settings')
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    var s = (d && d.ok && d.data) || {};
+    if (s.whatsappAutomatizacion && /^\d{8,15}$/.test(s.whatsappAutomatizacion)) applyWhatsAppNumber(s.whatsappAutomatizacion);
+    if (s.phoneAutomatizacion) {
+      document.querySelectorAll('.footer-col .phone-link').forEach(function(a) { a.textContent = s.phoneAutomatizacion; });
+    }
+  })
+  .catch(function() {});
+
+function getModalFormData() {
   var nombre = document.getElementById('modalNombre').value.trim();
-  var email = document.getElementById('modalEmail').value.trim();
   var cuit = document.getElementById('modalCuit').value.trim();
   var asunto = document.getElementById('modalAsunto').value.trim();
   var mensaje = document.getElementById('modalMensaje').value.trim();
-  if (!nombre || !cuit || !mensaje || (requireEmail && !email)) {
-    alert('Por favor completá nombre, email, CUIT / CUIL y mensaje.');
+  if (!nombre || !cuit || !mensaje) {
+    alert('Por favor completá nombre, CUIT / CUIL y mensaje.');
     return null;
   }
-  if (requireEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    alert('Ingresá un email válido.');
-    return null;
-  }
-  return { nombre: nombre, email: email, cuit: cuit, asunto: asunto, mensaje: mensaje };
-}
-
-function enviarModalEmail() {
-  var d = getModalFormData(true);
-  if (!d) return;
-
-  var note = document.getElementById('modalNote');
-  var btn = document.querySelector('#modalForm .btn-email');
-  var gotcha = document.querySelector('#modalForm [name="_gotcha"]');
-  if (btn) btn.disabled = true;
-  if (note) note.textContent = 'Enviando…';
-
-  fetch(CONTACT_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      nombre: d.nombre,
-      email: d.email,
-      cuit: d.cuit,
-      asunto: d.asunto,
-      mensaje: d.mensaje,
-      _gotcha: gotcha ? gotcha.value : ''
-    })
-  })
-  .then(function(res) { return res.json().catch(function() { return {}; }).then(function(body) { return { ok: res.ok, body: body }; }); })
-  .then(function(r) {
-    if (!r.ok || !r.body.ok) throw new Error();
-    if (note) note.textContent = '¡Gracias! Recibimos tu consulta y te contactaremos pronto.';
-    document.getElementById('modalForm').reset();
-  })
-  .catch(function() {
-    if (note) note.textContent = 'No se pudo enviar. Probá de nuevo o escribinos a info@segulap.com.ar.';
-  })
-  .finally(function() { if (btn) btn.disabled = false; });
+  return { nombre: nombre, cuit: cuit, asunto: asunto, mensaje: mensaje };
 }
 
 function enviarModalWhatsApp() {
-  var d = getModalFormData(false);
+  var d = getModalFormData();
   if (!d) return;
-  var texto = 'Hola, soy ' + d.nombre + '.%0A%0A';
-  texto += 'Consulta: ' + d.asunto + '.%0A%0A';
-  texto += 'CUIT / CUIL: ' + d.cuit + '.%0A%0A';
+  var texto = 'Hola, soy ' + d.nombre + '.\n\n';
+  texto += 'Consulta: ' + d.asunto + '.\n\n';
+  texto += 'CUIT / CUIL: ' + d.cuit + '.\n\n';
   texto += d.mensaje;
-  window.open('https://wa.me/5492216515377?text=' + texto, '_blank');
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(texto), '_blank');
 }
 </script>
 </body>

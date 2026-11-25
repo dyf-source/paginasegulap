@@ -150,6 +150,19 @@
       </div>
       <div id="configFeedback" style="font-size:13px;margin-top:8px;color:var(--red);min-height:20px"></div>
     </div>
+
+    <div class="admin-form" style="max-width:560px;margin-top:24px">
+      <h3>Automatización y Control</h3>
+      <div class="admin-form-field">
+        <label>Teléfono / WhatsApp de la página</label>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:8px">Se muestra tal cual en el pie de /automatizacion y recibe los mensajes del formulario y los botones de WhatsApp. Incluí el código de país.</p>
+        <input type="text" id="configWhatsappAuto" inputmode="tel" placeholder="ej: +54 9 221 651-5377">
+      </div>
+      <div class="admin-form-actions">
+        <button class="admin-btn admin-btn-primary" id="configAutoSaveBtn" onclick="saveAutoWhatsapp()">Guardar</button>
+      </div>
+      <div id="configAutoFeedback" style="font-size:13px;margin-top:8px;color:var(--red);min-height:20px"></div>
+    </div>
   </div>
 
   <div id="sectionCategorias" style="display:none">
@@ -378,6 +391,7 @@ function switchTab(tab) {
     document.querySelectorAll('.admin-tab')[2].classList.add('active');
     document.getElementById('sectionConfiguracion').style.display = 'block';
     document.getElementById('configWhatsapp').value = getWhatsAppNumber();
+    loadSiteSettings();
   }
 }
 
@@ -966,6 +980,50 @@ function saveConfig() {
   setWhatsAppNumber(num);
   fb.textContent = 'Número guardado correctamente.';
   fb.style.color = '#2e7d32';
+}
+
+// ── Site settings (KV via API, shared by all visitors) ──
+
+var AUTO_PHONE_DEFAULT = '+54 9 221 651-5377';
+
+function loadSiteSettings() {
+  var input = document.getElementById('configWhatsappAuto');
+  document.getElementById('configAutoFeedback').textContent = '';
+  fetch('/api/settings', { cache: 'no-store' })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var s = (d.ok && d.data) || {};
+      input.value = s.phoneAutomatizacion || s.whatsappAutomatizacion || AUTO_PHONE_DEFAULT;
+    })
+    .catch(function() { input.value = AUTO_PHONE_DEFAULT; });
+}
+
+function saveAutoWhatsapp() {
+  // One input feeds both: the typed text is the footer display, its digits are the wa.me number
+  var phone = document.getElementById('configWhatsappAuto').value.trim().replace(/\s+/g, ' ');
+  var num = phone.replace(/\D/g, '');
+  var fb = document.getElementById('configAutoFeedback');
+  var btn = document.getElementById('configAutoSaveBtn');
+  fb.style.color = 'var(--red)';
+  if (!/^[\d +()\-.]{8,30}$/.test(phone) || !/^\d{8,15}$/.test(num)) {
+    fb.textContent = 'Ingresá un número válido (8 a 15 dígitos, con código de país).';
+    return;
+  }
+  btn.disabled = true;
+  fetch('/admin/api/settings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ whatsappAutomatizacion: num, phoneAutomatizacion: phone })
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d.ok) throw new Error((d.data && d.data.error) || 'error');
+      document.getElementById('configWhatsappAuto').value = phone;
+      fb.textContent = 'Número guardado. Puede tardar hasta un minuto en verse en el sitio.';
+      fb.style.color = '#2e7d32';
+    })
+    .catch(function() { fb.textContent = 'No se pudo guardar el número.'; })
+    .then(function() { btn.disabled = false; });
 }
 
 populateCatSelect('addCat', categories[0]);
