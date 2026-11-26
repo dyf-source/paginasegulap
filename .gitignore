@@ -4,3 +4,5 @@ wrangler.toml
 !/wrangler.toml
 .claude
 dist
+# Root-level notes and docs (not part of the site)
+/*.md
